@@ -20,12 +20,14 @@
                 } else {
                     $scope.$apply(function () {
                         console.log("Authenticated successfully with payload:", authData);
-                        $sessionStorage.isUserAuthenticated = true;
-                        $sessionStorage.displayName = 'Administrator';
-                        $sessionStorage.profileImage = '';
-                        $sessionStorage.idNumber = '123456789';
-                        $sessionStorage.userType = 'admin';
-                        LoginService.setLoginDetails();
+                        $sessionStorage.isUserAuthenticated = true;                     
+                        if (authData) {
+                            $sessionStorage.userType = 'student';
+                        } else if (true) {
+                            $sessionStorage.userType = 'lecturer';
+                        } else {
+                            $sessionStorage.userType = 'admin';
+                        }
                         $location.path('/dashboard');
                     });
                 }

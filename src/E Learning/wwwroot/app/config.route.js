@@ -14,7 +14,115 @@
         controller: 'LoginController',
         templateUrl: viewcommonBase + '/login/login.html',
         controllerAs: 'vm'
-    }).otherwise({ redirectTo: '/' });
+    }).when('/dashboard', {
+        controller: 'dashboardController',
+        templateUrl: viewBase + '/dashboard/dashboard.html',
+        controllerAs: 'vm'
+    }).when('/annoucement', {
+        controller: 'AnnoucementController',
+        templateUrl: viewBase + '/annoucement/annoucementView.html',
+        controllerAs: 'vm'
+    }).when('/annoucementAddEdit', {
+        controller: 'AnnoucementAddEditController',
+        templateUrl: viewBase + '/annoucement/annoucementAddEdit/annoucementAddEdit.html',
+        controllerAs: 'vm'
+    }).when('/assignment', {
+        controller: 'AssignmentController',
+        templateUrl: viewBase + '/assignment/assignmentView.html',
+        controllerAs: 'vm'
+    }).when('/assignmentAddEdit', {
+        controller: 'AssignmentAddEditController',
+        templateUrl: viewBase + '/assignment/assignmentAddEdit/assignmentAddEdit.html',
+        controllerAs: 'vm'
+    }).when('/class', {
+        controller: 'ClassController',
+        templateUrl: viewBase + '/class/classView.html',
+        controllerAs: 'vm'
+    }).when('/classAddEdit', {
+        controller: 'ClassAddEditController',
+        templateUrl: viewBase + '/class/classAddEdit/classAddEdit.html',
+        controllerAs: 'vm'
+    }).when('/department', {
+        controller: 'DepartmentController',
+        templateUrl: viewBase + '/department/departmentView.html',
+        controllerAs: 'vm'
+    }).when('/departmentAddEdit', {
+        controller: 'DepartmentAddEditController',
+        templateUrl: viewBase + '/department/departmentAddEdit/departmentAddEdit.html',
+        controllerAs: 'vm'
+    }).when('/event', {
+        controller: 'EventController',
+        templateUrl: viewBase + '/event/eventView.html',
+        controllerAs: 'vm'
+    }).when('/eventAddEdit', {
+        controller: 'EventAddEditController',
+        templateUrl: viewBase + '/event/eventAddEdit/eventAddEdit.html',
+        controllerAs: 'vm'
+    }).when('/file', {
+        controller: 'FileController',
+        templateUrl: viewBase + '/file/fileView.html',
+        controllerAs: 'vm'
+    }).when('/fileAddEdit', {
+        controller: 'FileAddEditController',
+        templateUrl: viewBase + '/file/fileAddEdit/fileAddEdit.html',
+        controllerAs: 'vm'
+    }).when('/logReport', {
+        controller: 'LogReportController',
+        templateUrl: viewBase + '/logReport/logReportView.html',
+        controllerAs: 'vm'
+    }).when('/logReportAddEdit', {
+        controller: 'LogReportAddEditController',
+        templateUrl: viewBase + '/logReport/logReportAddEdit/logReportAddEdit.html',
+        controllerAs: 'vm'
+    }).when('/message', {
+        controller: 'MessageController',
+        templateUrl: viewBase + '/message/messageView.html',
+        controllerAs: 'vm'
+    }).when('/messageAddEdit', {
+        controller: 'MessageAddEditController',
+        templateUrl: viewBase + '/message/messageAddEdit/messageAddEdit.html',
+        controllerAs: 'vm'
+    }).when('/schoolYear', {
+        controller: 'SchoolYearController',
+        templateUrl: viewBase + '/schoolYear/schoolYearView.html',
+        controllerAs: 'vm'
+    }).when('/schoolYearAddEdit', {
+        controller: 'SchoolYearAddEditController',
+        templateUrl: viewBase + '/schoolYear/schoolYearAddEdit/schoolYearAddEdit.html',
+        controllerAs: 'vm'
+    }).when('/studentReport', {
+        controller: 'StudentReportController',
+        templateUrl: viewBase + '/studentReport/studentReportView.html',
+        controllerAs: 'vm'
+    }).when('/schoolYearAddEdit', {
+        controller: 'StudentReportAddEditController',
+        templateUrl: viewBase + '/studentReport/studentReportAddEdit/studentReportAddEdit.html',
+        controllerAs: 'vm'
+    }).when('/subject', {
+        controller: 'SubjectController',
+        templateUrl: viewBase + '/subject/subjectView.html',
+        controllerAs: 'vm'
+    }).when('/subjectAddEdit', {
+        controller: 'SubjectAddEditController',
+        templateUrl: viewBase + '/subject/subjectAddEdit/subjectAddEdit.html',
+        controllerAs: 'vm'
+    }).when('/user', {
+        controller: 'UserController',
+        templateUrl: viewBase + '/user/userView.html',
+        controllerAs: 'vm'
+    }).when('/userAddEdit', {
+        controller: 'UserAddEditController',
+        templateUrl: viewBase + '/user/userAddEdit/userAddEdit.html',
+        controllerAs: 'vm'
+    }).when('/quiz', {
+        controller: 'QuizController',
+        templateUrl: viewBase + '/quiz/quizView.html',
+        controllerAs: 'vm'
+    }).when('/quizAddEdit', {
+        controller: 'QuizAddEditController',
+        templateUrl: viewBase + '/quiz/quizAddEdit/quizAddEdit.html',
+        controllerAs: 'vm'
+    })  .otherwise({ redirectTo: '/' });
     }
 
     angular.module('EL').config(['$routeProvider', '$locationProvider', routeProvider]);
