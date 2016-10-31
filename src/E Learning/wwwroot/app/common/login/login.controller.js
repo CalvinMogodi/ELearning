@@ -11,18 +11,6 @@
         $rootScope.profileImage = 'assets/img/placeholder.png';
 
         $scope.login = function (user) {
-
-            //ref.createUser({
-            //    email: "olivier@stockmanagement.co.za",
-            //    password: "olivier"
-            //}, function (error, userData) {
-            //    if (error) {
-            //        console.log("Error creating user:", error);
-            //    } else {
-            //        console.log("Successfully created user account with uid:", userData.uid);
-            //    }
-            //});
-
             ref.authWithPassword({
                 email: user.username,
                 password: user.password
