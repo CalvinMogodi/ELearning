@@ -3,25 +3,25 @@
 </dir-page-header>
 
 <div class="md-padding md-application-cards" layout="row" layout-wrap>
-    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/annoucement')">
+    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/annoucement')" ng-if="userType != 'admin'">
         <div layout="column" layout-align="center center">
             <md-icon class="no-margin" style="color:#005a52">code</md-icon>
             <p class="no-margin md-font-size-xs">Annoucements</p>
         </div>
     </md-card>
-    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/assignment')">
+    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/assignment')" ng-if="userType != 'admin'">
         <div layout="column" layout-align="center center">
             <md-icon class="no-margin" style="color:#7a0046">business_center</md-icon>
             <p class="no-margin md-font-size-xs">Assignments</p>
         </div>
     </md-card>   
-    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/class')">
+    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/class')" ng-if="userType != 'student'">
         <div layout="column" layout-align="center center">
             <md-icon class="no-margin" style="color:#eab600">business_center</md-icon>
             <p class="no-margin md-font-size-xs">Classes</p>
         </div>
     </md-card>
-    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/department')">
+    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/department')" ng-if="userType == 'admin'">
         <div layout="column" layout-align="center center">
             <md-icon class="no-margin" style="color:#eab600">business_center</md-icon>
             <p class="no-margin md-font-size-xs">Departments</p>
@@ -34,49 +34,49 @@
         </div>
     </md-card>
    
-    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/file')">
+    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/file')" ng-if="userType != 'admin'">
         <div layout="column" layout-align="center center">
             <md-icon class="no-margin" style="color:#005a52">view_list</md-icon>
             <p class="no-margin md-font-size-xs">Files</p>
         </div>
     </md-card>
-    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/logReport')">
+    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/logReport')" ng-if="userType == 'admin'">
         <div layout="column" layout-align="center center">
             <md-icon class="no-margin" style="color:#005a52">live_help</md-icon>
             <p class="no-margin md-font-size-xs">Logs Reports</p>
         </div>
     </md-card>
-    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/message')">
+    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/message')" ng-if="userType != 'admin'">
         <div layout="column" layout-align="center center">
             <md-icon class="no-margin" style="color:#005a52">forum</md-icon>
             <p class="no-margin md-font-size-xs">Messages</p>
         </div>
     </md-card>
-    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/schoolYear')">
+    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/schoolYear')" ng-if="userType == 'admin'">
         <div layout="column" layout-align="center center">
             <md-icon class="no-margin" style="color:#005a52">person_add</md-icon>
             <p class="no-margin md-font-size-xs">School Year Management</p>
         </div>
     </md-card>
-    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/studentReport')">
+    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/studentReport')" ng-if="userType != 'student'">
         <div layout="column" layout-align="center center">
             <md-icon class="no-margin" style="color:#005a52">live_help</md-icon>
-            <p class="no-margin md-font-size-xs">Students Reports</p>
+            <p class="no-margin md-font-size-xs">Students</p>
         </div>
     </md-card>
-    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/subject')">
+    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/subject')" ng-if="userType != 'lecturer'">
         <div layout="column" layout-align="center center">
             <md-icon class="no-margin" style="color:#005a52">business_center</md-icon>
             <p class="no-margin md-font-size-xs">Subjects</p>
         </div>
     </md-card>   
-    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/user')">
+    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/user')" ng-if="userType == 'admin'">
         <div layout="column" layout-align="center center">
             <md-icon class="no-margin" style="color:#005a52">face</md-icon>
             <p class="no-margin md-font-size-xs">Users</p>
         </div>
     </md-card>   
-    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/quiz')">
+    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/quiz')" ng-if="userType != 'admin'">
         <div layout="column" layout-align="center center">
             <md-icon class="no-margin" style="color:#005a52">forum</md-icon>
             <p class="no-margin md-font-size-xs">Quiz</p>

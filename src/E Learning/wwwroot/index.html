@@ -35,22 +35,22 @@
                         </md-menu-sidenav-title>
                     </md-menu-sidenav-item>                    
                 </md-menu-sidenav>
-                <md-menu-sidenav-item ng-click="navigateTo('/annoucement')">
+                <md-menu-sidenav-item ng-click="navigateTo('/annoucement')" ng-if="userType != 'admin'">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>code</md-icon></span>Annoucements</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
-                <md-menu-sidenav-item ng-click="navigateTo('/assignment')">
+                <md-menu-sidenav-item ng-click="navigateTo('/assignment')" ng-if="userType != 'admin'">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>business_center</md-icon></span>Assignments</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
-                <md-menu-sidenav-item ng-click="navigateTo('/class')">
+                <md-menu-sidenav-item ng-click="navigateTo('/class')" ng-if="userType != 'student'">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>business_center</md-icon></span>Classes</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
-                <md-menu-sidenav-item ng-click="navigateTo('/department')">
+                <md-menu-sidenav-item ng-click="navigateTo('/department')" ng-if="userType == 'admin'">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>business_center</md-icon></span>Departments</h1>
                     </md-menu-sidenav-title>
@@ -60,42 +60,42 @@
                         <h1 class="md-body-2" flex><span><md-icon>toys</md-icon></span>Events</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
-                <md-menu-sidenav-item ng-click="navigateTo('/file')">
+                <md-menu-sidenav-item ng-click="navigateTo('/file')" ng-if="userType != 'admin'">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>view_list</md-icon></span>Files</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
-                <md-menu-sidenav-item ng-click="navigateTo('/logReport')">
+                <md-menu-sidenav-item ng-click="navigateTo('/logReport')" ng-if="userType == 'admin'">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>live_help</md-icon></span>Logs Reports</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
-                <md-menu-sidenav-item ng-click="navigateTo('/message')">
+                <md-menu-sidenav-item ng-click="navigateTo('/message')" ng-if="userType != 'admin'">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>forum</md-icon></span>Messages</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
-                <md-menu-sidenav-item ng-click="navigateTo('/schoolYear')">
+                <md-menu-sidenav-item ng-click="navigateTo('/schoolYear')" ng-if="userType == 'admin'">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>person_add</md-icon></span>School Year Management</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
-                <md-menu-sidenav-item ng-click="navigateTo('/studentsReport')">
+                <md-menu-sidenav-item ng-click="navigateTo('/studentsReport')" ng-if="userType != 'student'">
                     <md-menu-sidenav-title>
-                        <h1 class="md-body-2" flex><span><md-icon>live_help</md-icon></span>Students Reports</h1>
+                        <h1 class="md-body-2" flex><span><md-icon>live_help</md-icon></span>Students</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
-                <md-menu-sidenav-item ng-click="navigateTo('/subject')">
+                <md-menu-sidenav-item ng-click="navigateTo('/subject')" ng-if="userType != 'lecturer'">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>business_center</md-icon></span>Subjects</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
-                <md-menu-sidenav-item ng-click="navigateTo('/user')">
+                <md-menu-sidenav-item ng-click="navigateTo('/user')" ng-if="userType == 'admin'">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>face</md-icon></span>Users</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
-                <md-menu-sidenav-item ng-click="navigateTo('/quiz')">
+                <md-menu-sidenav-item ng-click="navigateTo('/quiz')" ng-if="userType != 'admin'">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>forum</md-icon></span>Quiz</h1>
                     </md-menu-sidenav-title>
