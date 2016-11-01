@@ -8,7 +8,6 @@
             $scope.message = alertDialogService.message;
         }
         $scope.navigate = function () {
-            $location.path(alertDialogService.getPath());
             modal.getResult(true);
         };
 

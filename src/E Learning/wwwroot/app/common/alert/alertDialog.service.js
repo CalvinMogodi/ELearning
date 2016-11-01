@@ -28,6 +28,6 @@
 
     }
 
-    angular.module('EOHIntranet').service('alertDialogService', alertDialogService);
+    angular.module('EL').service('alertDialogService', alertDialogService);
     alertDialogService.$inject = [];
 })();
