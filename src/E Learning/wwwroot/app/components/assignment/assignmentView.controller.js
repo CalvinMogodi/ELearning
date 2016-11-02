@@ -52,6 +52,8 @@
                 if (this.status === 200) {
                     var blob = new Blob([xhr.response], { type: "application/pdf" });
                     var objectUrl = URL.createObjectURL(blob);
+                    //objectUrl = objectUrl.substring(0, objectUrl.lastIndexOf('/'));
+                    //objectUrl = objectUrl + '/'+assignment.fileName;
                     window.open(objectUrl);
                 }
             };

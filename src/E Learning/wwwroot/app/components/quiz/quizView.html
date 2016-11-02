@@ -1,10 +1,41 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+﻿<dir-page-header heading="vm.heading"
+                 icon="vm.icon"
+                 show-search="false"
+                 show-new-button="true"
+                 add-new-button-function="vm.newQuiz()">
+</dir-page-header>
 
-</body>
-</html>
+<md-content class="main-content md-fade-in md-padding page-content transparent">
+    <md-content class="box-shadow">
+        <md-data-table-container>
+            <table md-data-table md-progress="deferred">
+                <thead md-order="query.order" md-trigger="onOrderChange" class="color-blue color-medium-grey">
+                    <tr>
+                        <th name="Title"></th>
+                        <th name="Class"></th>
+                        <th name="Description"></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="quiz in vm.quizzes" class="hover">
+                        <td>{{quiz.title}}</td>
+                        <td>{{quiz.class.description}}</td>
+                        <td>{{quiz.description}}</td>
+                        <td>
+                            <md-button class="md-icon-button" ng-click="vm.editQuiz(quiz)">
+                                <md-icon md-font-icon="material-icons" class="md-font material-icons">edit</md-icon>
+                            </md-button>
+                            <md-button class="md-icon-button" ng-click="vm.deleteQuiz(quiz)">
+                                <md-icon md-font-icon="material-icons" class="md-font material-icons">delete</md-icon>
+                            </md-button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-data-table-container>
+        <md-data-table-container>
+            <md-data-table-pagination class="margin-bottom-16" md-limit="vm.pagenation.limit" md-page="vm.pagenation.page" md-total="{{vm.quizzes.length}}"></md-data-table-pagination>
+        </md-data-table-container>
+    </md-content>
+</md-content>

@@ -1,19 +1,66 @@
 ﻿(function () {
     'use strict';
 
-    angular
-        .module('EL')
-        .controller('QuizAddEditController', QuizAddEditController);
-
-    QuizAddEditController.$inject = ['$location']; 
-
-    function QuizAddEditController($location) {
+    function QuizAddEditController($location, firebaseUrl, HelperService, $firebaseArray, $filter, $firebaseObject) {
         /* jshint validthis:true */
         var vm = this;
-        vm.title = 'QuizAddEditController';
+        var ref = new Firebase(firebaseUrl);
+        vm.isEdit = false;
 
-        activate();
+        init();
+        function init() {
+            vm.quiz = HelperService.getAssignedRecord();
+            vm.classes = $firebaseArray(ref.child('Class'));
+            vm.heading = 'Add New Quiz';
+            if (vm.quiz) {
+                vm.isEdit = true;
+                vm.heading = 'Update Quiz';
+                vm.quiz.class = vm.quiz.class;
+            }
 
-        function activate() { }
+        }
+
+        vm.create = function (quiz) {
+
+            vm.formSubmitted = true;
+
+            if (vm.quizForm.$valid) {
+                var obj = JSON.parse(quiz.class);
+                var quizRef = new Firebase(firebaseUrl + "/Quiz");
+                var quizzes = $firebaseArray(quizRef);
+                var newRecord = {
+                    title: quiz.title,
+                    description: quiz.description,
+                    classId: obj.$id,
+                };
+                quizzes.$add(newRecord);
+                $location.path('/quiz');
+            }
+        }
+
+        vm.update = function (quiz) {
+            vm.formSubmitted = true;
+
+            if (vm.quizForm.$valid) {
+                var obj = JSON.parse(quiz.class);
+                var editRef = new Firebase(firebaseUrl + "/Quiz/" + quiz.$id);
+                var oldQuiz = $firebaseObject(editRef);
+
+                oldQuiz.$id = quiz.$id;
+                oldQuiz.description = quiz.description;
+                oldQuiz.title = quiz.title;
+                oldQuiz.classId = obj.$id;
+
+                oldQuiz.$save();
+                $location.path('/quiz');
+            }
+        }
+
+        vm.cancel = function () {
+            $location.path('/quiz');
+        }
     }
+
+    angular.module('EL').controller('QuizAddEditController', QuizAddEditController);
+    QuizAddEditController.$inject = ['$location', 'firebaseUrl', 'HelperService', '$firebaseArray', '$filter', '$firebaseObject'];
 })();

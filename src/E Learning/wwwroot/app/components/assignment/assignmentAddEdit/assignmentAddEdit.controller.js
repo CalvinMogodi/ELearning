@@ -19,6 +19,7 @@
                 vm.assignment.date = new Date(vm.assignment.date);
             }
 
+
         }
 
         vm.create = function (assignment) {
@@ -27,54 +28,79 @@
 
             if (vm.assignmentForm.$valid) {
               
-                var f = document.getElementById('file').files[0],
-                r = new FileReader();
-                r.onloadend = function (e) {
-                    var data = e.target.result;
-                    //send your binary data via $http or $resource or do anything else with it
+                var f = document.getElementById('file').files[0];
+                if (f != undefined) {
+                  var r = new FileReader();
+                    r.onloadend = function (e) {
+                        var data = e.target.result;
+                        //send your binary data via $http or $resource or do anything else with it
+                        var obj = JSON.parse(assignment.class);
+                        var assignmentRef = new Firebase(firebaseUrl + "/Assignment");
+                        var assignments = $firebaseArray(assignmentRef);
 
-                    var obj = JSON.parse(assignment.class);
-                    var assignmentRef = new Firebase(firebaseUrl + "/Assignment");
-                    var assignments = $firebaseArray(assignmentRef);
+                        assignment.date = $filter('date')(new Date(assignment.date), 'yyyy-MM-dd');
+                        var newRecord = {
+                            title: assignment.title,
+                            description: assignment.description,
+                            date: assignment.date,
+                            file: data,
+                            fileName: f.name,
+                            classId: obj.$id,
+                        };
+                        assignments.$add(newRecord);
+                        $location.path('/assignment');
 
-                    assignment.date = $filter('date')(new Date(assignment.date), 'yyyy-MM-dd');
-                    var newRecord = {
-                        title: assignment.title,
-                        description: assignment.description,
-                        date: assignment.date,
-                        file: data,
-                        classId: obj.$id,
-                    };
-                    assignments.$add(newRecord);
-                    $location.path('/assignment');
-
+                    }
+                    r.readAsDataURL(f);
+                } else {
+                    //Please choose a file to upload
                 }
-                r.readAsDataURL(f);
-
-               
-
-                
             }
         }
 
         vm.update = function (assignment) {
             vm.formSubmitted = true;
-
             if (vm.assignmentForm.$valid) {
+
                 var obj = JSON.parse(assignment.class);
                 var editRef = new Firebase(firebaseUrl + "/Assignment/" + assignment.$id);
                 assignment.date = $filter('date')(new Date(assignment.date), 'yyyy-MM-dd');
                 var oldAssignmentt = $firebaseObject(editRef);
 
-                oldAssignmentt.$id = assignment.$id;
-                oldAssignmentt.description = assignment.description;
-                oldAssignmentt.title = assignment.title;
-                oldAssignmentt.date = assignment.date;
-                oldAssignmentt.classId = obj.$id;
+            var f = document.getElementById('file').files[0];
+            if (f != undefined) {
+               var r = new FileReader();
+                r.onloadend = function (e) {
+                    var data = e.target.result;
 
-                oldAssignmentt.$save();
-                $location.path('/assignment');
+                    oldAssignmentt.$id = assignment.$id;
+                    oldAssignmentt.description = assignment.description;
+                    oldAssignmentt.title = assignment.title;
+                    oldAssignmentt.date = assignment.date;
+                    oldAssignmentt.classId = obj.$id;
+                    oldAssignmentt.file = data;
+                    oldAssignmentt.fileName = f.name;
+
+                    oldAssignmentt.$save();
+                    $location.path('/assignment');
+
+                }
+                r.readAsDataURL(f);
             }
+            else {               
+
+                    oldAssignmentt.$id = assignment.$id;
+                    oldAssignmentt.description = assignment.description;
+                    oldAssignmentt.title = assignment.title;
+                    oldAssignmentt.date = assignment.date;
+                    oldAssignmentt.classId = obj.$id;
+                    oldAssignmentt.file = assignment.file;
+                    oldAssignmentt.fileName = assignment.fileName;
+
+                    oldAssignmentt.$save();
+                    $location.path('/assignment');
+                }
+            }            
         }
 
         vm.cancel = function () {
