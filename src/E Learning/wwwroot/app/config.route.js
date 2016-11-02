@@ -90,11 +90,11 @@
         controller: 'SchoolYearAddEditController',
         templateUrl: viewBase + '/schoolYear/schoolYearAddEdit/schoolYearAddEdit.html',
         controllerAs: 'vm'
-    }).when('/studentReport', {
+    }).when('/studentAddEdit', {
         controller: 'StudentReportController',
         templateUrl: viewBase + '/studentReport/studentReportView.html',
         controllerAs: 'vm'
-    }).when('/schoolYearAddEdit', {
+    }).when('/studentAddEdit', {
         controller: 'StudentReportAddEditController',
         templateUrl: viewBase + '/studentReport/studentReportAddEdit/studentReportAddEdit.html',
         controllerAs: 'vm'
@@ -122,7 +122,19 @@
         controller: 'QuizAddEditController',
         templateUrl: viewBase + '/quiz/quizAddEdit/quizAddEdit.html',
         controllerAs: 'vm'
-    })  .otherwise({ redirectTo: '/' });
+    }).when('/sentMessage', {
+        controller: 'sentMessageController',
+        templateUrl: viewBase + '/message/sentMessage/sentMessage.html',
+        controllerAs: 'vm'
+    }).when('/classAnnoucement', {
+        controller: 'ClassAnnoucementController',
+        templateUrl: viewBase + '/class/classannoucement/classannoucement.html',
+        controllerAs: 'vm'
+    }).when('/classAssignment', {
+        controller: 'ClassAssignmentController',
+        templateUrl: viewBase + '/class/classAssignment/classAssignment.html',
+        controllerAs: 'vm'
+    }).otherwise({ redirectTo: '/' });
     }
 
     angular.module('EL').config(['$routeProvider', '$locationProvider', routeProvider]);

@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function AssignmentAddEditController($location, firebaseUrl, HelperService, $firebaseArray, $filter, $firebaseObject) {
+    function AssignmentAddEditController($location, firebaseUrl, HelperService, $firebaseArray, $filter, $firebaseObject, $sessionStorage) {
         /* jshint validthis:true */
         var vm = this;
         var ref = new Firebase(firebaseUrl);
@@ -46,6 +46,7 @@
                             file: data,
                             fileName: f.name,
                             classId: obj.$id,
+                            lecturerId: $sessionStorage.userId,
                         };
                         assignments.$add(newRecord);
                         $location.path('/assignment');
@@ -65,7 +66,7 @@
                 var obj = JSON.parse(assignment.class);
                 var editRef = new Firebase(firebaseUrl + "/Assignment/" + assignment.$id);
                 assignment.date = $filter('date')(new Date(assignment.date), 'yyyy-MM-dd');
-                var oldAssignmentt = $firebaseObject(editRef);
+                var oldAssignment = $firebaseObject(editRef);
 
             var f = document.getElementById('file').files[0];
             if (f != undefined) {
@@ -73,15 +74,16 @@
                 r.onloadend = function (e) {
                     var data = e.target.result;
 
-                    oldAssignmentt.$id = assignment.$id;
-                    oldAssignmentt.description = assignment.description;
-                    oldAssignmentt.title = assignment.title;
-                    oldAssignmentt.date = assignment.date;
-                    oldAssignmentt.classId = obj.$id;
-                    oldAssignmentt.file = data;
-                    oldAssignmentt.fileName = f.name;
+                    oldAssignment.$id = assignment.$id;
+                    oldAssignment.description = assignment.description;
+                    oldAssignment.title = assignment.title;
+                    oldAssignment.date = assignment.date;
+                    oldAssignment.classId = obj.$id;
+                    oldAssignment.file = data;
+                    oldAssignment.fileName = f.name;
+                    oldAssignment.lecturerId = $sessionStorage.userId;
 
-                    oldAssignmentt.$save();
+                    oldAssignment.$save();
                     $location.path('/assignment');
 
                 }
@@ -89,15 +91,16 @@
             }
             else {               
 
-                    oldAssignmentt.$id = assignment.$id;
-                    oldAssignmentt.description = assignment.description;
-                    oldAssignmentt.title = assignment.title;
-                    oldAssignmentt.date = assignment.date;
-                    oldAssignmentt.classId = obj.$id;
-                    oldAssignmentt.file = assignment.file;
-                    oldAssignmentt.fileName = assignment.fileName;
+                    oldAssignment.$id = assignment.$id;
+                    oldAssignment.description = assignment.description;
+                    oldAssignment.title = assignment.title;
+                    oldAssignment.date = assignment.date;
+                    oldAssignment.classId = obj.$id;
+                    oldAssignment.file = assignment.file;
+                    oldAssignment.fileName = assignment.fileName;
+                    oldAssignment.lecturerId = $sessionStorage.userId;
 
-                    oldAssignmentt.$save();
+                    oldAssignment.$save();
                     $location.path('/assignment');
                 }
             }            
@@ -109,5 +112,5 @@
     }
 
     angular.module('EL').controller('AssignmentAddEditController', AssignmentAddEditController);
-    AssignmentAddEditController.$inject = ['$location', 'firebaseUrl', 'HelperService', '$firebaseArray', '$filter', '$firebaseObject'];
+    AssignmentAddEditController.$inject = ['$location', 'firebaseUrl', 'HelperService', '$firebaseArray', '$filter', '$firebaseObject', '$sessionStorage'];
 })();

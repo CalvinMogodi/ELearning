@@ -1,7 +1,7 @@
 ﻿<dir-page-header heading="vm.heading"
                  icon="vm.icon"
                  show-search="false"
-                 show-new-button="true"
+                 show-new-button="showAddButton"
                  add-new-button-function="vm.newClass()">
 </dir-page-header>
 
@@ -20,13 +20,17 @@
                     <tr ng-repeat="class in vm.classes" ng-click="vm.showClass(class)" class="hover">
                         <td>{{class.title}}</td>
                         <td>{{class.description}}</td>
-                        <td >
+                        <td ng-if="!vm.isStudent">
                             <md-button class="md-icon-button" ng-click="vm.editClass(class)">
                                 <md-icon md-font-icon="material-icons" class="md-font material-icons">edit</md-icon>
                             </md-button>
                             <md-button class="md-icon-button" ng-click="vm.deleteClass(class)">
                                 <md-icon md-font-icon="material-icons" class="md-font material-icons">delete</md-icon>
                             </md-button>
+                        </td>
+                        <td ng-if="vm.isStudent">
+                            <md-button class="md-primary md-primary-custom" ng-click="vm.viewAnnoucements(class)">View Annoucements</md-button>
+                            <md-button class="md-primary md-primary-custom" ng-click="vm.viewAssignments(class)">View Assignments</md-button>
                         </td>
                     </tr>
                 </tbody>

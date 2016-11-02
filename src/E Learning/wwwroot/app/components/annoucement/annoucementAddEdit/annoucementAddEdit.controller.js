@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict'; 
 
-    function AnnoucementAddEditController($location, firebaseUrl, HelperService, $firebaseArray, $filter, $firebaseObject) {
+    function AnnoucementAddEditController($location, firebaseUrl, HelperService, $firebaseArray, $filter, $firebaseObject, $sessionStorage) {
         /* jshint validthis:true */
         var vm = this;
         var ref = new Firebase(firebaseUrl);        
@@ -37,6 +37,7 @@
                     description: annoucement.description,
                     date: annoucement.date,
                     classId: obj.$id,
+                    lecturerId: $sessionStorage.userId,
                 };
                 annoucements.$add(newRecord);
                 $location.path('/annoucement');
@@ -57,6 +58,7 @@
                 oldAnnoucement.title = annoucement.title;
                 oldAnnoucement.date = annoucement.date;
                 oldAnnoucement.classId = obj.$id;
+                oldAnnoucement.lecturerId = $sessionStorage.userId;
                 
                 oldAnnoucement.$save();
                 $location.path('/annoucement');
@@ -69,5 +71,5 @@
     }
 
     angular.module('EL').controller('AnnoucementAddEditController', AnnoucementAddEditController);
-    AnnoucementAddEditController.$inject = ['$location', 'firebaseUrl', 'HelperService', '$firebaseArray', '$filter', '$firebaseObject'];
+    AnnoucementAddEditController.$inject = ['$location', 'firebaseUrl', 'HelperService', '$firebaseArray', '$filter', '$firebaseObject', '$sessionStorage'];
 })();

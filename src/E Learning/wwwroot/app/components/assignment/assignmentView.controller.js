@@ -43,7 +43,6 @@
         }
 
         vm.downloadAssignment = function (assignment) {
-            //TODO
             var xhr = new XMLHttpRequest();
             xhr.open("GET", assignment.file);
             xhr.responseType = "arraybuffer";
@@ -52,8 +51,6 @@
                 if (this.status === 200) {
                     var blob = new Blob([xhr.response], { type: "application/pdf" });
                     var objectUrl = URL.createObjectURL(blob);
-                    //objectUrl = objectUrl.substring(0, objectUrl.lastIndexOf('/'));
-                    //objectUrl = objectUrl + '/'+assignment.fileName;
                     window.open(objectUrl);
                 }
             };

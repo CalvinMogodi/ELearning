@@ -1,10 +1,41 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+﻿<dir-page-header heading="vm.heading"
+                 icon="vm.icon"
+                 show-search="false"
+                 show-new-button="true"
+                 add-new-button-function="vm.newStudent()">
+</dir-page-header>
 
-</body>
-</html>
+<md-content class="main-content md-fade-in md-padding page-content transparent">
+    <md-content class="box-shadow">
+        <md-data-table-container>
+            <table md-data-table md-progress="deferred">
+                <thead md-order="query.order" md-trigger="onOrderChange" class="color-blue color-medium-grey">
+                    <tr>
+                        <th name="First Name"></th>
+                        <th name="Surname"></th>
+                        <th name="Enrollment"></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="student in vm.students" class="hover">
+                        <td>{{student.firstName}}</td>
+                        <td>{{student.surname}}</td>
+                        <td>{{student.enrollment.description}}</td>   
+                        <td>
+                            <md-button class="md-icon-button" ng-click="vm.editStudent(student)">
+                                <md-icon md-font-icon="material-icons" class="md-font material-icons">edit</md-icon>
+                            </md-button>
+                            <md-button class="md-icon-button" ng-click="vm.deleteStudent(student)">
+                                <md-icon md-font-icon="material-icons" class="md-font material-icons">delete</md-icon>
+                            </md-button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-data-table-container>
+        <md-data-table-container>
+            <md-data-table-pagination class="margin-bottom-16" md-limit="vm.pagenation.limit" md-page="vm.pagenation.page" md-total="{{vm.students.length}}"></md-data-table-pagination>
+        </md-data-table-container>
+    </md-content>
+</md-content>

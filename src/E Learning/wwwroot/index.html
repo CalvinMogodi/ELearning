@@ -45,7 +45,7 @@
                         <h1 class="md-body-2" flex><span><md-icon>business_center</md-icon></span>Assignments</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
-                <md-menu-sidenav-item ng-click="navigateTo('/class')" ng-if="userType != 'student'">
+                <md-menu-sidenav-item ng-click="navigateTo('/class')" ng-if="userType != 'lecturer'">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>business_center</md-icon></span>Classes</h1>
                     </md-menu-sidenav-title>
@@ -70,7 +70,7 @@
                         <h1 class="md-body-2" flex><span><md-icon>live_help</md-icon></span>Logs Reports</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
-                <md-menu-sidenav-item ng-click="navigateTo('/message')" ng-if="userType != 'admin'">
+                <md-menu-sidenav-item ng-click="navigateTo('/message')">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>forum</md-icon></span>Messages</h1>
                     </md-menu-sidenav-title>
@@ -173,6 +173,9 @@
 <script src="app/components/user/useraddedit/useraddedit.controller.js"></script>
 <script src="app/components/user/userview.controller.js"></script>
 <script src="app/common/alert/alertdialog.controller.js"></script>
+<script src="app/components/message/sentmessage/sentmessage.controller.js"></script>
+<script src="app/components/class/classannoucement/classannoucement.controller.js"></script>
+<script src="app/components/class/classassignment/classassignment.controller.js"></script>
 
 <!-- Services -->
 <script src="app/common/login/login.service.js"></script>
