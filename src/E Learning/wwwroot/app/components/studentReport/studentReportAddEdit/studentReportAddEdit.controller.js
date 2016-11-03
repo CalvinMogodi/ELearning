@@ -5,66 +5,37 @@
         /* jshint validthis:true */
         var vm = this;
         var ref = new Firebase(firebaseUrl);
-        vm.isEdit = false;
+        vm.heading = 'Link Student To Course';
 
         init();
         function init() {
-            vm.subject = HelperService.getAssignedRecord();
-            vm.classes = $firebaseArray(ref.child('Class'));
-            vm.heading = 'Add New subject';
-            if (vm.subject) {
-                vm.isEdit = true;
-                vm.heading = 'Update subject';
-                vm.subject.class = vm.subject.class;
-                if (vm.subject)
-                    vm.subject.date = new Date(vm.subject.date);
-            }
-
+            vm.studentRecord = HelperService.getAssignedRecord();
+            vm.courses = $firebaseArray(ref.child('Course'));
+           
         }
-
-        vm.create = function (subject) {
-
+        
+        vm.link = function (record) {
             vm.formSubmitted = true;
 
-            if (vm.subjectForm.$valid) {
-                var obj = JSON.parse(subject.class);
-                var annoucementRef = new Firebase(firebaseUrl + "/Subject");
-                var subjects = $firebaseArray(annoucementRef);
+            if (vm.studentForm.$valid) {
+                var editRef = new Firebase(firebaseUrl + "/User/" + record.$id);
+                var oldUser = $firebaseObject(editRef);
 
-                subject.date = $filter('date')(new Date(subject.date), 'yyyy-MM-dd');
-                var newRecord = {
-                    title: subject.title,
-                    description: subject.description,
-                    date: subject.date,
-                    classId: obj.$id,
-                };
-                subjects.$add(newRecord);
-                $location.path('/subject');
-            }
-        }
+                oldUser.$id = record.$id;
+                oldUser.firstname = record.firstname,
+                oldUser.surname = record.surname,
+                oldUser.userType = record.userType,
+                oldUser.username = record.username,
+                oldUser.password = record.password,
+                oldUser.courseId = record.course.$id,
 
-        vm.update = function (subject) {
-            vm.formSubmitted = true;
-
-            if (vm.subjectForm.$valid) {
-                var obj = JSON.parse(subject.class);
-                var editRef = new Firebase(firebaseUrl + "/Subject/" + subject.$id);
-                subject.date = $filter('date')(new Date(subject.date), 'yyyy-MM-dd');
-                var oldSubject = $firebaseObject(editRef);
-
-                oldSubject.$id = subject.$id;
-                oldSubject.description = subject.description;
-                oldSubject.title = subject.title;
-                oldSubject.date = subject.date;
-                oldSubject.classId = obj.$id;
-
-                oldSubject.$save();
-                $location.path('/subject');
+                oldUser.$save();
+                $location.path('/studentsReport');
             }
         }
 
         vm.cancel = function () {
-            $location.path('/subject');
+            $location.path('/studentsReport');
         }
     }
 

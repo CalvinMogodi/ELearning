@@ -1,10 +1,49 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+﻿<dir-page-header heading="vm.heading"
+                 icon="vm.icon">
+</dir-page-header>
 
-</body>
-</html>
+<md-content class="main-content md-fade-in md-padding page-content transparent">
+    <md-content class="box-shadow">
+        <md-content class="md-padding">
+            <form name="vm.studentForm">
+                <div layout-gt-md="row" layout-md="column">
+                    <div flex>
+                        <md-input-container class="md-block">
+                            <label>First Name</label>
+                            <input ng-model="vm.studentRecord.firstname" required name="firstname" type="text" />
+                            <div ng-messages="vm.studentForm.firstname.$error" ng-if="vm.studentForm.firstname.$dirty || vm.formSubmitted">
+                                <div ng-message="required">The field above is required</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Surname</label>
+                            <input ng-model="vm.studentRecord.surname" required name="surname" type="text" />
+                            <div ng-messages="vm.studentForm.surname.$error" ng-if="vm.studentForm.surname.$dirty || vm.formSubmitted">
+                                <div ng-message="required">The field above is required</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Select Course</label>
+                            <md-select ng-model="vm.studentRecord.course" required name="course">
+                                <md-option ng-value="course" ng-repeat="course in vm.courses track by $index">{{course.title}}</md-option>
+                            </md-select>
+                            <div ng-messages="vm.studentForm.course.$error" ng-if="vm.studentForm.course.$dirty || vm.formSubmitted">
+                                <div ng-message="required">Please select course</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </div>
+            </form>
+            <md-content class="md-padding">
+                <div layout="row">
+                    <div flex="50" layout="column" layout-align="start start">
+                        <md-button class="md-primary md-primary-custom" ng-click="vm.cancel()">Cancel</md-button>
+                    </div>
+                    <div flex="50" layout="row" layout-align="end end">
+                        <md-button class="md-primary md-primary-custom" ng-click="vm.link(vm.studentRecord)">Link</md-button>
+                    </div>
+                </div>
+            </md-content>
+        </md-content>
+    </md-content>
+</md-content>

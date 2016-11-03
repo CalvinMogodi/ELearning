@@ -29,6 +29,15 @@
                                 <div ng-message="required">The field above is required</div>
                             </div>
                         </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Select Course</label>
+                            <md-select ng-model="vm.subject.course" required name="course">
+                                <md-option ng-value="course" ng-repeat="course in vm.courses track by $index">{{course.title}}</md-option>
+                            </md-select>
+                            <div ng-messages="vm.subjectForm.course.$error" ng-if="vm.subjectForm.course.$dirty || vm.formSubmitted">
+                                <div ng-message="required">Please select course</div>
+                            </div>
+                        </md-input-container>
                     </div>
                 </div>
             </form>

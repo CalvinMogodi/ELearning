@@ -18,8 +18,10 @@
                     if (vm.user.username == vm.users[i].username && vm.user.password == vm.users[i].password) {
                         $sessionStorage.isUserAuthenticated = true;
                         $sessionStorage.userId = vm.users[i].$id;
+                        $sessionStorage.courseId = undefined;
                         if (vm.users[i].userType == 'student') {
                             $sessionStorage.userType = 'student';
+                            $sessionStorage.courseId = vm.users[i].courseId;
                         } else if (vm.users[i].userType == 'lecturer') {
                             $sessionStorage.userType = 'lecturer';
                         } else if (vm.users[i].userType == 'admin') {

@@ -42,13 +42,13 @@
         controller: 'ClassAddEditController',
         templateUrl: viewBase + '/class/classAddEdit/classAddEdit.html',
         controllerAs: 'vm'
-    }).when('/department', {
-        controller: 'DepartmentController',
-        templateUrl: viewBase + '/department/departmentView.html',
+    }).when('/course', {
+        controller: 'CourseController',
+        templateUrl: viewBase + '/course/course.html',
         controllerAs: 'vm'
-    }).when('/departmentAddEdit', {
-        controller: 'DepartmentAddEditController',
-        templateUrl: viewBase + '/department/departmentAddEdit/departmentAddEdit.html',
+    }).when('/courseAddEdit', {
+        controller: 'CourseAddEditController',
+        templateUrl: viewBase + '/course/courseAddEdit/courseAddEdit.html',
         controllerAs: 'vm'
     }).when('/event', {
         controller: 'EventController',
@@ -90,7 +90,7 @@
         controller: 'SchoolYearAddEditController',
         templateUrl: viewBase + '/schoolYear/schoolYearAddEdit/schoolYearAddEdit.html',
         controllerAs: 'vm'
-    }).when('/studentAddEdit', {
+    }).when('/studentsReport', {
         controller: 'StudentReportController',
         templateUrl: viewBase + '/studentReport/studentReportView.html',
         controllerAs: 'vm'

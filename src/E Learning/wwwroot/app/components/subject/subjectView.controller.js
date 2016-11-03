@@ -20,23 +20,42 @@
             if ($sessionStorage.userType == 'student') {
                 vm.showAddButton = false;
                 vm.isStudent = true;
-            }
-            //load subjects with class that is linked to
-            vm.subjects = $firebaseArray(ref.child('Subject'));
-            vm.subjects.$loaded(function (data) {
-                vm.classes = $firebaseArray(ref.child('Class'));
-                vm.classes.$loaded(function (data) {
-                    for (var i = 0; i < vm.subjects.length; i++) {
-                        for (var j = 0; j < vm.classes.length; j++) {
-                            if (vm.subjects[i].classId == vm.classes[j].$id) {
-                                vm.subjects[i].class = vm.classes[j];
+                vm.subjects = [];
+                vm.allSubjects = $firebaseArray(ref.child('Subject'));
+                vm.allSubjects.$loaded(function (data) {
+                    vm.course = $firebaseArray(ref.child('Course'));
+                    vm.course.$loaded(function (data) {
+                        for (var j = 0; j < vm.course.length; j++) {
+                            if (vm.course[j].$id == $sessionStorage.courseId) {
+                                for (var i = 0; i < vm.allSubjects.length; i++) {
+                                    if (vm.allSubjects[i].courseId == vm.course[j].$id) {
+                                        vm.allSubjects[i].course = vm.course[j];
+                                        vm.subjects.push(vm.allSubjects[i]);
+                                    }
+                                }
                                 break;
                             }
+                            
                         }
-                    }
+                    });
                 });
-            });
-
+            } else {
+                //load subjects with course that is linked to
+                vm.subjects = $firebaseArray(ref.child('Subject'));
+                vm.subjects.$loaded(function (data) {
+                    vm.course = $firebaseArray(ref.child('Course'));
+                    vm.course.$loaded(function (data) {
+                        for (var i = 0; i < vm.subjects.length; i++) {
+                            for (var j = 0; j < vm.course.length; j++) {
+                                if (vm.subjects[i].courseId == vm.course[j].$id) {
+                                    vm.subjects[i].course = vm.course[j];
+                                    break;
+                                }
+                            }
+                        }
+                    });
+                });
+            }
         }
 
         vm.newSubject = function () {

@@ -43,6 +43,11 @@
                         <h1 class="md-body-2" flex><span><md-icon>business_center</md-icon></span>Classes</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
+                <md-menu-sidenav-item ng-click="navigateTo('/course')" ng-if="userType == 'admin'">
+                    <md-menu-sidenav-title>
+                        <h1 class="md-body-2" flex><span><md-icon>forum</md-icon></span>Course</h1>
+                    </md-menu-sidenav-title>
+                </md-menu-sidenav-item>
                 <md-menu-sidenav-item ng-click="navigateTo('/event')">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>toys</md-icon></span>Events</h1>
@@ -125,20 +130,12 @@
 <script src="app/components/assignment/assignmentview.controller.js"></script>
 <script src="app/components/class/classaddedit/classaddedit.controller.js"></script>
 <script src="app/components/class/classview.controller.js"></script>
-<script src="app/components/department/departmentaddedit/departmentaddedit.controller.js"></script>
-<script src="app/components/department/departmentview.controller.js"></script>
 <script src="app/components/event/eventaddedit/eventaddedit.controller.js"></script>
 <script src="app/components/event/eventview.controller.js"></script>
-<script src="app/components/file/fileaddedit/fileaddedit.controller.js"></script>
-<script src="app/components/file/fileview.controller.js"></script>
-<script src="app/components/logreport/logreportaddedit/logreportaddedit.controller.js"></script>
-<script src="app/components/logreport/logreportview.controller.js"></script>
 <script src="app/components/message/messageaddedit/messageaddedit.controller.js"></script>
 <script src="app/components/message/messageview.controller.js"></script>
 <script src="app/components/quiz/quizaddedit/quizaddedit.controller.js"></script>
 <script src="app/components/quiz/quizview.controller.js"></script>
-<script src="app/components/schoolyear/schoolyearaddedit/schoolyearaddedit.controller.js"></script>
-<script src="app/components/schoolyear/schoolyearview.controller.js"></script>
 <script src="app/components/studentreport/studentreportaddedit/studentreportaddedit.controller.js"></script>
 <script src="app/components/studentreport/studentreportview.controller.js"></script>
 <script src="app/components/subject/subjectaddedit/subjectaddedit.controller.js"></script>
@@ -149,6 +146,8 @@
 <script src="app/components/message/sentmessage/sentmessage.controller.js"></script>
 <script src="app/components/class/classannoucement/classannoucement.controller.js"></script>
 <script src="app/components/class/classassignment/classassignment.controller.js"></script>
+<script src="app/components/course/course.controller.js"></script>
+<script src="app/components/course/courseaddedit/courseaddedit.controller.js"></script>
 
 <!-- Services -->
 <script src="app/common/login/login.service.js"></script>

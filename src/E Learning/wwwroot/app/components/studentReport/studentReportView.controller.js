@@ -6,6 +6,7 @@
         var vm = this;
         vm.heading = 'Student';
         vm.icon = "add_box";
+        vm.students = [];
         var ref = new Firebase(firebaseUrl);
         vm.pagenation = {
             limit: 5,
@@ -16,39 +17,37 @@
 
         function init() {
             //load students with class that is linked to
-            vm.students = $firebaseArray(ref.child('Student'));
-            vm.students.$loaded(function (data) {
-                vm.classes = $firebaseArray(ref.child('Class'));
-                vm.classes.$loaded(function (data) {
-                    for (var i = 0; i < vm.students.length; i++) {
-                        for (var j = 0; j < vm.classes.length; j++) {
-                            if (vm.students[i].classId == vm.classes[j].$id) {
-                                vm.students[i].class = vm.classes[j];
-                                break;
+            vm.users = $firebaseArray(ref.child('User'));
+            vm.users.$loaded(function (data) {
+                vm.courses = $firebaseArray(ref.child('Course'));
+                vm.courses.$loaded(function (data) {
+                    for (var i = 0; i < vm.users.length; i++) {
+                        if (vm.users[i].userType == 'student') {
+                            if (vm.users[i].courseId) {
+                            for (var j = 0; j < vm.courses.length; j++) {                                
+                                if (vm.users[i].courseId == vm.courses[j].$id) {
+                                    vm.users[i].course = vm.courses[j];
+                                    vm.students.push(vm.users[i]);
+                                    break;
+                                }             
                             }
-                        }
+                            } else {
+                                vm.students.push(vm.users[i]);
+                            }
+                        }                        
                     }
                 });
             });
 
         }
 
-        vm.newStudent = function () {
+        vm.editStudentRecord = function () {
             HelperService.assignCurrentRecord(undefined);
-            $location.path('/studentReportAddEdit');
+            $location.path('/studentAddEdit');
         }
-        vm.editStudent = function (student) {
-            HelperService.assignCurrentRecord(student);
-            $location.path('/studentReportAddEdit');
-        }
-        vm.deleteStudent = function (student) {
-            alertDialogService.setHeaderAndMessage('Delete', 'Are you sore you want to delete this class?');
-            var templateUrl = '/app/common/alert/alertDialog.template.html';
-            modal.show(templateUrl, 'alertDialogController').then(function (result) {
-                if (result) {
-                    vm.students.$remove(student);
-                }
-            });
+        vm.addCourse = function (course) {
+            HelperService.assignCurrentRecord(course);
+            $location.path('/studentAddEdit');
         }
     }
 

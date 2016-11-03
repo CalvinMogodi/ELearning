@@ -13,7 +13,7 @@
                     <tr>
                         <th name="Subject Code"></th>
                         <th name="Title"></th>
-                        <th name="Class"></th>
+                        <th name="Course"></th>
                         <th name="Description"></th>
                         <th ng-if="!vm.isStudent"></th>
                     </tr>
@@ -22,7 +22,7 @@
                     <tr ng-repeat="subject in vm.subjects" class="hover">
                         <td>{{subject.code}}</td>
                         <td>{{subject.title}}</td>
-                        <td>{{subject.class.description}}</td>                  
+                        <td>{{subject.course.title}}</td>                  
                         <td>{{subject.description}}</td>
                         <td ng-if="!vm.isStudent">
                             <md-button class="md-icon-button" ng-click="vm.editSubject(subject)">
