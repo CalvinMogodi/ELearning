@@ -14,6 +14,8 @@
             $mdDialog.hide(result);
         };
 
+
+
         var show = function (templateUrl, modalController) {
             var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) ;
            return $mdDialog.show({
