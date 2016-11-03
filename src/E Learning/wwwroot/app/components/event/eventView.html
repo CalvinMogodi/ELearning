@@ -16,7 +16,7 @@
                         <th name="Start Date"></th>
                         <th name="End Date"></th>
                         <th name="Description"></th>
-                        <th></th>
+                        <th ng-if="!vm.isStudent"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,7 +26,7 @@
                         <td>{{event.startDate}}</td>
                         <td>{{event.endDate}}</td>
                         <td>{{event.description}}</td>
-                        <td>
+                        <td ng-if="!vm.isStudent">
                             <md-button class="md-icon-button" ng-click="vm.editEvent(event)">
                                 <md-icon md-font-icon="material-icons" class="md-font material-icons">edit</md-icon>
                             </md-button>
