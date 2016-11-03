@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict'; 
 
-    function EventController($location, $firebaseArray, HelperService, alertDialogService, modal, firebaseUrl) {
+    function EventController($location, $firebaseArray, HelperService, alertDialogService, modal, firebaseUrl, $sessionStorage) {
         /* jshint validthis:true */
         var vm = this;
         vm.heading = 'Event';
@@ -60,5 +60,5 @@
     }
 
     angular.module('EL').controller('EventController', EventController);
-    EventController.$inject = ['$location', '$firebaseArray', 'HelperService', 'alertDialogService', 'modal', 'firebaseUrl'];
+    EventController.$inject = ['$location', '$firebaseArray', 'HelperService', 'alertDialogService', 'modal', 'firebaseUrl', '$sessionStorage'];
 })();

@@ -7,10 +7,10 @@
         vm.isReadOnly = false;
         var ref = new Firebase(firebaseUrl);
         vm.tabs = [
-            { id: 1, heading: 'Inbox', active: false, url: '/message' },
-            { id: 2, heading: 'Sent Message', active: false, url: '' },
+            { id: 1, heading: 'Inbox', active: false, url: 'message' },
+            { id: 2, heading: 'Sent Message', active: false, url: 'sentMessage' },
             { id: 3, heading: 'Send New Message', active: true, url: '/messageAddEdit' }
-        ];
+        ]
         vm.pageControls = {
             showNewButton: true,
             heading: 'Send New Message',

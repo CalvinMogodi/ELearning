@@ -1,11 +1,13 @@
 ﻿(function () {
     'use strict';
 
-    function QuizController($location, $firebaseArray, HelperService, alertDialogService, modal, firebaseUrl) {
+    function QuizController($location, $firebaseArray, HelperService, alertDialogService, modal, firebaseUrl, $sessionStorage) {
         /* jshint validthis:true */
         var vm = this;
         vm.heading = 'Quiz';
         vm.icon = "add_box";
+        vm.isStudent = false;
+        vm.showAddButton = true;
         var ref = new Firebase(firebaseUrl);
         vm.pagenation = {
             limit: 5,
@@ -15,6 +17,10 @@
         init();
 
         function init() {
+            if ($sessionStorage.userType == 'student') {
+                vm.showAddButton = false;
+                vm.isStudent = true;
+            }
             //load quiz with class that is linked to
             vm.quizzes = $firebaseArray(ref.child('Quiz'));
             vm.quizzes.$loaded(function (data) {
@@ -53,5 +59,5 @@
     }
 
     angular.module('EL').controller('QuizController', QuizController);
-    QuizController.$inject = ['$location', '$firebaseArray', 'HelperService', 'alertDialogService', 'modal', 'firebaseUrl'];
+    QuizController.$inject = ['$location', '$firebaseArray', 'HelperService', 'alertDialogService', 'modal', 'firebaseUrl', '$sessionStorage'];
 })();

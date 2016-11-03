@@ -1,11 +1,13 @@
 ﻿(function () {
     'use strict';
 
-    function SubjectController($location, $firebaseArray, HelperService, alertDialogService, modal, firebaseUrl) {
+    function SubjectController($location, $firebaseArray, HelperService, alertDialogService, modal, firebaseUrl, $sessionStorage) {
         /* jshint validthis:true */
         var vm = this;
         vm.heading = 'Subject';
         vm.icon = "add_box";
+        vm.isStudent = false;
+        vm.showAddButton = true;
         var ref = new Firebase(firebaseUrl);
         vm.pagenation = {
             limit: 5,
@@ -15,6 +17,10 @@
         init();
 
         function init() {
+            if ($sessionStorage.userType == 'student') {
+                vm.showAddButton = false;
+                vm.isStudent = true;
+            }
             //load subjects with class that is linked to
             vm.subjects = $firebaseArray(ref.child('Subject'));
             vm.subjects.$loaded(function (data) {
@@ -53,5 +59,5 @@
     }
 
     angular.module('EL').controller('SubjectController', SubjectController);
-    SubjectController.$inject = ['$location', '$firebaseArray', 'HelperService', 'alertDialogService', 'modal', 'firebaseUrl'];
+    SubjectController.$inject = ['$location', '$firebaseArray', 'HelperService', 'alertDialogService', 'modal', 'firebaseUrl', '$sessionStorage'];
 })();

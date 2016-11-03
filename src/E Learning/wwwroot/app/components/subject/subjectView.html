@@ -1,7 +1,7 @@
 ﻿<dir-page-header heading="vm.heading"
                  icon="vm.icon"
                  show-search="false"
-                 show-new-button="true"
+                 show-new-button="vm.showAddButton"
                  add-new-button-function="vm.newSubject()">
 </dir-page-header>
 
@@ -15,7 +15,7 @@
                         <th name="Title"></th>
                         <th name="Class"></th>
                         <th name="Description"></th>
-                        <th></th>
+                        <th ng-if="!vm.isStudent"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,7 +24,7 @@
                         <td>{{subject.title}}</td>
                         <td>{{subject.class.description}}</td>                  
                         <td>{{subject.description}}</td>
-                        <td>
+                        <td ng-if="!vm.isStudent">
                             <md-button class="md-icon-button" ng-click="vm.editSubject(subject)">
                                 <md-icon md-font-icon="material-icons" class="md-font material-icons">edit</md-icon>
                             </md-button>

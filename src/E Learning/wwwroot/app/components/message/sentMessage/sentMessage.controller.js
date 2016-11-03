@@ -8,9 +8,9 @@
         var ref = new Firebase(firebaseUrl);
         vm.inboxmessages = [];
         vm.tabs = [
-            { id: 1, heading: 'Inbox', active: true, url: '' },
-            { id: 2, heading: 'Sent Message', active: false, url: '' },
-            { id: 3, heading: 'Send New Message', active: false, url: '/messageAddEdit' }
+             { id: 1, heading: 'Inbox', active:false , url: 'message' },
+             { id: 2, heading: 'Sent Message', active: true, url: 'sentMessage' },
+             { id: 3, heading: 'Send New Message', active: false, url: '/messageAddEdit' }
         ]
 
         init();

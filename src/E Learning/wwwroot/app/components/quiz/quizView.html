@@ -1,7 +1,7 @@
 ﻿<dir-page-header heading="vm.heading"
                  icon="vm.icon"
                  show-search="false"
-                 show-new-button="true"
+                 show-new-button="vm.showAddButton"
                  add-new-button-function="vm.newQuiz()">
 </dir-page-header>
 
@@ -14,7 +14,7 @@
                         <th name="Title"></th>
                         <th name="Class"></th>
                         <th name="Description"></th>
-                        <th></th>
+                        <th ng-if="!vm.isStudent"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,7 +22,7 @@
                         <td>{{quiz.title}}</td>
                         <td>{{quiz.class.description}}</td>
                         <td>{{quiz.description}}</td>
-                        <td>
+                        <td ng-if="!vm.isStudent">
                             <md-button class="md-icon-button" ng-click="vm.editQuiz(quiz)">
                                 <md-icon md-font-icon="material-icons" class="md-font material-icons">edit</md-icon>
                             </md-button>
