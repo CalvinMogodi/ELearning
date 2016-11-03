@@ -7,7 +7,7 @@
         vm.heading = 'Class';
         vm.icon = "add_box";
         vm.isStudent = false;
-        $scope.showAddButton = false;
+        vm.showAddButton = true;
         var ref = new Firebase(firebaseUrl);
         vm.pagenation = {
             limit: 5,
@@ -20,7 +20,7 @@
             vm.classes = $firebaseArray(ref.child('Class'));
             if ($sessionStorage.userType == 'student') {
                 vm.isStudent = true;
-                $scope.showAddButton = true;
+                vm.showAddButton = false;
             }
 
             

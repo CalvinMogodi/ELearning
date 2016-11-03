@@ -29,7 +29,6 @@
             vm.formSubmitted = true;
 
             if (vm.eventForm.$valid) {
-                var obj = JSON.parse(event.class);
                 var eventRef = new Firebase(firebaseUrl + "/Event");
                 var events = $firebaseArray(eventRef);
 
@@ -40,7 +39,7 @@
                     description: event.description,
                     startDate: event.startDate,
                     endDate: event.endDate,
-                    classId: obj.$id,
+                    classId: event.class.$id,
                 };
                 events.$add(newRecord);
                 $location.path('/event');
@@ -51,7 +50,6 @@
             vm.formSubmitted = true;
 
             if (vm.eventForm.$valid) {
-                var obj = JSON.parse(event.class);
                 var editRef = new Firebase(firebaseUrl + "/Event/" + event.$id);
                 event.startDate = $filter('date')(new Date(event.startDate), 'yyyy-MM-dd');
                 event.endDate = $filter('date')(new Date(event.endDate), 'yyyy-MM-dd');
@@ -62,7 +60,7 @@
                 oldEvent.title = event.title;
                 oldEvent.startDate = event.startDate;
                 oldEvent.endDate = event.endDate;
-                oldEvent.classId = obj.$id;
+                oldEvent.classId = event.class.$id;
 
                 oldEvent.$save();
                 $location.path('/event');

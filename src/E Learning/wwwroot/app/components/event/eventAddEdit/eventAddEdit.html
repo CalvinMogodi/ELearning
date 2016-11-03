@@ -18,7 +18,7 @@
                         <md-input-container class="md-block">
                             <label>Select Class</label>
                             <md-select ng-model="vm.event.class" required name="class">
-                                <md-option value="{{class}}" ng-repeat="class in vm.classes track by $index">{{class.description}}</md-option>
+                                <md-option ng-value="class" ng-repeat="class in vm.classes track by $index">{{class.description}}</md-option>
                             </md-select>
                             <div ng-messages="vm.eventForm.class.$error" ng-if="vm.eventForm.class.$dirty || vm.formSubmitted">
                                 <div ng-message="required">Please select class</div>

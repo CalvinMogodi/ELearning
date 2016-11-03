@@ -1,4 +1,4 @@
-﻿<dir-page-header heading="vm.heading"
+﻿<dir-page-header heading="vm.pageControls.heading"
                  icon="vm.icon">
 </dir-page-header>
 
@@ -18,7 +18,7 @@
                         <md-input-container class="md-block">
                             <label>Select Class</label>
                             <md-select ng-model="vm.annoucement.class" required name="class">
-                                <md-option value="{{class}}" ng-repeat="class in vm.classes track by $index">{{class.description}}</md-option>
+                                <md-option ng-value="class" ng-repeat="class in vm.classes track by $index">{{class.description}}</md-option>
                             </md-select>
                             <div ng-messages="vm.annoucementForm.class.$error" ng-if="vm.annoucementForm.class.$dirty || vm.formSubmitted">
                                 <div ng-message="required">Please select class</div>

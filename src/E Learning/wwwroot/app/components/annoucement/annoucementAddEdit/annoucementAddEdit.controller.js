@@ -27,7 +27,6 @@
             vm.formSubmitted = true;
 
             if (vm.annoucementForm.$valid) {
-                var obj = JSON.parse(annoucement.class);
                 var annoucementRef = new Firebase(firebaseUrl + "/Annoucement");
                 var annoucements = $firebaseArray(annoucementRef);
 
@@ -36,7 +35,7 @@
                     title: annoucement.title,
                     description: annoucement.description,
                     date: annoucement.date,
-                    classId: obj.$id,
+                    classId: annoucement.class.$id,
                     lecturerId: $sessionStorage.userId,
                 };
                 annoucements.$add(newRecord);
@@ -48,7 +47,6 @@
             vm.formSubmitted = true;
 
             if (vm.annoucementForm.$valid) {
-                var obj = JSON.parse(annoucement.class);
                 var editRef = new Firebase(firebaseUrl + "/Annoucement/" + annoucement.$id);
                 annoucement.date = $filter('date')(new Date(annoucement.date), 'yyyy-MM-dd');
                 var oldAnnoucement = $firebaseObject(editRef);
@@ -57,7 +55,7 @@
                 oldAnnoucement.description = annoucement.description;
                 oldAnnoucement.title = annoucement.title;
                 oldAnnoucement.date = annoucement.date;
-                oldAnnoucement.classId = obj.$id;
+                oldAnnoucement.classId = annoucement.class.$id;
                 oldAnnoucement.lecturerId = $sessionStorage.userId;
                 
                 oldAnnoucement.$save();

@@ -5,13 +5,6 @@
     <title>E Learning</title>
     <link href="assets/css/styles.css" rel="stylesheet" />
     <link href="assets/css/ui-grid.css" rel="stylesheet" />
-
-
-    <!--<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase-messaging.js"></script>-->
 </head>
 <body ng-controller="indexController" ng-class="{'md-login' : currentUrl === '/login'}">
 
@@ -35,12 +28,12 @@
                         </md-menu-sidenav-title>
                     </md-menu-sidenav-item>                    
                 </md-menu-sidenav>
-                <md-menu-sidenav-item ng-click="navigateTo('/annoucement')" ng-if="userType != 'admin'">
+                <md-menu-sidenav-item ng-click="navigateTo('/annoucement')" ng-if="userType != 'student'">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>code</md-icon></span>Annoucements</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
-                <md-menu-sidenav-item ng-click="navigateTo('/assignment')" ng-if="userType != 'admin'">
+                <md-menu-sidenav-item ng-click="navigateTo('/assignment')" ng-if="userType == 'lecturer'">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>business_center</md-icon></span>Assignments</h1>
                     </md-menu-sidenav-title>
@@ -50,24 +43,9 @@
                         <h1 class="md-body-2" flex><span><md-icon>business_center</md-icon></span>Classes</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
-                <md-menu-sidenav-item ng-click="navigateTo('/department')" ng-if="userType == 'admin'">
-                    <md-menu-sidenav-title>
-                        <h1 class="md-body-2" flex><span><md-icon>business_center</md-icon></span>Departments</h1>
-                    </md-menu-sidenav-title>
-                </md-menu-sidenav-item>
                 <md-menu-sidenav-item ng-click="navigateTo('/event')">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>toys</md-icon></span>Events</h1>
-                    </md-menu-sidenav-title>
-                </md-menu-sidenav-item>
-                <md-menu-sidenav-item ng-click="navigateTo('/file')" ng-if="userType != 'admin'">
-                    <md-menu-sidenav-title>
-                        <h1 class="md-body-2" flex><span><md-icon>view_list</md-icon></span>Files</h1>
-                    </md-menu-sidenav-title>
-                </md-menu-sidenav-item>
-                <md-menu-sidenav-item ng-click="navigateTo('/logReport')" ng-if="userType == 'admin'">
-                    <md-menu-sidenav-title>
-                        <h1 class="md-body-2" flex><span><md-icon>live_help</md-icon></span>Logs Reports</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
                 <md-menu-sidenav-item ng-click="navigateTo('/message')">
@@ -75,12 +53,7 @@
                         <h1 class="md-body-2" flex><span><md-icon>forum</md-icon></span>Messages</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
-                <md-menu-sidenav-item ng-click="navigateTo('/schoolYear')" ng-if="userType == 'admin'">
-                    <md-menu-sidenav-title>
-                        <h1 class="md-body-2" flex><span><md-icon>person_add</md-icon></span>School Year Management</h1>
-                    </md-menu-sidenav-title>
-                </md-menu-sidenav-item>
-                <md-menu-sidenav-item ng-click="navigateTo('/studentsReport')" ng-if="userType != 'student'">
+                <md-menu-sidenav-item ng-click="navigateTo('/studentsReport')" ng-if="userType == 'admin'">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>live_help</md-icon></span>Students</h1>
                     </md-menu-sidenav-title>

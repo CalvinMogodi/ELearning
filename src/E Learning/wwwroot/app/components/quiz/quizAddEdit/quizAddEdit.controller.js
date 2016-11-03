@@ -25,13 +25,12 @@
             vm.formSubmitted = true;
 
             if (vm.quizForm.$valid) {
-                var obj = JSON.parse(quiz.class);
                 var quizRef = new Firebase(firebaseUrl + "/Quiz");
                 var quizzes = $firebaseArray(quizRef);
                 var newRecord = {
                     title: quiz.title,
                     description: quiz.description,
-                    classId: obj.$id,
+                    classId: quiz.class.$id,
                 };
                 quizzes.$add(newRecord);
                 $location.path('/quiz');
@@ -42,14 +41,13 @@
             vm.formSubmitted = true;
 
             if (vm.quizForm.$valid) {
-                var obj = JSON.parse(quiz.class);
                 var editRef = new Firebase(firebaseUrl + "/Quiz/" + quiz.$id);
                 var oldQuiz = $firebaseObject(editRef);
 
                 oldQuiz.$id = quiz.$id;
                 oldQuiz.description = quiz.description;
                 oldQuiz.title = quiz.title;
-                oldQuiz.classId = obj.$id;
+                oldQuiz.classId = quiz.class.$id;
 
                 oldQuiz.$save();
                 $location.path('/quiz');

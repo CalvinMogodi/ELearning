@@ -4,14 +4,17 @@
     function MessageAddEditController($location, $firebaseArray, HelperService, alertDialogService, modal, $filter, firebaseUrl, $sessionStorage) {
         /* jshint validthis:true */
         var vm = this;
-        vm.heading = 'Send New Message';
         vm.isReadOnly = false;
         var ref = new Firebase(firebaseUrl);
         vm.tabs = [
             { id: 1, heading: 'Inbox', active: false, url: '/message' },
             { id: 2, heading: 'Sent Message', active: false, url: '' },
             { id: 3, heading: 'Send New Message', active: true, url: '/messageAddEdit' }
-        ]
+        ];
+        vm.pageControls = {
+            showNewButton: true,
+            heading: 'Send New Message',
+        };
 
         init();
         function init() {
@@ -37,14 +40,13 @@
 
             if (vm.messageForm.$valid) {
 
-                var obj = JSON.parse(message.user);
                 var addRef = new Firebase(firebaseUrl + "/Message");
                 var messages = $firebaseArray(addRef);
                 message.date = $filter('date')(new Date(), 'yyyy-MM-dd');
 
                 var newRecord = {
                     sendTo: message.sendTo,
-                    userId: obj.$id,
+                    userId: message.user.$id,
                     subject: message.subject,
                     message: message.message,
                     senderId: $sessionStorage.userId,
@@ -58,6 +60,10 @@
 
         vm.cancel = function () {
             $location.path('/message');
+        }
+
+        vm.tabClickedFunction = function (tab) {
+            $location.path(tab.url);
         }
     }
 

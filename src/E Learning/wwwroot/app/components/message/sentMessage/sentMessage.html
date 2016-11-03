@@ -1,9 +1,6 @@
 ﻿<dir-page-header heading="vm.heading"
                  icon="vm.icon"
-                 show-search="false"
-                 show-new-button="true"
                  tabs="vm.tabs"
-                 add-new-button-function="vm.newMessage()"
                  tab-Clicked-Function="vm.tabClickedFunction">
 </dir-page-header>
 
@@ -13,7 +10,8 @@
             <table md-data-table md-progress="deferred">
                 <thead md-order="query.order" md-trigger="onOrderChange" class="color-blue color-medium-grey">
                     <tr>
-                        <th name="Message From"></th>
+                        <th name="Sent To"></th>
+                        <th name="Sent To User"></th>
                         <th name="Subject"></th>
                         <th name="Date"></th>
                         <th></th>
@@ -21,7 +19,8 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="message in vm.inboxmessages track by $index" class="hover">
-                        <td>{{message.sender.firstname}} {{message.sender.surname}}</td>
+                        <td>{{message.sendTo}}</td>
+                        <td>{{message.user.firstname}} {{message.user.surname}}</td>
                         <td>{{message.subject}}</td>
                         <td>{{message.createdDate}}</td>
                         <td>

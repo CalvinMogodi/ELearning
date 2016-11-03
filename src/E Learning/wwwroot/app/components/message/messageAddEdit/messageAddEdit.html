@@ -1,6 +1,7 @@
 ﻿<dir-page-header heading="vm.heading"
                  show-search="false"
-                 tabs="vm.tabs">
+                 tabs="vm.tabs"
+                 tab-Clicked-Function="vm.tabClickedFunction">
 </dir-page-header>
 
 <md-content class="main-content md-fade-in md-padding page-content transparent">
@@ -23,7 +24,7 @@
                         <md-input-container class="md-block">
                             <label>Select User Type</label>
                             <md-select ng-model="vm.message.user" required name="user" ng-disabled="vm.isReadOnly">
-                                <md-option value="{{user}}" ng-repeat="user in vm.listOfUsers track by $index">{{user.firstName}} {{user.surname}}</md-option>
+                                <md-option ng-value="user" ng-repeat="user in vm.listOfUsers track by $index">{{user.firstName}} {{user.surname}}</md-option>
                             </md-select>
                             <div ng-messages="vm.messageForm.user.$error" ng-if="vm.assignmentForm.user.$dirty || vm.formSubmitted">
                                 <div ng-message="required">Please select class</div>
