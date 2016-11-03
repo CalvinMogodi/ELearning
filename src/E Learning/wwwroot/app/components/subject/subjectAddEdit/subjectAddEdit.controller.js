@@ -36,7 +36,6 @@
                     code: subject.code,
                     title: subject.title,
                     description: subject.description,
-                    classId: obj.$id,
                 };
                 subjects.$add(newRecord);
                 $location.path('/subject');
@@ -56,7 +55,6 @@
                 oldSubject.description = subject.description;
                 oldSubject.title = subject.title;
                 oldSubject.code = subject.code,
-                oldSubject.classId = obj.$id;
 
                 oldSubject.$save();
                 $location.path('/subject');

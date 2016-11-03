@@ -23,15 +23,6 @@
                             </div>
                         </md-input-container>
                         <md-input-container class="md-block">
-                            <label>Select Class</label>
-                            <md-select ng-model="vm.subject.class" required name="class">
-                                <md-option value="{{class}}" ng-repeat="class in vm.classes track by $index">{{class.description}}</md-option>
-                            </md-select>
-                            <div ng-messages="vm.subjectForm.class.$error" ng-if="vm.subjectForm.class.$dirty || vm.formSubmitted">
-                                <div ng-message="required">Please select class</div>
-                            </div>
-                        </md-input-container>
-                        <md-input-container class="md-block">
                             <label>Description</label>
                             <input ng-model="vm.subject.description" required name="description" type="text" />
                             <div ng-messages="vm.subjectForm.description.$error" ng-if="vm.subjectForm.description.$dirty || vm.formSubmitted">
