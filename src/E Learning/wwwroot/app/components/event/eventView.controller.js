@@ -6,6 +6,7 @@
         var vm = this;
         vm.heading = 'Event';
         vm.icon = "add_box";
+        vm.showAddButton = true;
         var ref = new Firebase(firebaseUrl);
         vm.pagenation = {
             limit: 5,
@@ -15,6 +16,10 @@
         init();
 
         function init() {
+
+            if ($sessionStorage.userType == 'student') {
+                vm.showAddButton = false;
+            }
             //load annoucements with class that is linked to
             vm.events = $firebaseArray(ref.child('Event'));
             vm.events.$loaded(function (data) {
