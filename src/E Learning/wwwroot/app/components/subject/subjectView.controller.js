@@ -75,6 +75,21 @@
                 }
             });
         }
+
+        vm.viewQuizzess = function (subject) {
+            HelperService.assignCurrentRecord(subject);
+            $location.path('/subjectQuiz');
+        }
+
+        vm.viewAnnoucements = function (subject) {
+            HelperService.assignCurrentRecord(subject);
+            $location.path('/subjectAnnoucement');
+        }
+
+        vm.viewAssignments = function (classOjb) {
+            HelperService.assignCurrentRecord(classOjb);
+            $location.path('/subjectAssignment');
+        }
     }
 
     angular.module('EL').controller('SubjectController', SubjectController);

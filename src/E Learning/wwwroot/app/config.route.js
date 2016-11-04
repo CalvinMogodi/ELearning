@@ -126,13 +126,25 @@
         controller: 'sentMessageController',
         templateUrl: viewBase + '/message/sentMessage/sentMessage.html',
         controllerAs: 'vm'
-    }).when('/classAnnoucement', {
-        controller: 'ClassAnnoucementController',
-        templateUrl: viewBase + '/class/classannoucement/classannoucement.html',
+    }).when('/subjectAnnoucement', {
+        controller: 'SubjectAnnoucementController',
+        templateUrl: viewBase + '/subject/subjectannoucement/subjectannoucement.html',
         controllerAs: 'vm'
-    }).when('/classAssignment', {
-        controller: 'ClassAssignmentController',
-        templateUrl: viewBase + '/class/classAssignment/classAssignment.html',
+    }).when('/subjectAssignment', {
+        controller: 'SubjectAssignmentController',
+        templateUrl: viewBase + '/subject/subjectAssignment/subjectAssignment.html',
+        controllerAs: 'vm'
+    }).when('/subjectQuiz', {
+        controller: 'SubjectQuizController',
+        templateUrl: viewBase + '/subject/subjectQuiz/subjectQuiz.html',
+        controllerAs: 'vm'
+    }).when('/quizQuestion', {
+        controller: 'quizQuestionContorller',
+        templateUrl: viewBase + '/quiz/quizquestion/quizquestion.html',
+        controllerAs: 'vm'
+    }).when('/chatRoom', {
+        controller: 'ChatRoomController',
+        templateUrl: viewBase + '/chatroom/chatroom.html',
         controllerAs: 'vm'
     }).otherwise({ redirectTo: '/' });
     }

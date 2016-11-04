@@ -10,7 +10,7 @@
         init();
         function init() {
             vm.assignment = HelperService.getAssignedRecord();
-            vm.classes = $firebaseArray(ref.child('Class'));
+            vm.subjects = $firebaseArray(ref.child('Subject'));
             vm.heading = 'Add New Assignment';
             if (vm.assignment) {
                 vm.isEdit = true;
@@ -44,7 +44,7 @@
                             date: assignment.date,
                             file: data,
                             fileName: f.name,
-                            classId: assignment.class.$id,
+                            subjectId: assignment.subject.$id,
                             lecturerId: $sessionStorage.userId,
                         };
                         assignments.$add(newRecord);
@@ -62,7 +62,6 @@
             vm.formSubmitted = true;
             if (vm.assignmentForm.$valid) {
 
-                var obj = JSON.parse(assignment.class);
                 var editRef = new Firebase(firebaseUrl + "/Assignment/" + assignment.$id);
                 assignment.date = $filter('date')(new Date(assignment.date), 'yyyy-MM-dd');
                 var oldAssignment = $firebaseObject(editRef);
@@ -77,7 +76,7 @@
                     oldAssignment.description = assignment.description;
                     oldAssignment.title = assignment.title;
                     oldAssignment.date = assignment.date;
-                    oldAssignment.classId = obj.$id;
+                    oldAssignment.subjectId = assignment.subject.$id;
                     oldAssignment.file = data;
                     oldAssignment.fileName = f.name;
                     oldAssignment.lecturerId = $sessionStorage.userId;
@@ -94,7 +93,7 @@
                     oldAssignment.description = assignment.description;
                     oldAssignment.title = assignment.title;
                     oldAssignment.date = assignment.date;
-                    oldAssignment.classId = obj.$id;
+                    oldAssignment.subjectId = assignment.subject.$id;
                     oldAssignment.file = assignment.file;
                     oldAssignment.fileName = assignment.fileName;
                     oldAssignment.lecturerId = $sessionStorage.userId;

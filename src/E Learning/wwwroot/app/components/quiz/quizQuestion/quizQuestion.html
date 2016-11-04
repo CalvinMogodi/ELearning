@@ -1,10 +1,94 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+﻿<dir-page-header heading="vm.heading"
+                 icon="vm.icon">
+</dir-page-header>
 
-</body>
-</html>
+<md-content class="main-content md-padding page-content transparent">
+    <md-content class="box-shadow padding-bottom-32">
+        <table md-data-table md-progress="deferred">
+            <thead md-order="query.order" md-trigger="onOrderChange" class="color-blue color-medium-grey">
+                <tr>
+                    <th name="Title"></th>
+                    <th name="Class"></th>
+                    <th name="Description"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{vm.quiz.title}}</td>
+                    <td>{{vm.quiz.class.description}}</td>
+                    <td>{{vm.quiz.description}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </md-content>
+
+        <md-content class="box-shadow">
+            <h4>Add Question</h4>
+            <md-content class="md-padding">
+                <form name="vm.questionForm">
+                    <div layout-gt-md="row" layout-md="column">
+                        <div flex>
+                            <md-input-container class="md-block">
+                                <label>Select Question Type</label>
+                                <md-select ng-model="vm.question.questionType" required name="questionType">
+                                    <md-option value="YesNo">Yes/No</md-option>
+                                </md-select>
+                                <div ng-messages="vm.questionForm.questionType.$error" ng-if="vm.questionForm.questionType.$dirty || vm.formSubmitted">
+                                    <div ng-message="required">Please Question class</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Description</label>
+                                <input ng-model="vm.question.description" required name="description" type="text" />
+                                <div ng-messages="vm.questionForm.description.$error" ng-if="vm.questionForm.description.$dirty || vm.formSubmitted">
+                                    <div ng-message="required">The field above is required</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Answer</label>
+                                <input ng-model="vm.question.title" required name="title" type="text" />
+                                <div ng-messages="vm.questionForm.title.$error" ng-if="vm.questionForm.title.$dirty || vm.formSubmitted">
+                                    <div ng-message="required">The field above is required</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                    </div>
+                </form>
+                <md-content class="md-padding">
+                    <div layout="row">
+                        <div flex="50" layout="row" layout-align="end end">
+                            <md-button class="md-primary md-primary-custom" ng-click="vm.addQuestion(vm.question)">Add</md-button>
+                        </div>
+                    </div>
+                </md-content>
+            </md-content>
+        </md-content>        
+    </md-content>
+<md-content class="main-content md-padding page-content transparent">
+    <md-content class="box-shadow">
+        <table md-data-table md-progress="deferred">
+            <thead md-order="query.order" md-trigger="onOrderChange" class="color-blue color-medium-grey">
+                <tr>
+                    <th name="Question"></th>
+                    <th name="Answer"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="question in vm.questions" class="hover">
+                    <td>{{question.description}}</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <md-content class="md-padding">
+            <div layout="row">
+                <div flex="50" layout="column" layout-align="start start">
+                    <md-button class="md-primary md-primary-custom" ng-click="vm.cancel()">Cancel</md-button>
+                </div>
+                <div flex="50" layout="row" layout-align="end end">
+                    <md-button class="md-primary md-primary-custom" ng-click="vm.done(vm.class)">Done</md-button>
+                </div>
+            </div>
+        </md-content>
+    </md-content>
+</md-content>

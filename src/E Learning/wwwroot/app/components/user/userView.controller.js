@@ -17,6 +17,9 @@
         function init() {
             //load users with
             vm.users = $firebaseArray(ref.child('User'));
+            vm.users.$loaded(function (data) {
+                vm.masterUsers = angular.copy(vm.users);
+            });
         }
 
         vm.newUser = function () {
@@ -35,6 +38,22 @@
                     vm.users.$remove(user);
                 }
             });
+        }
+        vm.filter = function (filter) {
+            var list = angular.copy(vm.masterUsers);
+            var results = [];
+            if (filter.userType){
+                for (var i = 0; i < list.length; i++) {
+                    if (filter.userType.toLowerCase() == list[i].userType.toLowerCase()) {
+                        results.push(list[i]);
+                    }
+                }
+            }
+            vm.users = results;
+        }
+        vm.clear = function () {
+            vm.filter.userType = undefined;
+            vm.users = angular.copy(vm.masterUsers);
         }
     }
 

@@ -13,7 +13,7 @@
                     <tr>
                         <th name="Title"></th>
                         <th name="Description"></th>
-                        <th></th>
+                        <th ng-if="!vm.isStudent"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,11 +27,7 @@
                             <md-button class="md-icon-button" ng-click="vm.deleteClass(class)">
                                 <md-icon md-font-icon="material-icons" class="md-font material-icons">delete</md-icon>
                             </md-button>
-                        </td>
-                        <td ng-if="vm.isStudent">
-                            <md-button class="md-primary md-primary-custom" ng-click="vm.viewAnnoucements(class)">View Annoucements</md-button>
-                            <md-button class="md-primary md-primary-custom" ng-click="vm.viewAssignments(class)">View Assignments</md-button>
-                        </td>
+                        </td>                       
                     </tr>
                 </tbody>
             </table>

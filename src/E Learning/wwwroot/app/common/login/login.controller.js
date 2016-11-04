@@ -19,6 +19,7 @@
                         $sessionStorage.isUserAuthenticated = true;
                         $sessionStorage.userId = vm.users[i].$id;
                         $sessionStorage.courseId = undefined;
+                        $sessionStorage.displayName = vm.users[i].firstname + ' ' + vm.users[i].surname;
                         if (vm.users[i].userType == 'student') {
                             $sessionStorage.userType = 'student';
                             $sessionStorage.courseId = vm.users[i].courseId;

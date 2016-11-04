@@ -18,12 +18,12 @@
             //load annoucements with class that is linked to
             vm.annoucements = $firebaseArray(ref.child('Annoucement'));
             vm.annoucements.$loaded(function (data) {
-                vm.classes = $firebaseArray(ref.child('Class'));
-                vm.classes.$loaded(function (data) {                   
+                vm.subjects = $firebaseArray(ref.child('Subject'));
+                vm.subjects.$loaded(function (data) {
                     for (var i = 0; i < vm.annoucements.length; i++) {
-                        for (var j = 0; j < vm.classes.length; j++) {
-                            if (vm.annoucements[i].classId == vm.classes[j].$id) {
-                                vm.annoucements[i].class = vm.classes[j];
+                        for (var j = 0; j < vm.subjects.length; j++) {
+                            if (vm.annoucements[i].subjectId == vm.subjects[j].$id) {
+                                vm.annoucements[i].subject = vm.subjects[j];
                                 break;
                             }
                         }

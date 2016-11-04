@@ -21,10 +21,7 @@
             if ($sessionStorage.userType == 'student') {
                 vm.isStudent = true;
                 vm.showAddButton = false;
-            }
-
-            
-            
+            }            
         }
 
         vm.newClass = function () {
@@ -45,15 +42,7 @@
             });
         }
 
-        vm.viewAnnoucements = function (classOjb) {
-            HelperService.assignCurrentRecord(classOjb);
-            $location.path('/classAnnoucement');
-        }
-
-        vm.viewAssignments = function (classOjb) {
-            HelperService.assignCurrentRecord(classOjb);
-            $location.path('/classAssignment');
-        }
+       
     }
 
     angular.module('EL').controller('ClassController', ClassController);

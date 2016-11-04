@@ -24,12 +24,12 @@
             //load quiz with class that is linked to
             vm.quizzes = $firebaseArray(ref.child('Quiz'));
             vm.quizzes.$loaded(function (data) {
-                vm.classes = $firebaseArray(ref.child('Class'));
-                vm.classes.$loaded(function (data) {
+                vm.subjects = $firebaseArray(ref.child('Subject'));
+                vm.subjects.$loaded(function (data) {
                     for (var i = 0; i < vm.quizzes.length; i++) {
-                        for (var j = 0; j < vm.classes.length; j++) {
-                            if (vm.quizzes[i].classId == vm.classes[j].$id) {
-                                vm.quizzes[i].class = vm.classes[j];
+                        for (var j = 0; j < vm.subjects.length; j++) {
+                            if (vm.quizzes[i].subjectId == vm.subjects[j].$id) {
+                                vm.quizzes[i].subject = vm.subjects[j];
                                 break;
                             }
                         }
@@ -46,6 +46,14 @@
         vm.editQuiz = function (quiz) {
             HelperService.assignCurrentRecord(quiz);
             $location.path('/quizAddEdit');
+        }
+        vm.takeQuiz = function (quiz) {
+            HelperService.assignCurrentRecord(quiz);
+            $location.path('/quizQuestion');
+        }
+        vm.addQuestion = function (quiz) {
+            HelperService.assignCurrentRecord(quiz);
+            $location.path('/quizQuestion');
         }
         vm.deleteQuiz = function (quiz) {
             alertDialogService.setHeaderAndMessage('Delete', 'Are you sore you want to delete this class?');

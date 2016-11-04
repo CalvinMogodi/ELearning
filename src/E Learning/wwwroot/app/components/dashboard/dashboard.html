@@ -15,6 +15,12 @@
             <p class="no-margin md-font-size-xs">Assignments</p>
         </div>
     </md-card>   
+    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/chatRoom')" ng-if="userType != 'admin'">
+        <div layout="column" layout-align="center center">
+            <md-icon class="no-margin" style="color:#3f6618">forum</md-icon>
+            <p class="no-margin md-font-size-xs">@Chat</p>
+        </div>
+    </md-card>
     <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/class')" ng-if="userType != 'lecturer'">
         <div layout="column" layout-align="center center">
             <md-icon class="no-margin" style="color:#eab600">business_center</md-icon>
@@ -57,7 +63,7 @@
             <p class="no-margin md-font-size-xs">Users</p>
         </div>
     </md-card>   
-    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/quiz')" ng-if="userType != 'admin'">
+    <md-card flex layout-align="center center" class="md-flip-in" ng-click="vm.navigateTo('/quiz')" ng-if="userType == 'lecturer'">
         <div layout="column" layout-align="center center">
             <md-icon class="no-margin" style="color:#005a52">forum</md-icon>
             <p class="no-margin md-font-size-xs">Quiz</p>

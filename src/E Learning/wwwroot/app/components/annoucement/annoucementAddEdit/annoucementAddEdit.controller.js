@@ -10,7 +10,7 @@
         init();
         function init() {
             vm.annoucement = HelperService.getAssignedRecord();
-            vm.classes = $firebaseArray(ref.child('Class'));
+            vm.subjects = $firebaseArray(ref.child('Subject'));
             vm.heading = 'Add New Annoucement';
             if (vm.annoucement) {
                 vm.isEdit = true;
@@ -35,7 +35,7 @@
                     title: annoucement.title,
                     description: annoucement.description,
                     date: annoucement.date,
-                    classId: annoucement.class.$id,
+                    subjectId: annoucement.subject.$id,
                     lecturerId: $sessionStorage.userId,
                 };
                 annoucements.$add(newRecord);
@@ -55,7 +55,7 @@
                 oldAnnoucement.description = annoucement.description;
                 oldAnnoucement.title = annoucement.title;
                 oldAnnoucement.date = annoucement.date;
-                oldAnnoucement.classId = annoucement.class.$id;
+                oldAnnoucement.subjectId = annoucement.subject.$id;
                 oldAnnoucement.lecturerId = $sessionStorage.userId;
                 
                 oldAnnoucement.$save();

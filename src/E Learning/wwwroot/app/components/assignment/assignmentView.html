@@ -12,7 +12,7 @@
                 <thead md-order="query.order" md-trigger="onOrderChange" class="color-blue color-medium-grey">
                     <tr>
                         <th name="Title"></th>
-                        <th name="Class"></th>
+                        <th name="Subject"></th>
                         <th name="Date"></th>
                         <th name="Description"></th>
                         <th></th>
@@ -22,7 +22,7 @@
                 <tbody>
                     <tr ng-repeat="assignment in vm.assignments" class="hover">
                         <td>{{assignment.title}}</td>
-                        <td>{{assignment.class.description}}</td>
+                        <td>{{assignment.subject.title}}</td>
                         <td>{{assignment.date}}</td>
                         <td>{{assignment.description}}</td>
                         <td>
@@ -41,7 +41,7 @@
             </table>
         </md-data-table-container>
         <md-data-table-container>
-            <md-data-table-pagination class="margin-bottom-16" md-limit="vm.pagenation.limit" md-page="vm.pagenation.page" md-total="{{vm.annoucements.length}}"></md-data-table-pagination>
+            <md-data-table-pagination class="margin-bottom-16" md-limit="vm.pagenation.limit" md-page="vm.pagenation.page" md-total="{{vm.assignments.length}}"></md-data-table-pagination>
         </md-data-table-container>
     </md-content>
 </md-content>

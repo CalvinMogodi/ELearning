@@ -10,7 +10,7 @@
         init();
         function init() {
             vm.quiz = HelperService.getAssignedRecord();
-            vm.classes = $firebaseArray(ref.child('Class'));
+            vm.subjects = $firebaseArray(ref.child('Subject'));
             vm.heading = 'Add New Quiz';
             if (vm.quiz) {
                 vm.isEdit = true;
@@ -30,7 +30,7 @@
                 var newRecord = {
                     title: quiz.title,
                     description: quiz.description,
-                    classId: quiz.class.$id,
+                    subjectId: quiz.subject.$id,
                 };
                 quizzes.$add(newRecord);
                 $location.path('/quiz');
@@ -47,7 +47,7 @@
                 oldQuiz.$id = quiz.$id;
                 oldQuiz.description = quiz.description;
                 oldQuiz.title = quiz.title;
-                oldQuiz.classId = quiz.class.$id;
+                oldQuiz.subjectId = quiz.subject.$id;
 
                 oldQuiz.$save();
                 $location.path('/quiz');

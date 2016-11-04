@@ -14,10 +14,13 @@
             <div flex layout="column" layout-fill>
                 <img src="assets/img/login_background.png" />
 
-                <div class="md-padding profile-area margin-top-16" layout="row" layout-align="center center">
+                <div class="md-padding profile-area margin-top-16" layout="column" layout-align="center center">
                     <div flex layout="row">
                         <img src="assets/img/placeholder.png" />
                         <div class="online"></div>
+                    </div>
+                    <div flex layout="column" layout-align="center center">
+                        <p class="md-name">{{displayName}}</p>
                     </div>
                 </div>
 
@@ -36,6 +39,11 @@
                 <md-menu-sidenav-item ng-click="navigateTo('/assignment')" ng-if="userType == 'lecturer'">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>business_center</md-icon></span>Assignments</h1>
+                    </md-menu-sidenav-title>
+                </md-menu-sidenav-item>
+                <md-menu-sidenav-item ng-click="navigateTo('/chatRoom')" ng-if="userType != 'admin'">
+                    <md-menu-sidenav-title>
+                        <h1 class="md-body-2" flex><span><md-icon>forum</md-icon></span>@Chat</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
                 <md-menu-sidenav-item ng-click="navigateTo('/class')" ng-if="userType != 'lecturer'">
@@ -73,7 +81,7 @@
                         <h1 class="md-body-2" flex><span><md-icon>face</md-icon></span>Users</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
-                <md-menu-sidenav-item ng-click="navigateTo('/quiz')" ng-if="userType != 'admin'">
+                <md-menu-sidenav-item ng-click="navigateTo('/quiz')" ng-if="userType == 'lecturer'">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>forum</md-icon></span>Quiz</h1>
                     </md-menu-sidenav-title>
@@ -144,10 +152,13 @@
 <script src="app/components/user/userview.controller.js"></script>
 <script src="app/common/alert/alertdialog.controller.js"></script>
 <script src="app/components/message/sentmessage/sentmessage.controller.js"></script>
-<script src="app/components/class/classannoucement/classannoucement.controller.js"></script>
-<script src="app/components/class/classassignment/classassignment.controller.js"></script>
 <script src="app/components/course/course.controller.js"></script>
 <script src="app/components/course/courseaddedit/courseaddedit.controller.js"></script>
+<script src="app/components/quiz/quizquestion/quizquestion.controller.js"></script>
+<script src="app/components/chatroom/chatroom.controller.js"></script>
+<script src="app/components/subject/subjectassignment/subjectassignment.controller.js"></script>
+<script src="app/components/subject/subjectannoucement/subjectannoucement.controller.js"></script>
+<script src="app/components/subject/subjectquiz/subjectquiz.controller.js"></script>
 
 <!-- Services -->
 <script src="app/common/login/login.service.js"></script>

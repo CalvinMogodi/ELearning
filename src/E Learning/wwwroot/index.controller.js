@@ -23,6 +23,7 @@
         $rootScope.$on('$locationChangeSuccess', routeChanged);
         function routeChanged(evt, newUrl, oldUrl) {
             $scope.userType = $sessionStorage.userType;
+            $scope.displayName = $sessionStorage.displayName;
         }
     }
 

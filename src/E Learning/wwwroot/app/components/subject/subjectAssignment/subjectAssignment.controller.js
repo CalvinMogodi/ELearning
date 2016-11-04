@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function ClassAssignmentController($location, $firebaseArray, HelperService, firebaseUrl) {
+    function SubjectAssignmentController($location, $firebaseArray, HelperService, firebaseUrl) {
         /* jshint validthis:true */
         var vm = this;
         vm.heading = 'Class Assignment';
@@ -16,7 +16,7 @@
         init();
 
         function init() {
-            vm.class = HelperService.getAssignedRecord();
+            vm.subject = HelperService.getAssignedRecord();
 
             //load assignments with class that is linked to
             vm.assignments = $firebaseArray(ref.child('Assignment'));
@@ -24,7 +24,7 @@
                 vm.users = $firebaseArray(ref.child('User'));
                 vm.users.$loaded(function (data) {
                     for (var i = 0; i < vm.assignments.length; i++) {
-                        if (vm.assignments[i].classId == vm.class.$id) {                       
+                        if (vm.assignments[i].subjectId == vm.subject.$id) {
                             for (var j = 0; j < vm.users.length; j++) {
                                 if (vm.users[j].$id == vm.assignments[i].lecturerId) {
                                     vm.assignments[i].lecturer = vm.users[j];
@@ -38,7 +38,7 @@
 
         }
         vm.back = function () {
-            $location.path('/class');
+            $location.path('/subject');
         }
 
         vm.downloadAssignment = function (assignment) {
@@ -57,6 +57,6 @@
         }
     }
 
-    angular.module('EL').controller('ClassAssignmentController', ClassAssignmentController);
-    ClassAssignmentController.$inject = ['$location', '$firebaseArray', 'HelperService', 'firebaseUrl'];
+    angular.module('EL').controller('SubjectAssignmentController', SubjectAssignmentController);
+    SubjectAssignmentController.$inject = ['$location', '$firebaseArray', 'HelperService', 'firebaseUrl'];
 })();
