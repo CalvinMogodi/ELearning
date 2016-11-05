@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict'; 
 
-    function SubjectQuizController($location, $firebaseArray, HelperService, firebaseUrl) {
+    function SubjectQuizController($location, $firebaseArray, HelperService, firebaseUrl, $sessionStorage) {
         /* jshint validthis:true */
         var vm = this;
         vm.heading = 'Subject Quiz';
@@ -21,21 +21,27 @@
             //load assignments with class that is linked to
             vm.quizzes = $firebaseArray(ref.child('Quiz'));
             vm.quizzes.$loaded(function (data) {
-                vm.users = $firebaseArray(ref.child('User'));
-                vm.users.$loaded(function (data) {
+                vm.quizAnswers = $firebaseArray(ref.child('QuizAnswer'));
+                vm.quizAnswers.$loaded(function (data) {
                     for (var i = 0; i < vm.quizzes.length; i++) {
                         if (vm.quizzes[i].subjectId == vm.subject.$id) {
-                            for (var j = 0; j < vm.users.length; j++) {
-                                if (vm.users[j].$id == vm.quizzes[i].lecturerId) {
-                                    vm.quizzes[i].lecturer = vm.users[j];
-                                }
+                            for (var j = 0; j < vm.quizAnswers.length; j++) {
+                                if (vm.quizAnswers[j].studentId == $sessionStorage.userId && vm.quizAnswers[j].quizId == vm.quizzes[i].$id) {
+                                    vm.quizzes[i].score = vm.quizAnswers[j].score;
+                                    vm.quizzes[i].quizAnswered = true;                                    
+                                }   
                             }
                             vm.subjectQuizzes.push(vm.quizzes[i]);
-                        }
+                        }   
                     }
                 });
             });
 
+        }
+
+        vm.answerQuiz = function (quiz) {
+            HelperService.assignCurrentRecord(quiz);
+            $location.path('/quizQuestion');
         }
 
         vm.back = function () {
@@ -44,5 +50,5 @@
     }
 
     angular.module('EL').controller('SubjectQuizController', SubjectQuizController);
-    SubjectQuizController.$inject = ['$location', '$firebaseArray', 'HelperService', 'firebaseUrl'];
+    SubjectQuizController.$inject = ['$location', '$firebaseArray', 'HelperService', 'firebaseUrl', '$sessionStorage'];
 })();

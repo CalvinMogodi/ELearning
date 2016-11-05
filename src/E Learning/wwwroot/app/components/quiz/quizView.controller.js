@@ -47,10 +47,7 @@
             HelperService.assignCurrentRecord(quiz);
             $location.path('/quizAddEdit');
         }
-        vm.takeQuiz = function (quiz) {
-            HelperService.assignCurrentRecord(quiz);
-            $location.path('/quizQuestion');
-        }
+        
         vm.addQuestion = function (quiz) {
             HelperService.assignCurrentRecord(quiz);
             $location.path('/quizQuestion');

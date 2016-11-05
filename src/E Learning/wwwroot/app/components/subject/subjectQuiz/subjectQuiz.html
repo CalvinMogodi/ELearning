@@ -11,16 +11,17 @@
                     <tr>
                         <th name="Title"></th>
                         <th name="Description"></th>
-                        <th></th>
+                        <th name="Score"></th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="quiz in vm.subjectQuizzes" class="hover">
+                    <tr ng-repeat="quiz in vm.subjectQuizzes track by $index" class="hover">
                         <td>{{quiz.title}}</td>
                         <td>{{quiz.description}}</td>
+                        <th><label>{{quiz.score}}</label> </th>
                         <td>
-                            <md-button class="md-primary md-primary-custom" ng-click="vm.answerQuiz(quiz)">Answer Quiz</md-button>
+                            <md-button ng-if="!quiz.quizAnswered" class="md-primary md-primary-custom" ng-click="vm.answerQuiz(quiz)">Answer Quiz</md-button>
                         </td>
                     </tr>
                 </tbody>
