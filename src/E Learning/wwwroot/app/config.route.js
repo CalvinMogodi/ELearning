@@ -146,6 +146,10 @@
         controller: 'ChatRoomController',
         templateUrl: viewBase + '/chatroom/chatroom.html',
         controllerAs: 'vm'
+    }).when('/quizResult', {
+        controller: 'ViewResultContorller',
+        templateUrl: viewBase + '/quiz/viewresult/viewresult.html',
+        controllerAs: 'vm'
     }).otherwise({ redirectTo: '/' });
     }
 

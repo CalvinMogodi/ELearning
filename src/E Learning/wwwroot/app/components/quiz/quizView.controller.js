@@ -48,6 +48,10 @@
             $location.path('/quizAddEdit');
         }
         
+        vm.viewResult = function (quiz) {
+            HelperService.assignCurrentRecord(quiz);
+            $location.path('/quizResult');
+        }
         vm.addQuestion = function (quiz) {
             HelperService.assignCurrentRecord(quiz);
             $location.path('/quizQuestion');

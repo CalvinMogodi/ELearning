@@ -30,6 +30,8 @@
                         }
                         $location.path('/dashboard');
                         break;
+                    } else {
+                        vm.message = 'Incorrect username or password!!';
                     }
                 }
             });           

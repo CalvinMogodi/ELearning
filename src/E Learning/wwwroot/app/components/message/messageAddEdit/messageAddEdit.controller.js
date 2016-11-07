@@ -61,6 +61,7 @@
         }
 
         vm.cancel = function () {
+            HelperService.assignCurrentRecord(undefined);
             $location.path('/message');
         }
 
