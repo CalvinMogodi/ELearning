@@ -8,6 +8,9 @@
         vm.isEdit = false;
         vm.quizQuestions = [];
         vm.isStudent = false;
+        vm.question = {
+            answer: false
+        };
 
         init();
         function init() {

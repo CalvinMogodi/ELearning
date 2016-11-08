@@ -31,9 +31,10 @@
                 var f = document.getElementById('file').files[0];
                 if (f != undefined) {
                   var r = new FileReader();
-                    r.onloadend = function (e) {
+                  r.onloadend = function (e) {
+                      var data = e.target.result;
                         //send your binary data via $http or $resource or do anything else with it
-                        var obj = JSON.parse();
+                        //var obj = JSON.parse();
                         var assignmentRef = new Firebase(firebaseUrl + "/Assignment");
                         var assignments = $firebaseArray(assignmentRef);
 
