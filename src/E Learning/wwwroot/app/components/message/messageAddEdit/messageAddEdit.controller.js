@@ -5,6 +5,7 @@
         /* jshint validthis:true */
         var vm = this;
         vm.isReadOnly = false;
+        vm.isFromInbox = false;
         var ref = new Firebase(firebaseUrl);
         vm.tabs = [
             { id: 1, heading: 'Inbox', active: false, url: 'message' },
@@ -19,6 +20,7 @@
             vm.message = HelperService.getAssignedRecord();
             if (vm.message) {
                 vm.isReadOnly = true;
+                vm.isFromInbox = true;
                 vm.heading = 'View Message';
                 vm.tabs.push({ id: 3, heading: 'View Message', active: true, url: '/messageAddEdit' });
             }

@@ -45,6 +45,7 @@
         }
 
         vm.viewMessage = function (message) {
+            message.isFromSent = false;
             HelperService.assignCurrentRecord(message);
             $location.path('/messageAddEdit');
         }

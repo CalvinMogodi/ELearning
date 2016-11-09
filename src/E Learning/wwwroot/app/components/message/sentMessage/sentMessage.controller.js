@@ -44,6 +44,7 @@
             $location.path('/messageAddEdit');
         }
         vm.viewMessage = function (message) {
+            message.isFromSent = true;
             HelperService.assignCurrentRecord(message);
             $location.path('/messageAddEdit');
         }

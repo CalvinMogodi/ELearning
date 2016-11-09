@@ -4,7 +4,7 @@
     function SubjectAnnoucementController($location, $firebaseArray, HelperService, firebaseUrl) {
         /* jshint validthis:true */
         var vm = this;
-        vm.heading = 'Human Resource Annoucement';
+        vm.heading = 'Annoucement';
         vm.icon = "add_box";
         var ref = new Firebase(firebaseUrl);
         vm.classAnnoucements = [];

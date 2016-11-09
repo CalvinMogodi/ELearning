@@ -26,8 +26,8 @@
                             <label>Select User Type</label>
                             <md-select ng-model="vm.user.userType" required name="userType">
                                 <md-option value="student">Student</md-option>
-                                <md-option value="admin">Admin</md-option>
-                                <md-option value="lecturer">Lecturer</md-option>
+                                <!--<md-option value="admin">Admin</md-option>
+                                <md-option value="lecturer">Lecturer</md-option>-->
                             </md-select>
                             <div ng-messages="vm.userForm.class.$error" ng-if="vm.assignmentForm.class.$dirty || vm.formSubmitted">
                                 <div ng-message="required">Please select class</div>
