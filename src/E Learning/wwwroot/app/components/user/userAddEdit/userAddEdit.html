@@ -26,8 +26,8 @@
                             <label>Select User Type</label>
                             <md-select ng-model="vm.user.userType" required name="userType">
                                 <md-option value="student">Student</md-option>
-                                <md-option value="admin">Admin</md-option>
-                                <md-option value="lecturer">Lecturer</md-option>
+                                <!--<md-option value="admin">Admin</md-option>
+                                <md-option value="lecturer">Lecturer</md-option>-->
                             </md-select>
                             <div ng-messages="vm.userForm.class.$error" ng-if="vm.assignmentForm.class.$dirty || vm.formSubmitted">
                                 <div ng-message="required">Please select class</div>
@@ -35,7 +35,7 @@
                         </md-input-container>
                         <md-input-container class="md-block">
                             <label>username</label>
-                            <input ng-model="vm.user.username" required name="surname" type="email" />
+                            <input ng-model="vm.user.username" required name="username" type="email" />
                             <div ng-messages="vm.userForm.username.$error" ng-if="vm.userForm.username.$dirty || vm.formSubmitted">
                                 <div ng-message="required">The field above is required</div>
                             </div>

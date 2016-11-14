@@ -49,6 +49,10 @@
             HelperService.assignCurrentRecord(course);
             $location.path('/studentAddEdit');
         }
+
+        vm.newStudent = function () {
+            $location.path('/userAddEdit');
+        }
     }
 
     angular.module('EL').controller('StudentReportController', StudentReportController);

@@ -78,6 +78,10 @@
         controller: 'MessageController',
         templateUrl: viewBase + '/message/messageView.html',
         controllerAs: 'vm'
+    }).when('/messageViewInbox', {
+        controller: 'MessageAddEditController',
+        templateUrl: viewBase + '/message/sentMessage/viewInboxMessage.html',
+        controllerAs: 'vm'
     }).when('/messageAddEdit', {
         controller: 'MessageAddEditController',
         templateUrl: viewBase + '/message/messageAddEdit/messageAddEdit.html',
