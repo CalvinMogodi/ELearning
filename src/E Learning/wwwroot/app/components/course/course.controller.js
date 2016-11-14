@@ -30,7 +30,7 @@
             $location.path('/courseAddEdit');
         }
         vm.deleteCourse = function (course) {
-            alertDialogService.setHeaderAndMessage('Delete', 'Are you sore you want to delete this course?');
+            alertDialogService.setHeaderAndMessage('Delete', 'Are you sure you want to delete this course?');
             var templateUrl = '/app/common/alert/alertDialog.template.html';
             modal.show(templateUrl, 'alertDialogController').then(function (result) {
                 if (result) {

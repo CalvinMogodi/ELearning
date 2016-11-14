@@ -6,11 +6,10 @@
         var vm = this;
         vm.title = 'indexController';
         var ref = new Firebase(firebaseUrl);
-        vm.login = {};
 
         $rootScope.profileImage = 'assets/img/placeholder.png';
 
-        $scope.login = function (user) {
+        vm.login = function (user) {
             //load users with
             vm.users = $firebaseArray(ref.child('User'));
             vm.users.$loaded(function (data) {

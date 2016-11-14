@@ -58,7 +58,7 @@
         }
 
         vm.deleteAssignment = function (assignment) {
-            alertDialogService.setHeaderAndMessage('Delete', 'Are you sore you want to delete this class?');
+            alertDialogService.setHeaderAndMessage('Delete', 'Are you sure you want to delete this class?');
             var templateUrl = '/app/common/alert/alertDialog.template.html';
             modal.show(templateUrl, 'alertDialogController').then(function (result) {
                 if (result) {

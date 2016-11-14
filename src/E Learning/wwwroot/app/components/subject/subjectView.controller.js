@@ -67,7 +67,7 @@
             $location.path('/subjectAddEdit');
         }
         vm.deleteSubjest = function (subject) {
-            alertDialogService.setHeaderAndMessage('Delete', 'Are you sore you want to delete this subject?');
+            alertDialogService.setHeaderAndMessage('Delete', 'Are you sure you want to delete this subject?');
             var templateUrl = '/app/common/alert/alertDialog.template.html';
             modal.show(templateUrl, 'alertDialogController').then(function (result) {
                 if (result) {

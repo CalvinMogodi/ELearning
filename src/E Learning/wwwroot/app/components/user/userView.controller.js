@@ -31,7 +31,7 @@
             $location.path('/userAddEdit');
         }
         vm.deleteUser = function (user) {
-            alertDialogService.setHeaderAndMessage('Delete', 'Are you sore you want to delete this user?');
+            alertDialogService.setHeaderAndMessage('Delete', 'Are you sure you want to delete this user?');
             var templateUrl = '/app/common/alert/alertDialog.template.html';
             modal.show(templateUrl, 'alertDialogController').then(function (result) {
                 if (result) {
