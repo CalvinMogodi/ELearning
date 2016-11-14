@@ -1,16 +1,16 @@
 ﻿(function () {
-    'use strict'; 
+    'use strict';
 
     function AnnoucementAddEditController($location, firebaseUrl, HelperService, $firebaseArray, $filter, $firebaseObject, $sessionStorage) {
         /* jshint validthis:true */
         var vm = this;
-        var ref = new Firebase(firebaseUrl);        
+        var ref = new Firebase(firebaseUrl);
         vm.isEdit = false;
 
         init();
         function init() {
             vm.annoucement = HelperService.getAssignedRecord();
-            vm.subjects = $firebaseArray(ref.child('Subject'));
+            vm.classes = $firebaseArray(ref.child('Class'));
             vm.heading = 'Add New Annoucement';
             if (vm.annoucement) {
                 vm.isEdit = true;
@@ -35,7 +35,7 @@
                     title: annoucement.title,
                     description: annoucement.description,
                     date: annoucement.date,
-                    subjectId: annoucement.subject.$id,
+                    classId: annoucement.class.$id,
                     lecturerId: $sessionStorage.userId,
                 };
                 annoucements.$add(newRecord);
@@ -55,9 +55,9 @@
                 oldAnnoucement.description = annoucement.description;
                 oldAnnoucement.title = annoucement.title;
                 oldAnnoucement.date = annoucement.date;
-                oldAnnoucement.subjectId = annoucement.subject.$id;
+                oldAnnoucement.classId = annoucement.class.$id;
                 oldAnnoucement.lecturerId = $sessionStorage.userId;
-                
+
                 oldAnnoucement.$save();
                 $location.path('/annoucement');
             }
