@@ -21,6 +21,13 @@
                             for (var j = 0; j < vm.users.length; j++) {
                                 if (vm.quizAnswers[i].studentId == vm.users[j].$id) {
                                     vm.quizAnswers[i].student = vm.users[j];
+                                    vm.quizAnswers[i].passOrFail = 'Failed';
+                                    var f = vm.quizAnswers[i].score.split('/');
+                                    var scoreCount = f[1] / 2;
+                                    if (f[0] >= scoreCount) {
+                                        vm.quizAnswers[i].passOrFail = 'Passed';
+                                    }
+                                   
                                     vm.studentQuizAnswers.push(vm.quizAnswers[i]);
                                     break;
                                 }

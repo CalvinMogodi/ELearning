@@ -30,13 +30,14 @@
                     <tr>
                         <th name="Student"></th>
                         <th name="Score"></th>
-                        <th></th>
+                        <th name="Result"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="answer in vm.studentQuizAnswers track by $index" class="hover">
                         <td>{{answer.student.firstname}} {{answer.student.surname}}</td>
                         <td>{{answer.score}}</td>
+                        <td>{{answer.passOrFail}}</td>
                     </tr>
                 </tbody>
             </table>

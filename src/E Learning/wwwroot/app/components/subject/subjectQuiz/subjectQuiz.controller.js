@@ -28,7 +28,13 @@
                             for (var j = 0; j < vm.quizAnswers.length; j++) {
                                 if (vm.quizAnswers[j].studentId == $sessionStorage.userId && vm.quizAnswers[j].quizId == vm.quizzes[i].$id) {
                                     vm.quizzes[i].score = vm.quizAnswers[j].score;
-                                    vm.quizzes[i].quizAnswered = true;                                    
+                                    vm.quizzes[i].quizAnswered = true;
+                                    vm.quizzes[i].passOrFail = 'Failed';
+                                    var f = vm.quizzes[i].score.split('/');
+                                    var scoreCount = f[1] / 2;
+                                    if (f[0] >= scoreCount) {
+                                        vm.quizzes[i].passOrFail = 'Passed';
+                                    }
                                 }   
                             }
                             vm.subjectQuizzes.push(vm.quizzes[i]);

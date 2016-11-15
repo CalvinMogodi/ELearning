@@ -12,6 +12,7 @@
                         <th name="Title"></th>
                         <th name="Description"></th>
                         <th name="Score"></th>
+                        <th name="Result"></th>
                         <th></th>
                     </tr>
                 </thead>
@@ -19,7 +20,8 @@
                     <tr ng-repeat="quiz in vm.subjectQuizzes track by $index" class="hover">
                         <td>{{quiz.title}}</td>
                         <td>{{quiz.description}}</td>
-                        <th><label>{{quiz.score}}</label> </th>
+                        <td>{{quiz.score}}</td>
+                        <td>{{quiz.passOrFail}}</td>
                         <td>
                             <md-button ng-if="!quiz.quizAnswered" class="md-primary md-primary-custom" ng-click="vm.answerQuiz(quiz)">Answer Quiz</md-button>
                         </td>

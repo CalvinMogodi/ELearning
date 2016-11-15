@@ -3,28 +3,68 @@
     <div flex-gt-md="30" flex-md="40" flex-sm="100" flex="100" layout-fill class="input-area">
         <div layout="column" class="md-padding layout-fill">
            <!-- <div class="logo"></div>-->
-            <div layout="row">
-                <md-icon flex="initial" md-font-icon="material-icons">person</md-icon>
-                <md-input-container flex class="md-block">
-                    <label>Username</label>
-                    <input ng-model="vm.user.username" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" name="{{vm.fieldNameUsername}}">
-                </md-input-container>
-            </div>
-            <div layout="row">
-                <md-icon flex="initial" md-font-icon="material-icons">lock</md-icon>
-                <md-input-container flex class="md-block md-input-has-value">
-                    <label>Password</label>
-                    <input ng-model="vm.user.password" type="password" autocomplete="off" name="{{vm.fieldNamePassword}}">
-                </md-input-container>
-            </div>
-            <div layout="row" class="margin-top-16">   
-                <div flex="5"></div>
-                <div flex ng-click="vm.login(vm.user)" class="login-button">
-                    <md-button class="button button-login">Login</md-button>
-                </div>
-            </div>
-            <div flex="5"></div>
-            <p class="login-error md-shake-error" ng-if="vm.message">{{vm.message}}</p>
+            <md-tabs md-dynamic-height md-selected="vm.selectedIndex">
+                <md-tab label="login">
+                    <div layout="row">
+                        <md-icon flex="initial" md-font-icon="material-icons">person</md-icon>
+                        <md-input-container flex class="md-block">
+                            <label>Username</label>
+                            <input ng-model="vm.user.username" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" name="{{vm.fieldNameUsername}}">
+                        </md-input-container>
+                    </div>
+                    <div layout="row">
+                        <md-icon flex="initial" md-font-icon="material-icons">lock</md-icon>
+                        <md-input-container flex class="md-block md-input-has-value">
+                            <label>Password</label>
+                            <input ng-model="vm.user.password" type="password" autocomplete="off" name="{{vm.fieldNamePassword}}">
+                        </md-input-container>
+                    </div>
+                    <div layout="row" class="margin-top-16">
+                        <div flex="5"></div>
+                        <div flex ng-click="vm.login(vm.user)" class="login-button">
+                            <md-button class="button button-login">Login</md-button>
+                        </div>
+                    </div>
+                    <div layout="row" class="margin-top-16">
+                        <div flex="5"></div>
+                        <div class="login-forgot-password" >
+                            <p style="color:red" ng-click="vm.nextTab()">Forgot Password</p>
+                        </div>
+                        </div>
+                        <p class="login-error md-shake-error" ng-if="vm.message">{{vm.message}}</p>
+                </md-tab>
+                <md-tab label="forgotPassword">
+                    <div layout="row">
+                        <md-icon flex="initial" md-font-icon="material-icons">lock</md-icon>
+                        <md-input-container flex class="md-block md-input-has-value">
+                            <label>New Password</label>
+                            <input ng-model="vm.user.newPassword" type="password" autocomplete="off" name="{{vm.newPassword}}">
+                        </md-input-container>
+                    </div>
+                    <div layout="row">
+                        <md-icon flex="initial" md-font-icon="material-icons">lock</md-icon>
+                        <md-input-container flex class="md-block md-input-has-value">
+                            <label>Confirm New Password</label>
+                            <input ng-model="vm.user.confirmNewPassword" type="password" autocomplete="off" name="{{vm.confirmNewPassword}}">
+                        </md-input-container>
+                    </div>
+                    <div layout="row" class="margin-top-16">
+                        <div flex="5"></div>
+                        <div flex ng-click="vm.changePassword(vm.user)" class="login-button">
+                            <md-button class="button button-login">Change Password</md-button>
+                        </div>
+                    </div>
+                    <div layout="row" class="margin-top-16">
+                        <div flex="5"></div>
+                        <div class="login-forgot-password">
+                            <p style="color:red" ng-click="vm.backTab()">Go Back</p>
+                        </div>
+                    </div>
+                    <p class="login-error md-shake-error" ng-if="vm.fpMessage">{{vm.fpMessage}}</p>
+                </md-tab>
+            </md-tabs>
+           
+            <div flex="5"></div>            
                 <div layout="row" layout-align="start end" class="login-copyright">
                     <p class="margin-bottom-0">© Copyright E-Learning - All Rights Reserved</p>
                 </div>
