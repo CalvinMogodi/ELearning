@@ -28,6 +28,7 @@
             <table md-data-table md-progress="deferred">
                 <thead md-order="query.order" md-trigger="onOrderChange" class="color-blue color-medium-grey">
                     <tr>
+                        <th name="Student Number"></th>
                         <th name="Student"></th>
                         <th name="Score"></th>
                         <th name="Result"></th>
@@ -35,6 +36,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="answer in vm.studentQuizAnswers track by $index" class="hover">
+                        <td>{{answer.student.studentNumber}}</td>
                         <td>{{answer.student.firstname}} {{answer.student.surname}}</td>
                         <td>{{answer.score}}</td>
                         <td>{{answer.passOrFail}}</td>

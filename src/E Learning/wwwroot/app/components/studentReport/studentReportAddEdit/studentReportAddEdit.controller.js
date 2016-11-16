@@ -37,6 +37,10 @@
         vm.cancel = function () {
             $location.path('/studentsReport');
         }
+
+        vm.getSubjects = function () {
+            vm.subjects = $firebaseArray(ref.child('Subject'));
+        }
     }
 
     angular.module('EL').controller('StudentReportAddEditController', StudentReportAddEditController);

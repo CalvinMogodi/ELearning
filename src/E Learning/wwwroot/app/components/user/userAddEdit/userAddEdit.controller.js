@@ -35,6 +35,9 @@
                     username: user.username,
                     password: user.password,
                 };
+                if (newRecord.userType == 'student') {
+                    newRecord.studentNumber = HelperService.getRandomizeId();
+                }
                 users.$add(newRecord);
                 $location.path('/user');
             }
@@ -49,11 +52,17 @@
                 var oldUser = $firebaseObject(editRef);
 
                 oldUser.$id = user.$id;
-                oldUser.firstname = user.firstname,
-                oldUser.surname = user.surname,
-                oldUser.userType = user.userType,
-                oldUser.username = user.username,
-                oldUser.password = user.password,
+                oldUser.firstname = user.firstname;
+                oldUser.surname = user.surname;
+                oldUser.userType = user.userType;
+                oldUser.username = user.username;
+                oldUser.password = user.password;
+
+                if (oldUser.userType == 'student') {
+                    if (oldUser.studentNumber == undefined) {
+                        oldUser.studentNumber = HelperService.getRandomizeId();
+                    }
+                }
 
                 oldUser.$save();
                 $location.path('/user');

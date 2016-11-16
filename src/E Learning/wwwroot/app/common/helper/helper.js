@@ -16,6 +16,11 @@
             return self.record;
         }
 
+        self.getRandomizeId = function () {
+            var id = Math.floor(Math.random() * 999999) + 1;
+            return id;
+        }
+
         return self;
     }
 
