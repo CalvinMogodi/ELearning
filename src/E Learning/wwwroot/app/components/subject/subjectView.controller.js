@@ -23,20 +23,18 @@
                 vm.subjects = [];
                 vm.allSubjects = $firebaseArray(ref.child('Subject'));
                 vm.allSubjects.$loaded(function (data) {
-                    vm.course = $firebaseArray(ref.child('Course'));
-                    vm.course.$loaded(function (data) {
-                        for (var j = 0; j < vm.course.length; j++) {
-                            if (vm.course[j].$id == $sessionStorage.courseId) {
-                                for (var i = 0; i < vm.allSubjects.length; i++) {
-                                    if (vm.allSubjects[i].courseId == vm.course[j].$id) {
-                                        vm.allSubjects[i].course = vm.course[j];
-                                        vm.subjects.push(vm.allSubjects[i]);
-                                    }
+                    vm.SubjectLinks = $firebaseArray(ref.child('SubjectLink'));
+                    vm.SubjectLinks.$loaded(function (data) {
+                        for (var i = 0; i < vm.allSubjects.length; i++) {
+                            for (var j = 0; j < vm.SubjectLinks.length; j++) {
+                                if (vm.SubjectLinks[j].subjectId == vm.allSubjects[i].$id && vm.SubjectLinks[j].studentId == $sessionStorage.userId) {                                 
+                                    vm.subjects.push(vm.allSubjects[i]);                                
+                                    break;
                                 }
-                                break;
+
                             }
-                            
                         }
+                        
                     });
                 });
             } else {

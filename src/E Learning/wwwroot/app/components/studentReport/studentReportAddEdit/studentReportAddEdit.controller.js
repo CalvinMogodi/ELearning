@@ -6,6 +6,7 @@
         var vm = this;
         var ref = new Firebase(firebaseUrl);
         vm.heading = 'Link Student To Course';
+        vm.selectedIndex = 0;
 
         init();
         function init() {
@@ -30,7 +31,8 @@
                 oldUser.courseId = record.course.$id,
 
                 oldUser.$save();
-                $location.path('/studentsReport');
+                vm.linkSubjectsTab(record.course);
+               
             }
         }
 
@@ -38,9 +40,41 @@
             $location.path('/studentsReport');
         }
 
-        vm.getSubjects = function () {
-            vm.subjects = $firebaseArray(ref.child('Subject'));
+        vm.backTab = function () {
+            vm.selectedIndex = 0;
         }
+
+        vm.linkSubjectsTab = function (course) {
+            vm.subjectsToLink = [];
+            vm.subjects = $firebaseArray(ref.child('Subject'));
+            vm.subjects.$loaded(function (data) {
+                for (var i = 0; i < vm.subjects.length; i++) {
+                    if (vm.subjects[i].courseId == course.$id) {
+                        vm.subjectsToLink.push(vm.subjects[i]);
+                    }
+                }
+                vm.selectedIndex = 1;
+            });
+        }
+
+        vm.linkSubjects = function (subjects) {
+            for (var i = 0; i < subjects.length; i++) {
+                if (subjects[i].isActive) {
+                    var addRef = new Firebase(firebaseUrl + "/SubjectLink");
+                    var subjectLinks = $firebaseArray(addRef);
+
+                    var subjectLink =  {
+                        subjectId: subjects[i].$id,
+                        studentId: vm.studentRecord.$id,
+                        courseId: vm.studentRecord.course.$id,
+                        };
+
+                    subjectLinks.$add(subjectLink);
+                }                
+            }
+            $location.path('/studentsReport');
+        }
+
     }
 
     angular.module('EL').controller('StudentReportAddEditController', StudentReportAddEditController);
