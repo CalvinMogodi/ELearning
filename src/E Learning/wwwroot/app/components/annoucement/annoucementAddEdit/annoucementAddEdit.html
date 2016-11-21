@@ -16,12 +16,12 @@
                             </div>
                         </md-input-container>
                         <md-input-container class="md-block">
-                            <label>Select Class</label>
-                            <md-select ng-model="vm.annoucement.class" required name="class">
-                                <md-option ng-value="class" ng-repeat="class in vm.classes track by $index">{{class.title}}</md-option>
+                            <label>Select Subject</label>
+                            <md-select ng-model="vm.annoucement.subject" required name="subject">
+                                <md-option ng-value="subject" ng-repeat="subject in vm.subjects track by $index">{{subject.title}}</md-option>
                             </md-select>
-                            <div ng-messages="vm.annoucementForm.class.$error" ng-if="vm.annoucementForm.class.$dirty || vm.formSubmitted">
-                                <div ng-message="required">Please select class</div>
+                            <div ng-messages="vm.annoucementForm.subject.$error" ng-if="vm.annoucementForm.subject.$dirty || vm.formSubmitted">
+                                <div ng-message="required">Please select subject</div>
                             </div>
                         </md-input-container>
                         <div flex flex-gt-md="33" layout="row" class="md-block">
