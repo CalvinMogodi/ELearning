@@ -23,7 +23,6 @@
                         if (vm.users[i].userType == 'student') {
                             $sessionStorage.userType = 'student';
                             $sessionStorage.courseId = vm.users[i].courseId;
-                            $sessionStorage.displayName = vm.users[i].firstname + ' ' + vm.users[i].surname + ' (' + vm.users[i].studentNumber + ')';
                         } else if (vm.users[i].userType == 'lecturer') {
                             $sessionStorage.userType = 'lecturer';
                         } else if (vm.users[i].userType == 'admin') {

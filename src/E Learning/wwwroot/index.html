@@ -31,7 +31,7 @@
                         </md-menu-sidenav-title>
                     </md-menu-sidenav-item>                    
                 </md-menu-sidenav>
-                <md-menu-sidenav-item ng-click="navigateTo('/annoucement')" ng-if="userType != 'student'">
+                <md-menu-sidenav-item ng-click="navigateTo('/annoucement')" ng-if="userType == 'lecturer'">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>code</md-icon></span>Annoucements</h1>
                     </md-menu-sidenav-title>
@@ -64,6 +64,11 @@
                 <md-menu-sidenav-item ng-click="navigateTo('/message')">
                     <md-menu-sidenav-title>
                         <h1 class="md-body-2" flex><span><md-icon>forum</md-icon></span>Messages</h1>
+                    </md-menu-sidenav-title>
+                </md-menu-sidenav-item>
+                <md-menu-sidenav-item ng-click="navigateTo('/resource')" ng-if="userType != 'admin'">
+                    <md-menu-sidenav-title>
+                        <h1 class="md-body-2" flex><span><md-icon>toys</md-icon></span>Resource</h1>
                     </md-menu-sidenav-title>
                 </md-menu-sidenav-item>
                 <md-menu-sidenav-item ng-click="navigateTo('/studentsReport')" ng-if="userType == 'admin'">
@@ -161,6 +166,8 @@
 <script src="app/components/subject/subjectannoucement/subjectannoucement.controller.js"></script>
 <script src="app/components/subject/subjectquiz/subjectquiz.controller.js"></script>
 <script src="app/components/quiz/viewresult/viewresult.controller.js"></script>
+<script src="app/components/resources/resources.controller.js"></script>
+<script src="app/components/resources/resourcesaddedit/resourcesaddedit.controller.js"></script>
 
 <!-- Services -->
 <script src="app/common/login/login.service.js"></script>
