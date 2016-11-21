@@ -166,6 +166,10 @@
         controller: 'ResourcesAddEditController',
         templateUrl: viewBase + '/resources/resourcesaddedit/resourcesaddedit.html',
         controllerAs: 'vm'
+    }).when('/viewAssignmentResult', {
+        controller: 'ViewAssignmentResultController',
+        templateUrl: viewBase + '/assignment/viewAssignmentResult/viewAssignmentResult.html',
+        controllerAs: 'vm'
     }).otherwise({ redirectTo: '/' });
     }
 

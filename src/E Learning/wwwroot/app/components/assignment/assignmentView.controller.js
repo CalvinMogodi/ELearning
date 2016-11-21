@@ -66,6 +66,11 @@
                 }
             });
         }
+
+        vm.viewResults = function (assignment) {
+            HelperService.assignCurrentRecord(assignment);
+            $location.path('/viewAssignmentResult');
+        }
     }
 
     angular.module('EL').controller('AssignmentController', AssignmentController);

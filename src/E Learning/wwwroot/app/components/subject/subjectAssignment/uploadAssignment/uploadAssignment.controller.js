@@ -12,26 +12,37 @@
         function init() {
             vm.assignment = HelperService.getAssignedRecord();
         }
- 
 
-         vm.upload = function () {
-             var assignmentRef = new Firebase(firebaseUrl + "/UploadedAssignment");
-             var assignments = $firebaseArray(assignmentRef);
 
-             var newRecord = {
-                 subjectId: vm.assignment.$id,
-                 studentId: $sessionStorage.userId,
-             };
-             assignments.$add(newRecord);
-             $location.path('/subject');
-         }
+        vm.upload = function () {
+            var f = document.getElementById('file').files[0];
+            if (f != undefined) {
+                var r = new FileReader();
+                r.onloadend = function (e) {
+                    var data = e.target.result;
+                    var assignmentRef = new Firebase(firebaseUrl + "/UploadedAssignment");
+                    var assignments = $firebaseArray(assignmentRef);
 
-         vm.cancel = function () {
-             $location.path('/subject');
-         }
+                    var newRecord = {
+                        subjectId: vm.assignment.$id,
+                        studentId: $sessionStorage.userId,
+                        file: data,
+                    };
+                    assignments.$add(newRecord);
+                    $location.path('/subject');
+                }
+                r.readAsDataURL(f);
+            } else {
+                //Please choose a file to upload
+            }
+        }
 
-        }        
+        vm.cancel = function () {
+            $location.path('/subject');
+        }
 
-        angular.module('EL').controller('UploadAssignmentController', UploadAssignmentController);
-        UploadAssignmentController.$inject = ['$location', 'firebaseUrl', '$sessionStorage', 'HelperService', '$firebaseArray'];
+    }
+
+    angular.module('EL').controller('UploadAssignmentController', UploadAssignmentController);
+    UploadAssignmentController.$inject = ['$location', 'firebaseUrl', '$sessionStorage', 'HelperService', '$firebaseArray'];
 })();
