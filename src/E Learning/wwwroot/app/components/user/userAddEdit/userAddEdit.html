@@ -33,6 +33,13 @@
                                 <div ng-message="required">Please select class</div>
                             </div>
                         </md-input-container>
+                        <md-input-container class="md-block" ng-if="vm.user.userType == 'student'">
+                            <label>Student Number</label>
+                            <input ng-model="vm.user.studentNumber" required name="studentNumber" type="number" />
+                            <div ng-messages="vm.userForm.studentNumber.$error" ng-if="vm.userForm.studentNumber.$dirty || vm.formSubmitted">
+                                <div ng-message="required">The field above is required</div>
+                            </div>
+                        </md-input-container>
                         <md-input-container class="md-block">
                             <label>username</label>
                             <input ng-model="vm.user.username" required name="username" type="email" />

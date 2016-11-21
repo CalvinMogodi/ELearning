@@ -36,7 +36,7 @@
                     password: user.password,
                 };
                 if (newRecord.userType == 'student') {
-                    newRecord.studentNumber = HelperService.getRandomizeId();
+                    newRecord.studentNumber = user.studentNumber;
                 }
                 users.$add(newRecord);
                 $location.path('/user');
@@ -59,9 +59,7 @@
                 oldUser.password = user.password;
 
                 if (oldUser.userType == 'student') {
-                    if (oldUser.studentNumber == undefined) {
-                        oldUser.studentNumber = HelperService.getRandomizeId();
-                    }
+                    oldUser.studentNumber = user.studentNumber;
                 }
 
                 oldUser.$save();
