@@ -154,7 +154,11 @@
         controller: 'ViewResultContorller',
         templateUrl: viewBase + '/quiz/viewresult/viewresult.html',
         controllerAs: 'vm'
-    }).otherwise({ redirectTo: '/' });
+    }).when('/uploadAssignment', {
+        controller: 'UploadAssignmentController',
+        templateUrl: viewBase + '/subject/subjectAssignment/uploadAssignment/uploadAssignment.html',
+            controllerAs: 'vm'
+        }).otherwise({ redirectTo: '/' });
     }
 
     angular.module('EL').config(['$routeProvider', '$locationProvider', routeProvider]);

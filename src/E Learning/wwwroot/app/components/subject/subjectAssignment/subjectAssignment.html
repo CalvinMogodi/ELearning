@@ -25,6 +25,7 @@
                         <td>{{assignment.description}}</td>
                         <td>
                             <md-button class="md-primary md-primary-custom" ng-click="vm.downloadAssignment(assignment)">Download</md-button>
+                            <md-button class="md-primary md-primary-custom" ng-if="!assignment.showUpload" ng-click="vm.uploadAssignment(assignment)">Upload Assignment</md-button>
                         </td>                        
                     </tr>
                 </tbody>
