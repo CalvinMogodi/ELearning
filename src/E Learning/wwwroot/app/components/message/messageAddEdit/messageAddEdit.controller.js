@@ -7,6 +7,7 @@
         vm.isReadOnly = false;
         vm.isFromInbox = false;
         var ref = new Firebase(firebaseUrl);
+        vm.showDownload = false;
         vm.tabs = [
             { id: 1, heading: 'Inbox', active: false, url: 'message' },
             { id: 2, heading: 'Sent Message', active: false, url: 'sentMessage' },
@@ -23,6 +24,9 @@
                 vm.isFromInbox = true;
                 vm.heading = 'View Message';
                 vm.tabs.push({ id: 3, heading: 'View Message', active: true, url: '/messageAddEdit' });
+                if (vm.message.file != undefined) {
+                    vm.showDownload = true;
+                }
             }
             else {
                 vm.tabs.push({ id: 3, heading: 'Send New Message', active: true, url: '/messageAddEdit' });
@@ -48,17 +52,40 @@
                 var messages = $firebaseArray(addRef);
                 message.date = $filter('date')(new Date(), 'yyyy-MM-dd');
 
-                var newRecord = {
-                    sendTo: message.sendTo,
-                    userId: message.user.$id,
-                    subject: message.subject,
-                    message: message.message,
-                    senderId: $sessionStorage.userId,
-                    createdDate: message.date,
-                    status: 'new',
-                };
-                messages.$add(newRecord);
-                $location.path('/message');
+                var f = document.getElementById('file').files[0];
+                if (f != undefined) {
+                    var newRecord = {
+                        sendTo: message.sendTo,
+                        userId: message.user.$id,
+                        subject: message.subject,
+                        message: message.message,
+                        senderId: $sessionStorage.userId,
+                        createdDate: message.date,
+                        status: 'new',
+                    };
+                    var r = new FileReader();
+                    r.onloadend = function (e) {
+                        var data = e.target.result;
+                        newRecord.file = data;
+                        messages.$add(newRecord);
+                        $location.path('/message');
+
+                    }
+                    r.readAsDataURL(f);
+                } else {
+                    var newRecord = {
+                        sendTo: message.sendTo,
+                        userId: message.user.$id,
+                        subject: message.subject,
+                        message: message.message,
+                        senderId: $sessionStorage.userId,
+                        createdDate: message.date,
+                        status: 'new',
+                    };
+                    messages.$add(newRecord);
+                    $location.path('/message');
+                }
+                
             }
         }
 
@@ -69,6 +96,21 @@
 
         vm.tabClickedFunction = function (tab) {
             $location.path(tab.url);
+        }
+
+        vm.downloadAssignment = function (message) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", message.file);
+            xhr.responseType = "arraybuffer";
+
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    var blob = new Blob([xhr.response], { type: "application/pdf" });
+                    var objectUrl = URL.createObjectURL(blob);
+                    window.open(objectUrl);
+                }
+            };
+            xhr.send();
         }
     }
 
