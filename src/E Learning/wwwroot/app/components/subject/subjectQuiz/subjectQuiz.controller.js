@@ -7,6 +7,7 @@
         vm.heading = 'Subject Quiz';
         vm.icon = "add_box";
         var ref = new Firebase(firebaseUrl);
+        vm.showPassword = false;
         vm.subjectQuizzes = [];
         vm.pagenation = {
             limit: 5,
@@ -17,7 +18,7 @@
 
         function init() {
             vm.subject = HelperService.getAssignedRecord();
-
+            vm.showPassword = true;
             //load assignments with class that is linked to
             vm.quizzes = $firebaseArray(ref.child('Quiz'));
             vm.quizzes.$loaded(function (data) {
@@ -52,6 +53,14 @@
 
         vm.back = function () {
             $location.path('/subject');
+        }
+
+        vm.passProceed = function (password) {
+            vm.formSubmitted = true;
+
+            if (vm.subjectForm.$valid) {
+                vm.showPassword = false;
+            }
         }
     }
 
