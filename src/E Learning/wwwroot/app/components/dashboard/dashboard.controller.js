@@ -5,6 +5,7 @@
         /* jshint validthis:true */
         var vm = this;
         vm.title = 'dashboard';
+        vm.heading = 'Kitso Academic College';
         init();
 
         function init(){
