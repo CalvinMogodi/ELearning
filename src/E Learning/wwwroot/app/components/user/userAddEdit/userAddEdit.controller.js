@@ -57,6 +57,9 @@
                 oldUser.userType = user.userType;
                 oldUser.username = user.username;
                 oldUser.password = user.password;
+                if (user.courseId != undefined) {
+                    oldUser.courseId = user.courseId;
+                }
 
                 if (oldUser.userType == 'student') {
                     oldUser.studentNumber = user.studentNumber;

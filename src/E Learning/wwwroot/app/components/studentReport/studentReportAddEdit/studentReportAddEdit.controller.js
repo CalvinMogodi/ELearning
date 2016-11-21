@@ -28,6 +28,7 @@
                 oldUser.userType = record.userType,
                 oldUser.username = record.username,
                 oldUser.password = record.password,
+                oldUser.studentNumber = record.studentNumber,
                 oldUser.courseId = record.course.$id,
 
                 oldUser.$save();
