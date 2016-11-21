@@ -158,7 +158,15 @@
         controller: 'UploadAssignmentController',
         templateUrl: viewBase + '/subject/subjectAssignment/uploadAssignment/uploadAssignment.html',
             controllerAs: 'vm'
-        }).otherwise({ redirectTo: '/' });
+    }).when('/resource', {
+        controller: 'ResourcesController',
+        templateUrl: viewBase + '/resources/resources.html',
+        controllerAs: 'vm'
+    }).when('/resourceAddEdit', {
+        controller: 'ResourcesAddEditController',
+        templateUrl: viewBase + '/resources/resourcesaddedit/resourcesaddedit.html',
+        controllerAs: 'vm'
+    }).otherwise({ redirectTo: '/' });
     }
 
     angular.module('EL').config(['$routeProvider', '$locationProvider', routeProvider]);
