@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function UserController($location, $firebaseArray, HelperService, alertDialogService, modal, firebaseUrl) {
+    function UserController($location, $firebaseArray, HelperService, alertDialogService, modal, firebaseUrl, UserFactory) {
         /* jshint validthis:true */
         var vm = this;
         vm.heading = 'user';
@@ -16,8 +16,13 @@
 
         function init() {
             //load users with
-            vm.users = $firebaseArray(ref.child('User'));
-            vm.users.$loaded(function (data) {
+            //vm.users = $firebaseArray(ref.child('User'));
+            //vm.users.$loaded(function (data) {
+            //    vm.masterUsers = angular.copy(vm.users);
+            //});
+
+            UserFactory.getUsers().then(function (data) {
+                vm.users = data;
                 vm.masterUsers = angular.copy(vm.users);
             });
         }
@@ -58,5 +63,5 @@
     }
 
     angular.module('EL').controller('UserController', UserController);
-    UserController.$inject = ['$location', '$firebaseArray', 'HelperService', 'alertDialogService', 'modal', 'firebaseUrl'];
+    UserController.$inject = ['$location', '$firebaseArray', 'HelperService', 'alertDialogService', 'modal', 'firebaseUrl', 'UserFactory'];
 })();
