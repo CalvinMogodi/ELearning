@@ -16,6 +16,9 @@
                 vm.user.confirmPassword = vm.user.password;
             }
 
+            UserFactory.getCourses().then(function (data) {
+                vm.courses = data;
+            });
         }
 
         vm.create = function (user) {

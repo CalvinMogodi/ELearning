@@ -11,10 +11,11 @@ using System.Web.Http.Description;
 using Elearning.WebAPI;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Elearning.WebAPI.Models;
 
 namespace Elearning.WebAPI.Controllers
 {
-    public class tbUsersController : ApiController
+    public class UsersController : ApiController
     {
         private ElearningContext db = new ElearningContext();
 
@@ -27,40 +28,40 @@ namespace Elearning.WebAPI.Controllers
         // GET: api/tbUsers
         public string GettbUsers()
         {
-           var users =  db.tbUsers as IQueryable<tbUser>;
+           var users =  db.Users as IQueryable<User>;
             return JsonConvert.SerializeObject(users, _serializerSettings);
         }
 
-        [ResponseType(typeof(tbUser))]
+        [ResponseType(typeof(User))]
         public string loginUser(string username, string password)
         {
-            tbUser tbUser = db.tbUsers.FirstOrDefault(u => u.Username == username && u.Password == password);
+            User User = db.Users.FirstOrDefault(u => u.Username == username && u.Password == password);
 
-            if (tbUser == null)
+            if (User == null)
             {
                 return null;
             }
 
-            return JsonConvert.SerializeObject(tbUser, _serializerSettings);
+            return JsonConvert.SerializeObject(User, _serializerSettings);
         }
         // GET: api/tbUsers/5
-        [ResponseType(typeof(tbUser))]
+        [ResponseType(typeof(User))]
         public string GettbUser(string username)
         {
-            tbUser tbUser = db.tbUsers.FirstOrDefault(u => u.Username == username);
-            if (tbUser == null)
+            User User = db.Users.FirstOrDefault(u => u.Username == username);
+            if (User == null)
             {
                 return null;
             }
 
-            return JsonConvert.SerializeObject(tbUser, _serializerSettings);
+            return JsonConvert.SerializeObject(User, _serializerSettings);
         }
 
         // PUT: api/tbUsers/5
         [HttpPut]
-        public bool EditUser([FromBody]tbUser tbUser)
+        public bool EditUser([FromBody]User User)
         {
-            db.Entry(tbUser).State = EntityState.Modified;
+            db.Entry(User).State = EntityState.Modified;
 
             try
             {
@@ -75,11 +76,11 @@ namespace Elearning.WebAPI.Controllers
 
         // POST: api/tbUsers
         [HttpPost]
-        public bool CreateUser([FromBody]tbUser tbUser)
+        public bool CreateUser([FromBody]User User)
         {
             try
             {
-                db.tbUsers.Add(tbUser);
+                db.Users.Add(User);
                 db.SaveChanges();
                 return true;
             }
@@ -89,16 +90,16 @@ namespace Elearning.WebAPI.Controllers
         }
 
         // DELETE: api/tbUsers/5
-        [ResponseType(typeof(tbUser))]
+        [ResponseType(typeof(User))]
         public bool DeletetbUser(int id)
         {
-            tbUser tbUser = db.tbUsers.Find(id);
-            if (tbUser == null)
+            User User = db.Users.Find(id);
+            if (User == null)
             {
                 return false;
             }
 
-            db.tbUsers.Remove(tbUser);
+            db.Users.Remove(User);
             db.SaveChanges();
 
             return true;
@@ -115,7 +116,7 @@ namespace Elearning.WebAPI.Controllers
 
         public bool tbUserExists(string username)
         {
-            tbUser user = db.tbUsers.FirstOrDefault(e => e.Username == username);
+            User user = db.Users.FirstOrDefault(e => e.Username == username);
             if (user.Equals(null))
                 return false;
             return true;

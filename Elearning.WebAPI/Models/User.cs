@@ -1,4 +1,4 @@
-namespace Elearning.WebAPI
+namespace Elearning.WebAPI.Models
 {
     using System;
     using System.Collections.Generic;
@@ -6,33 +6,32 @@ namespace Elearning.WebAPI
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("tbUser")]
-    public partial class tbUser
+    [Table("User")]
+    public partial class User
     {
         public int Id { get; set; }
 
         public int? CourseId { get; set; }
 
-        //[Required]
+        [Required]
         [StringLength(50)]
         public string Firstname { get; set; }
 
-        //[Required]
+        [Required]
         [StringLength(50)]
         public string Password { get; set; }
 
-        //[Required]
         public int? StudentNumber { get; set; }
 
-        //[Required]
+        [Required]
         [StringLength(50)]
         public string Surname { get; set; }
 
-        //[Required]
+        [Required]
         [StringLength(50)]
         public string UserType { get; set; }
 
-        //[Required]
+        [Required]
         [StringLength(50)]
         public string Username { get; set; }
     }
