@@ -33,18 +33,15 @@
         }
 
         vm.nextTab = function () {
-            vm.users = $firebaseArray(ref.child('User'));
-            vm.users.$loaded(function (data) {
-                for (var i = 0; i < vm.users.length; i++) {
-                    if (vm.user.username == vm.users[i].username) {
+            UserFactory.gettbUser(vm.user.username).then(function (data) {
+                if (data != null) {
                         vm.selectedIndex = 1;
                         vm.fpMessage = undefined;
-                        vm.thisUser = vm.users[i];
-                        break;
+                        vm.thisUser = data;
                     } else {
                         vm.message = 'Incorrect username!!';
                     }
-                }
+                
             });
            
         }
@@ -55,21 +52,16 @@
 
         vm.changePassword = function () {
             if (vm.user.newPassword == vm.user.confirmNewPassword) {
-                
-                var editRef = new Firebase(firebaseUrl + "/User/" + vm.thisUser.$id);
-                var oldUser = $firebaseObject(editRef);
+                vm.thisUser.password = vm.user.newPassword;
+                UserFactory.editUser(vm.thisUser).then(function (result) {
+                    if (result) {
+                        vm.message = undefined;
+                        vm.selectedIndex = 0;
+                    } else {
+                        vm.message = 'Password is not changed, Please try again!!';
+                    }
 
-                oldUser.$id = vm.thisUser.$id;
-                oldUser.firstname = vm.thisUser.firstname,
-                oldUser.surname = vm.thisUser.surname,
-                oldUser.userType = vm.thisUser.userType,
-                oldUser.username = vm.thisUser.username,
-                oldUser.password = vm.user.newPassword,
-
-                oldUser.$save();
-                vm.message = undefined;
-                vm.selectedIndex = 0;
-
+                });
             } else {
                 vm.fpMessage = 'Your passwords does not match!!';
             }

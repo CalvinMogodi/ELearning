@@ -25,8 +25,7 @@ namespace Elearning.WebAPI
                 .IsUnicode(false);
 
             modelBuilder.Entity<tbUser>()
-                .Property(e => e.StudentNumber)
-                .IsFixedLength();
+                .Property(e => e.StudentNumber);
 
             modelBuilder.Entity<tbUser>()
                 .Property(e => e.Surname)

@@ -11,29 +11,28 @@ namespace Elearning.WebAPI
     {
         public int Id { get; set; }
 
-        public int CourseId { get; set; }
+        public int? CourseId { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(50)]
         public string Firstname { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(50)]
         public string Password { get; set; }
 
-        [Required]
-        [StringLength(10)]
-        public string StudentNumber { get; set; }
+        //[Required]
+        public int? StudentNumber { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(50)]
         public string Surname { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(50)]
         public string UserType { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(50)]
         public string Username { get; set; }
     }

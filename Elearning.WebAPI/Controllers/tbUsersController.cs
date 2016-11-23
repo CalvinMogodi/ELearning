@@ -45,81 +45,63 @@ namespace Elearning.WebAPI.Controllers
         }
         // GET: api/tbUsers/5
         [ResponseType(typeof(tbUser))]
-        public IHttpActionResult GettbUser(int id)
+        public string GettbUser(string username)
         {
-            tbUser tbUser = db.tbUsers.Find(id);
+            tbUser tbUser = db.tbUsers.FirstOrDefault(u => u.Username == username);
             if (tbUser == null)
             {
-                return NotFound();
+                return null;
             }
 
-            return Ok(tbUser);
+            return JsonConvert.SerializeObject(tbUser, _serializerSettings);
         }
 
         // PUT: api/tbUsers/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PuttbUser(int id, tbUser tbUser)
+        [HttpPut]
+        public bool EditUser([FromBody]tbUser tbUser)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != tbUser.Id)
-            {
-                return BadRequest();
-            }
-
             db.Entry(tbUser).State = EntityState.Modified;
 
             try
             {
                 db.SaveChanges();
+                return true;
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!tbUserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+                return false;
+            }            
         }
 
         // POST: api/tbUsers
-        [ResponseType(typeof(tbUser))]
-        public IHttpActionResult PosttbUser(tbUser tbUser)
+        [HttpPost]
+        public bool CreateUser([FromBody]tbUser tbUser)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                db.tbUsers.Add(tbUser);
+                db.SaveChanges();
+                return true;
             }
-
-            db.tbUsers.Add(tbUser);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = tbUser.Id }, tbUser);
+            catch (Exception ex) {
+                return false;
+            }
         }
 
         // DELETE: api/tbUsers/5
         [ResponseType(typeof(tbUser))]
-        public IHttpActionResult DeletetbUser(int id)
+        public bool DeletetbUser(int id)
         {
             tbUser tbUser = db.tbUsers.Find(id);
             if (tbUser == null)
             {
-                return NotFound();
+                return false;
             }
 
             db.tbUsers.Remove(tbUser);
             db.SaveChanges();
 
-            return Ok(tbUser);
+            return true;
         }
 
         protected override void Dispose(bool disposing)
@@ -131,9 +113,12 @@ namespace Elearning.WebAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool tbUserExists(int id)
+        public bool tbUserExists(string username)
         {
-            return db.tbUsers.Count(e => e.Id == id) > 0;
+            tbUser user = db.tbUsers.FirstOrDefault(e => e.Username == username);
+            if (user.Equals(null))
+                return false;
+            return true;
         }
     }
 }
