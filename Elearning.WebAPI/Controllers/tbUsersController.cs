@@ -31,6 +31,18 @@ namespace Elearning.WebAPI.Controllers
             return JsonConvert.SerializeObject(users, _serializerSettings);
         }
 
+        [ResponseType(typeof(tbUser))]
+        public string loginUser(string username, string password)
+        {
+            tbUser tbUser = db.tbUsers.FirstOrDefault(u => u.Username == username && u.Password == password);
+
+            if (tbUser == null)
+            {
+                return null;
+            }
+
+            return JsonConvert.SerializeObject(tbUser, _serializerSettings);
+        }
         // GET: api/tbUsers/5
         [ResponseType(typeof(tbUser))]
         public IHttpActionResult GettbUser(int id)
