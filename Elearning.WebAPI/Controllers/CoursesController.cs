@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -19,19 +20,25 @@ namespace Elearning.WebAPI.Controllers
             NullValueHandling = NullValueHandling.Ignore,
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
         };
+
         // GET: Courses
         [HttpGet]
         public string GetCourses()
         {
-                return null;
+
+            var courses = db.Courses as IQueryable<Course>;
+            return JsonConvert.SerializeObject(courses, _serializerSettings);
         }
 
         // GET: Courses/Details/
         [HttpPut]
         public bool Edit(Course course)
         {
+            db.Entry(course).State = EntityState.Modified;
+
             try
             {
+                db.SaveChanges();
                 return true;
             }
             catch (Exception)
@@ -40,12 +47,27 @@ namespace Elearning.WebAPI.Controllers
             }
         }
 
+        [HttpGet]
+        public string GetCourse(int id)
+        {
+            Course course = db.Courses.Find(id);
+            if (course == null)
+            {
+                return null;
+            }
+
+            return JsonConvert.SerializeObject(User, _serializerSettings);
+        }
+
         // GET: Courses/Create
         [HttpPost]
         public bool Create(Course course)
         {            
             try
             {
+
+                db.Courses.Add(course);
+                db.SaveChanges();
                 return true;
             }
             catch (Exception)
@@ -59,14 +81,16 @@ namespace Elearning.WebAPI.Controllers
         [HttpDelete]
         public bool Delete(int id)
         {
-            try
+            Course course = db.Courses.Find(id);
+            if (course == null)
             {
-                return true;
+                return false;
             }
-            catch (Exception)
-            {
-                return true;
-            }
+
+            db.Courses.Remove(course);
+            db.SaveChanges();
+
+            return true;
         }
 
         protected override void Dispose(bool disposing)

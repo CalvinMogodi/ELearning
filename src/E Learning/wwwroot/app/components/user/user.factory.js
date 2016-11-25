@@ -10,7 +10,21 @@
                 defered.resolve(JSON.parse(response.data));
             }
 
-            $http.get(apiUrl + 'tbUsers').then(getUsersComplete, function (err, status) {
+            $http.get(apiUrl + 'Users/GetUsers').then(getUsersComplete, function (err, status) {
+                defered.reject(err);
+            });
+
+            return defered.promise;
+        }
+
+        var getStudents = function () {
+
+            var defered = $q.defer();
+            var getStudentsComplete = function (response) {
+                defered.resolve(JSON.parse(response.data));
+            }
+
+            $http.get(apiUrl + 'Users/GetStudents').then(getStudentsComplete, function (err, status) {
                 defered.reject(err);
             });
 
@@ -24,7 +38,7 @@
                 defered.resolve(JSON.parse(response.data));
             }
 
-            $http.post(apiUrl + 'tbUsers?username=' + username + '&password=' + password).then(getUsersComplete, function (err, status) {
+            $http.post(apiUrl + 'Users/Login?username=' + username + '&password=' + password).then(getUsersComplete, function (err, status) {
                 defered.reject(err);
             });
 
@@ -38,7 +52,7 @@
                 defered.resolve(JSON.parse(response.data));
             }
 
-            $http.post(apiUrl + 'tbUserExists?username=' + username).then(userExistsComplete, function (err, status) {
+            $http.post(apiUrl + 'Users/UserExists?username=' + username).then(userExistsComplete, function (err, status) {
                 defered.reject(err);
             });
 
@@ -52,7 +66,7 @@
                 defered.resolve(JSON.parse(response.data));
             }
 
-            $http.get(apiUrl + 'tbUsers?username=' + username).then(gettbUserComplete, function (err, status) {
+            $http.get(apiUrl + 'Users?username=' + username).then(gettbUserComplete, function (err, status) {
                 defered.reject(err);
             });
 
@@ -66,7 +80,7 @@
                 defered.resolve(response.data);
             }
 
-            $http.put(apiUrl + 'tbUsers/EditUser', user).then(editUserComplete, function (err, status) {
+            $http.put(apiUrl + 'Users/EditUser', user).then(editUserComplete, function (err, status) {
                 defered.reject(err);
             });
 
@@ -80,7 +94,7 @@
                 defered.resolve(response.data);
             }
 
-            $http.post(apiUrl + 'tbUsers/CreateUser', user).then(createUserComplete, function (err, status) {
+            $http.post(apiUrl + 'Users/CreateUser', user).then(createUserComplete, function (err, status) {
                 defered.reject(err);
             });
 
@@ -94,7 +108,7 @@
                 defered.resolve(response.data);
             }
 
-            $http.delete(apiUrl + 'tbUsers/DeletetbUser?id=' +userId).then(createUserComplete, function (err, status) {
+            $http.delete(apiUrl + 'Users/DeletetbUser?id=' +userId).then(createUserComplete, function (err, status) {
                 defered.reject(err);
             });
 
@@ -108,6 +122,7 @@
             editUser: editUser,
             createUser: createUser,
             deleteUser: deleteUser,
+            getStudents: getStudents,
         }
     }
 

@@ -12,9 +12,6 @@
                 <thead md-order="query.order" md-trigger="onOrderChange" class="color-blue color-medium-grey">
                     <tr>
                         <th name="Title"></th>
-                        <!--<th name="Class"></th>-->
-                        <th name="Start Date"></th>
-                        <th name="End Date"></th>
                         <th name="Description"></th>
                         <th></th>
                     </tr>
@@ -22,14 +19,12 @@
                 <tbody>
                     <tr ng-repeat="course in vm.courses" class="hover">
                         <td>{{course.title}}</td>
-                        <td>{{course.startDate}}</td>
-                        <td>{{course.endDate}}</td>
                         <td>{{course.description}}</td>
                         <td ng-if="!vm.isStudent">
                             <md-button class="md-icon-button" ng-click="vm.editCourse(course)">
                                 <md-icon md-font-icon="material-icons" class="md-font material-icons">edit</md-icon>
                             </md-button>
-                            <md-button class="md-icon-button" ng-click="vm.deleteCourse(course)">
+                            <md-button class="md-icon-button" ng-click="vm.deleteCourse(course, $index)">
                                 <md-icon md-font-icon="material-icons" class="md-font material-icons">delete</md-icon>
                             </md-button>
                         </td>

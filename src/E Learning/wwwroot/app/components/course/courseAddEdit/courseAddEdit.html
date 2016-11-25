@@ -14,13 +14,7 @@
                             <div ng-messages="vm.courseForm.title.$error" ng-if="vm.courseForm.title.$dirty || vm.formSubmitted">
                                 <div ng-message="required">The field above is required</div>
                             </div>
-                        </md-input-container>
-                        <div flex flex-gt-md="33" layout="row" class="md-block">
-                            <md-datepicker required flex="auto" class="md-datepicker-custom md-hide-overflow" ng-model="vm.course.startDate" md-placeholder="Select Start date"></md-datepicker>
-                        </div>
-                        <div flex flex-gt-md="33" layout="row" class="md-block">
-                            <md-datepicker required flex="auto" class="md-datepicker-custom md-hide-overflow" ng-model="vm.course.endDate" md-placeholder="Select End Date"></md-datepicker>
-                        </div>
+                        </md-input-container>                       
                         <md-input-container class="md-block">
                             <label>Description</label>
                             <input ng-model="vm.course.description" required name="description" type="text" />

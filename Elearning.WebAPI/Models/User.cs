@@ -34,5 +34,7 @@ namespace Elearning.WebAPI.Models
         [Required]
         [StringLength(50)]
         public string Username { get; set; }
+
+        public Course Course { get; set; }
     }
 }

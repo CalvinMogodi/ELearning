@@ -1,22 +1,21 @@
 ﻿(function () {
     'use strict';
 
-    function UserAddEditController($location, HelperService, UserFactory) {
+    function UserAddEditController($location, HelperService, UserFactory,CourseFactory) {
         /* jshint validthis:true */
         var vm = this;
         vm.isEdit = false;
 
         init();
         function init() {
-            vm.user = HelperService.getAssignedRecord();
-            vm.heading = 'Add New User';
-            if (vm.user) {
-                vm.isEdit = true;
-                vm.heading = 'Update User';
-                vm.user.confirmPassword = vm.user.password;
-            }
-
-            UserFactory.getCourses().then(function (data) {
+            CourseFactory.getCourses().then(function (data) {
+                vm.user = HelperService.getAssignedRecord();
+                vm.heading = 'Add New User';
+                if (vm.user) {
+                    vm.isEdit = true;
+                    vm.heading = 'Update User';
+                    vm.user.confirmPassword = vm.user.password;
+                }            
                 vm.courses = data;
             });
         }
@@ -36,7 +35,7 @@
                 };
                 if (newRecord.UserType == 'student') {
                     newRecord.StudentNumber = user.studentNumber;
-                    newRecord.CourseId = 2;
+                    newRecord.CourseId = user.course.id;
                 }
                 UserFactory.createUser(newRecord).then(function (result) {
                     if (result) {
@@ -52,6 +51,9 @@
 
             if (vm.userForm.$valid) {
 
+                if (user.userType == 'student') {
+                    user.CourseId = user.course.id;
+                }
                 UserFactory.editUser(user).then(function (result) {
                     if (result) {
                         $location.path('/user');
@@ -69,5 +71,5 @@
     }
 
     angular.module('EL').controller('UserAddEditController', UserAddEditController);
-    UserAddEditController.$inject = ['$location', 'HelperService', 'UserFactory'];
+    UserAddEditController.$inject = ['$location', 'HelperService', 'UserFactory', 'CourseFactory'];
 })();

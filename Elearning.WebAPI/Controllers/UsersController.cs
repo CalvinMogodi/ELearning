@@ -26,9 +26,14 @@ namespace Elearning.WebAPI.Controllers
         };
 
         // GET: api/tbUsers
-        public string GettbUsers()
+        [HttpGet]
+        public string GetUsers()
         {
            var users =  db.Users as IQueryable<User>;
+            foreach (var student in students)
+            {
+                student.Course = db.Courses.Find(student.CourseId);
+            }
             return JsonConvert.SerializeObject(users, _serializerSettings);
         }
 
@@ -45,8 +50,8 @@ namespace Elearning.WebAPI.Controllers
             return JsonConvert.SerializeObject(User, _serializerSettings);
         }
         // GET: api/tbUsers/5
-        [ResponseType(typeof(User))]
-        public string GettbUser(string username)
+        [HttpGet]
+        public string GetUser(string username)
         {
             User User = db.Users.FirstOrDefault(u => u.Username == username);
             if (User == null)
@@ -68,7 +73,7 @@ namespace Elearning.WebAPI.Controllers
                 db.SaveChanges();
                 return true;
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
                 return false;
             }            
@@ -90,8 +95,8 @@ namespace Elearning.WebAPI.Controllers
         }
 
         // DELETE: api/tbUsers/5
-        [ResponseType(typeof(User))]
-        public bool DeletetbUser(int id)
+        [HttpDelete]
+        public bool DeleteUser(int id)
         {
             User User = db.Users.Find(id);
             if (User == null)
@@ -103,6 +108,17 @@ namespace Elearning.WebAPI.Controllers
             db.SaveChanges();
 
             return true;
+        }
+
+        // GET: api/Students
+        public string GetStudents()
+        {
+            var students = db.Users.Where(u => u.UserType == "student") as IQueryable<User>;
+            foreach (var student in students)
+            {
+                student.Course = db.Courses.Find(student.CourseId);
+            }
+            return JsonConvert.SerializeObject(students, _serializerSettings);
         }
 
         protected override void Dispose(bool disposing)

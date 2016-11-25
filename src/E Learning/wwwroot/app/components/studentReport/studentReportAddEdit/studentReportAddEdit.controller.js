@@ -1,18 +1,14 @@
 ﻿(function () {
     'use strict';
 
-    function StudentReportAddEditController($location, firebaseUrl, HelperService, $firebaseArray, $filter, $firebaseObject) {
+    function StudentReportAddEditController($location, HelperService) {
         /* jshint validthis:true */
         var vm = this;
-        var ref = new Firebase(firebaseUrl);
         vm.heading = 'Link Student To Course';
-        vm.selectedIndex = 0;
 
         init();
         function init() {
-            vm.studentRecord = HelperService.getAssignedRecord();
-            vm.courses = $firebaseArray(ref.child('Course'));
-           
+            vm.studentRecord = HelperService.getAssignedRecord();           
         }
         
         vm.link = function (record) {
@@ -79,5 +75,5 @@
     }
 
     angular.module('EL').controller('StudentReportAddEditController', StudentReportAddEditController);
-    StudentReportAddEditController.$inject = ['$location', 'firebaseUrl', 'HelperService', '$firebaseArray', '$filter', '$firebaseObject'];
+    StudentReportAddEditController.$inject = ['$location', 'HelperService'];
 })();
