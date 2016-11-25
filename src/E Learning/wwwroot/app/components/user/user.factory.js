@@ -38,7 +38,7 @@
                 defered.resolve(JSON.parse(response.data));
             }
 
-            $http.post(apiUrl + 'Users/Login?username=' + username + '&password=' + password).then(getUsersComplete, function (err, status) {
+            $http.post(apiUrl + 'Users/loginUser?username=' + username + '&password=' + password).then(getUsersComplete, function (err, status) {
                 defered.reject(err);
             });
 

@@ -30,7 +30,7 @@ namespace Elearning.WebAPI.Controllers
         public string GetUsers()
         {
            var users =  db.Users as IQueryable<User>;
-            foreach (var student in students)
+            foreach (var student in users)
             {
                 student.Course = db.Courses.Find(student.CourseId);
             }

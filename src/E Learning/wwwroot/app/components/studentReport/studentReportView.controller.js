@@ -26,7 +26,7 @@
             $location.path('/studentAddEdit');
         }
         vm.addSubjects = function (student) {
-            HelperService.assignCurrentRecord(student.course);
+            HelperService.assignCurrentRecord(student);
             $location.path('/studentAddEdit');
         }
 
