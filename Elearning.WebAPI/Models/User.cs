@@ -41,9 +41,9 @@ namespace Elearning.WebAPI.Models
         [StringLength(50)]
         public string Username { get; set; }
 
-        public Course Course { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentSubject> StudentSubjects { get; set; }
+
+        public Course Course { get; set; }
     }
 }

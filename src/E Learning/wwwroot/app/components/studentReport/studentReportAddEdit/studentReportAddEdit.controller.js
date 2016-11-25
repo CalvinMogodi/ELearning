@@ -24,8 +24,8 @@
                 if (subjects[i].isActive) {
                     
                     var StudentSubject = {
-                        subjectId: subjects[i].$id,
-                        studentId: vm.studentRecord.$id,
+                        subjectId: subjects[i].id,
+                        studentId: vm.student.id,
                     };
                     StudentSubjectFactory.createStudentSubject(StudentSubject).then(function (result) {
                         if (result) {

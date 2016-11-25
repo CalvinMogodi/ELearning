@@ -12,6 +12,8 @@ namespace Elearning.WebAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Subject()
         {
+            Annoucements = new HashSet<Annoucement>();
+            Assignments = new HashSet<Assignment>();
             StudentSubjects = new HashSet<StudentSubject>();
         }
 
@@ -30,6 +32,12 @@ namespace Elearning.WebAPI.Models
         public string Description { get; set; }
 
         public int CourseId { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Annoucement> Annoucements { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Assignment> Assignments { get; set; }
 
         public virtual Course Course { get; set; }
 

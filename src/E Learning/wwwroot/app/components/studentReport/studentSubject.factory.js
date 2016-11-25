@@ -17,14 +17,14 @@
             return defered.promise;
         }
 
-        var getByStudentId = function (subjectId) {
+        var getByStudentId = function (studentId) {
 
             var defered = $q.defer();
             var getByStudentIdComplete = function (response) {
-                defered.resolve(response.data);
+                defered.resolve(JSON.parse(response.data));
             }
 
-            $http.get(apiUrl + 'StudentSubject/GetByStudentId?subjectId=' + subjectId).then(getByStudentIdComplete, function (err, status) {
+            $http.get(apiUrl + 'StudentSubject/GetByStudentId?studentId=' + studentId).then(getByStudentIdComplete, function (err, status) {
                 defered.reject(err);
             });
 

@@ -1,10 +1,9 @@
 ﻿(function () {
     'use strict';
 
-    function ResourcesAddEditController($location, firebaseUrl, HelperService, $firebaseArray, $filter, $firebaseObject, $sessionStorage) {
+    function ResourcesAddEditController($location, HelperService, ResourceFactory) {
         /* jshint validthis:true */
         var vm = this;
-        var ref = new Firebase(firebaseUrl);
 
         init();
         function init() {
@@ -23,15 +22,15 @@
                     r.onloadend = function (e) {
                         var data = e.target.result;
 
-                        var resourceRef = new Firebase(firebaseUrl + "/Resource");
-                        var resources = $firebaseArray(resourceRef);
-
                         var newRecord = {
                             title: resource.title,
                             file: data,
                         };
-                        resources.$add(newRecord);
-                        $location.path('/resource');
+                        ResourceFactory.createResource(newRecord).then(function (result) {
+                            if (result) {
+                                $location.path('/resource');
+                            }
+                        });
 
                     }
                     r.readAsDataURL(f);
@@ -47,5 +46,5 @@
     }
 
     angular.module('EL').controller('ResourcesAddEditController', ResourcesAddEditController);
-    ResourcesAddEditController.$inject = ['$location', 'firebaseUrl', 'HelperService', '$firebaseArray', '$filter', '$firebaseObject', '$sessionStorage'];
+    ResourcesAddEditController.$inject = ['$location', 'HelperService', 'ResourceFactory'];
 })();

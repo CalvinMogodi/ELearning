@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function SubjectController($location, HelperService, alertDialogService, modal, $sessionStorage, SubjectFactory) {
+    function SubjectController($location, HelperService, alertDialogService, modal, $sessionStorage, SubjectFactory, StudentSubjectFactory) {
         /* jshint validthis:true */
         var vm = this;
         vm.heading = 'Subject';
@@ -20,6 +20,11 @@
                 vm.showAddButton = false;
                 vm.isStudent = true;
                 vm.subjects = [];
+                StudentSubjectFactory.getByStudentId($sessionStorage.userId).then(function (results) {
+                    for (var i = 0; i < results.length; i++) {
+                        vm.subjects.push(results[i].subject);
+                    }
+                });
                 //SubjectFactory.
             } else {
                 //load subjects with course that is linked to
@@ -68,5 +73,5 @@
     }
 
     angular.module('EL').controller('SubjectController', SubjectController);
-    SubjectController.$inject = ['$location', 'HelperService', 'alertDialogService', 'modal', '$sessionStorage', 'SubjectFactory'];
+    SubjectController.$inject = ['$location', 'HelperService', 'alertDialogService', 'modal', '$sessionStorage', 'SubjectFactory', 'StudentSubjectFactory'];
 })();
