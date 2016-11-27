@@ -4,7 +4,11 @@
     [SubjectId]   INT          NOT NULL,
     [Date]        DATETIME     NOT NULL,
     [Description] VARCHAR (50) NOT NULL,
+    [LecturerId]  INT          NOT NULL,
     CONSTRAINT [PK_Annoucement] PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_Annoucement_Subject] FOREIGN KEY ([SubjectId]) REFERENCES [dbo].[Subject] ([Id])
+    CONSTRAINT [FK_Annoucement_Subject] FOREIGN KEY ([SubjectId]) REFERENCES [dbo].[Subject] ([Id]),
+    CONSTRAINT [FK_Annoucement_User] FOREIGN KEY ([LecturerId]) REFERENCES [dbo].[User] ([Id])
 );
+
+
 

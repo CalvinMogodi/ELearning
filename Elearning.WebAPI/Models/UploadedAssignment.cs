@@ -6,24 +6,17 @@ namespace Elearning.WebAPI.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Annoucement")]
-    public partial class Annoucement
+    [Table("UploadedAssignment")]
+    public partial class UploadedAssignment
     {
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string Title { get; set; }
-
         public int SubjectId { get; set; }
 
-        public DateTime Date { get; set; }
+        public int StudentId { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string Description { get; set; }
-
-        public int LecturerId { get; set; }
+        public string File { get; set; }
 
         public virtual Subject Subject { get; set; }
 

@@ -25,7 +25,6 @@
                         vm.subjects.push(results[i].subject);
                     }
                 });
-                //SubjectFactory.
             } else {
                 //load subjects with course that is linked to
                 SubjectFactory.getSubjects().then(function (results) {

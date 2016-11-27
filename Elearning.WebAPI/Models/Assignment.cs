@@ -23,6 +23,13 @@ namespace Elearning.WebAPI.Models
         [StringLength(50)]
         public string Description { get; set; }
 
+        [Required]
+        public string File { get; set; }
+
+        public int LecturerId { get; set; }
+
         public virtual Subject Subject { get; set; }
+
+        public virtual User User { get; set; }
     }
 }

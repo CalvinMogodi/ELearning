@@ -1,23 +1,23 @@
 ﻿(function () {
     'use strict';
 
-    function AssignmentAddEditController($location, firebaseUrl, HelperService, $firebaseArray, $filter, $firebaseObject, $sessionStorage) {
+    function AssignmentAddEditController($location, HelperService, AssignmentFactory, $sessionStorage, SubjectFactory) {
         /* jshint validthis:true */
         var vm = this;
-        var ref = new Firebase(firebaseUrl);
         vm.isEdit = false;
 
         init();
         function init() {
             vm.assignment = HelperService.getAssignedRecord();
-            vm.subjects = $firebaseArray(ref.child('Subject'));
-            vm.heading = 'Add New Assignment';
-            if (vm.assignment) {
-                vm.isEdit = true;
-                vm.heading = 'Update Assignment';
-                vm.assignment.class = vm.assignment.class;
-                vm.assignment.date = new Date(vm.assignment.date);
-            }
+            SubjectFactory.getSubjects().then(function (results) {
+                vm.heading = 'Add New Assignment';
+                if (vm.assignment) {
+                    vm.isEdit = true;
+                    vm.heading = 'Update Assignment';
+                }
+
+                vm.subjects = results;
+            });
 
 
         }
@@ -27,30 +27,23 @@
             vm.formSubmitted = true;
 
             if (vm.assignmentForm.$valid) {
-              
+
                 var f = document.getElementById('file').files[0];
                 if (f != undefined) {
-                  var r = new FileReader();
-                  r.onloadend = function (e) {
-                      var data = e.target.result;
+                    var r = new FileReader();
+                    r.onloadend = function (e) {
+                        var data = e.target.result;
                         //send your binary data via $http or $resource or do anything else with it
                         //var obj = JSON.parse();
-                        var assignmentRef = new Firebase(firebaseUrl + "/Assignment");
-                        var assignments = $firebaseArray(assignmentRef);
+                        assignment.subjectId = assignment.subject.id;
+                        assignment.lecturerId = $sessionStorage.userId;
+                        assignment.file = data;
 
-                        assignment.date = $filter('date')(new Date(assignment.date), 'yyyy-MM-dd');
-                        var newRecord = {
-                            title: assignment.title,
-                            description: assignment.description,
-                            date: assignment.date,
-                            file: data,
-                            fileName: f.name,
-                            subjectId: assignment.subject.$id,
-                            lecturerId: $sessionStorage.userId,
-                        };
-                        assignments.$add(newRecord);
-                        $location.path('/assignment');
-
+                        AssignmentFactory.createAssignment(assignment).then(function (result) {
+                            if (result) {
+                                $location.path('/assignment');
+                            }
+                        });
                     }
                     r.readAsDataURL(f);
                 } else {
@@ -63,46 +56,33 @@
             vm.formSubmitted = true;
             if (vm.assignmentForm.$valid) {
 
-                var editRef = new Firebase(firebaseUrl + "/Assignment/" + assignment.$id);
-                assignment.date = $filter('date')(new Date(assignment.date), 'yyyy-MM-dd');
-                var oldAssignment = $firebaseObject(editRef);
+                var f = document.getElementById('file').files[0];
+                if (f != undefined) {
+                    var r = new FileReader();
+                    r.onloadend = function (e) {
+                        var data = e.target.result;
 
-            var f = document.getElementById('file').files[0];
-            if (f != undefined) {
-               var r = new FileReader();
-                r.onloadend = function (e) {
-                    var data = e.target.result;
+                        assignment.subjectId = assignment.subject.id;
+                        assignment.file = data;
 
-                    oldAssignment.$id = assignment.$id;
-                    oldAssignment.description = assignment.description;
-                    oldAssignment.title = assignment.title;
-                    oldAssignment.date = assignment.date;
-                    oldAssignment.subjectId = assignment.subject.$id;
-                    oldAssignment.file = data;
-                    oldAssignment.fileName = f.name;
-                    oldAssignment.lecturerId = $sessionStorage.userId;
+                        AssignmentFactory.editAssignment(assignment).then(function (result) {
+                            if (result) {
+                                $location.path('/assignment');
+                            }
+                        });
 
-                    oldAssignment.$save();
-                    $location.path('/assignment');
-
+                    }
+                    r.readAsDataURL(f);
                 }
-                r.readAsDataURL(f);
+                else {
+                    assignment.subjectId = assignment.subject.id;
+                    AssignmentFactory.editAssignment(assignment).then(function (result) {
+                        if (result) {
+                            $location.path('/assignment');
+                        }
+                    });
+                }
             }
-            else {               
-
-                    oldAssignment.$id = assignment.$id;
-                    oldAssignment.description = assignment.description;
-                    oldAssignment.title = assignment.title;
-                    oldAssignment.date = assignment.date;
-                    oldAssignment.subjectId = assignment.subject.$id;
-                    oldAssignment.file = assignment.file;
-                    oldAssignment.fileName = assignment.fileName;
-                    oldAssignment.lecturerId = $sessionStorage.userId;
-
-                    oldAssignment.$save();
-                    $location.path('/assignment');
-                }
-            }            
         }
 
         vm.cancel = function () {
@@ -111,5 +91,5 @@
     }
 
     angular.module('EL').controller('AssignmentAddEditController', AssignmentAddEditController);
-    AssignmentAddEditController.$inject = ['$location', 'firebaseUrl', 'HelperService', '$firebaseArray', '$filter', '$firebaseObject', '$sessionStorage'];
+    AssignmentAddEditController.$inject = ['$location', 'HelperService', 'AssignmentFactory', '$sessionStorage', 'SubjectFactory'];
 })();

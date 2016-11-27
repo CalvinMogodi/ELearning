@@ -18,7 +18,7 @@
                         <md-input-container class="md-block">
                             <label>Select Subject</label>
                             <md-select ng-model="vm.annoucement.subject" required name="subject">
-                                <md-option ng-value="subject" ng-repeat="subject in vm.subjects track by $index">{{subject.title}}</md-option>
+                                <md-option ng-value="subject" ng-repeat="subject in vm.subjects track by $index">{{subject.title}} ({{subject.code}})</md-option>
                             </md-select>
                             <div ng-messages="vm.annoucementForm.subject.$error" ng-if="vm.annoucementForm.subject.$dirty || vm.formSubmitted">
                                 <div ng-message="required">Please select subject</div>

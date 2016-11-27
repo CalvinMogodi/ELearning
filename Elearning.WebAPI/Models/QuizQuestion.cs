@@ -6,27 +6,25 @@ namespace Elearning.WebAPI.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Annoucement")]
-    public partial class Annoucement
+    [Table("QuizQuestion")]
+    public partial class QuizQuestion
     {
         public int Id { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Title { get; set; }
+        public string Type { get; set; }
 
-        public int SubjectId { get; set; }
-
-        public DateTime Date { get; set; }
+        [Required]
+        [StringLength(500)]
+        public string Description { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Description { get; set; }
+        public string Answer { get; set; }
 
-        public int LecturerId { get; set; }
+        public int QuizId { get; set; }
 
-        public virtual Subject Subject { get; set; }
-
-        public virtual User User { get; set; }
+        public virtual Quiz Quiz { get; set; }
     }
 }

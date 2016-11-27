@@ -4,7 +4,7 @@ namespace Elearning.WebAPI
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
-    using WebAPI.Models;
+    using Models;
 
     public partial class ElearningContext : DbContext
     {
@@ -18,9 +18,14 @@ namespace Elearning.WebAPI
         public virtual DbSet<Class> Classes { get; set; }
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<Message> Messages { get; set; }
+        public virtual DbSet<Quiz> Quizs { get; set; }
+        public virtual DbSet<QuizAnswer> QuizAnswers { get; set; }
+        public virtual DbSet<QuizQuestion> QuizQuestions { get; set; }
         public virtual DbSet<Resource> Resources { get; set; }
         public virtual DbSet<StudentSubject> StudentSubjects { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
+        public virtual DbSet<UploadedAssignment> UploadedAssignments { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -39,6 +44,10 @@ namespace Elearning.WebAPI
 
             modelBuilder.Entity<Assignment>()
                 .Property(e => e.Description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Assignment>()
+                .Property(e => e.File)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Class>()
@@ -75,6 +84,56 @@ namespace Elearning.WebAPI
                 .Property(e => e.Description)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Message>()
+                .Property(e => e.SendTo)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Message>()
+                .Property(e => e.Subject)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Message>()
+                .Property(e => e.Message1)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Message>()
+                .Property(e => e.Status)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Quiz>()
+                .Property(e => e.Title)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Quiz>()
+                .Property(e => e.Description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Quiz>()
+                .HasMany(e => e.QuizAnswers)
+                .WithRequired(e => e.Quiz)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Quiz>()
+                .HasMany(e => e.QuizQuestions)
+                .WithRequired(e => e.Quiz)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<QuizAnswer>()
+                .Property(e => e.Score)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<QuizQuestion>()
+                .Property(e => e.Type)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<QuizQuestion>()
+                .Property(e => e.Description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<QuizQuestion>()
+                .Property(e => e.Answer)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Resource>()
                 .Property(e => e.Title)
                 .IsUnicode(false);
@@ -106,9 +165,23 @@ namespace Elearning.WebAPI
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Subject>()
+                .HasMany(e => e.Quizs)
+                .WithRequired(e => e.Subject)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Subject>()
                 .HasMany(e => e.StudentSubjects)
                 .WithRequired(e => e.Subject)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Subject>()
+                .HasMany(e => e.UploadedAssignments)
+                .WithRequired(e => e.Subject)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<UploadedAssignment>()
+                .Property(e => e.File)
+                .IsUnicode(false);
 
             modelBuilder.Entity<User>()
                 .Property(e => e.Firstname)
@@ -131,7 +204,43 @@ namespace Elearning.WebAPI
                 .IsUnicode(false);
 
             modelBuilder.Entity<User>()
+                .HasMany(e => e.Annoucements)
+                .WithRequired(e => e.User)
+                .HasForeignKey(e => e.LecturerId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Assignments)
+                .WithRequired(e => e.User)
+                .HasForeignKey(e => e.LecturerId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Messages)
+                .WithRequired(e => e.User)
+                .HasForeignKey(e => e.UserId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Messages1)
+                .WithRequired(e => e.User1)
+                .HasForeignKey(e => e.SenderId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.QuizAnswers)
+                .WithRequired(e => e.User)
+                .HasForeignKey(e => e.StudentId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
                 .HasMany(e => e.StudentSubjects)
+                .WithRequired(e => e.User)
+                .HasForeignKey(e => e.StudentId)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.UploadedAssignments)
                 .WithRequired(e => e.User)
                 .HasForeignKey(e => e.StudentId)
                 .WillCascadeOnDelete(false);

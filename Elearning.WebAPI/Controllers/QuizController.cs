@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Elearning.WebAPI.Models;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
@@ -7,11 +8,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Elearning.WebAPI.Models;
 
 namespace Elearning.WebAPI.Controllers
 {
-    public class AnnoucementController : ApiController
+    public class QuizController : ApiController
     {
         private ElearningContext db = new ElearningContext();
 
@@ -24,18 +24,18 @@ namespace Elearning.WebAPI.Controllers
 
         // GET: 
         [HttpGet]
-        public string GetAnnoucements()
+        public string GetQuizes()
         {
 
-            var annoucements = db.Annoucements as IQueryable<Annoucement>;
-            return JsonConvert.SerializeObject(annoucements, _serializerSettings);
+            var classes = db.Quizs as IQueryable<Quiz>;
+            return JsonConvert.SerializeObject(classes, _serializerSettings);
         }
 
         // GET: /Details/
         [HttpPut]
-        public bool Edit(Annoucement annoucement)
+        public bool Edit(Quiz quiz)
         {
-            db.Entry(annoucement).State = EntityState.Modified;
+            db.Entry(quiz).State = EntityState.Modified;
 
             try
             {
@@ -50,12 +50,12 @@ namespace Elearning.WebAPI.Controllers
 
         // GET: /Create
         [HttpPost]
-        public bool Create(Annoucement annoucement)
+        public bool Create(Quiz quiz)
         {
             try
             {
 
-                db.Annoucements.Add(annoucement);
+                db.Quizs.Add(quiz);
                 db.SaveChanges();
                 return true;
             }
@@ -66,17 +66,17 @@ namespace Elearning.WebAPI.Controllers
         }
 
 
-        // GET: /Delete/5
+        // GET: Courses/Delete/5
         [HttpDelete]
         public bool Delete(int id)
         {
-            Annoucement annoucement = db.Annoucements.Find(id);
-            if (annoucement == null)
+            Quiz classObj = db.Quizs.Find(id);
+            if (classObj == null)
             {
                 return false;
             }
 
-            db.Annoucements.Remove(annoucement);
+            db.Quizs.Remove(classObj);
             db.SaveChanges();
 
             return true;

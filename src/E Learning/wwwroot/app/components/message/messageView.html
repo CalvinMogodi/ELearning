@@ -21,7 +21,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="message in vm.inboxmessages track by $index" class="hover">
-                        <td>{{message.sender.firstname}} {{message.sender.surname}}</td>
+                        <td>{{message.user1.firstname}} {{message.user1.surname}}</td>
                         <td>{{message.subject}}</td>
                         <td>{{message.createdDate}}</td>
                         <td>
