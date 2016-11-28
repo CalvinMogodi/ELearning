@@ -16,7 +16,6 @@ namespace Elearning.WebAPI.Models
             Assignments = new HashSet<Assignment>();
             Quizs = new HashSet<Quiz>();
             StudentSubjects = new HashSet<StudentSubject>();
-            UploadedAssignments = new HashSet<UploadedAssignment>();
         }
 
         public int Id { get; set; }
@@ -48,8 +47,5 @@ namespace Elearning.WebAPI.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentSubject> StudentSubjects { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UploadedAssignment> UploadedAssignments { get; set; }
     }
 }

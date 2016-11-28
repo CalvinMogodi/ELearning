@@ -23,10 +23,9 @@ namespace Elearning.WebAPI.Controllers
 
         // GET: 
         [HttpGet]
-        public string GetUploadedAssignmentes()
+        public string GetUploadedAssignmentsByAssignmentId(int assignmentId)
         {
-
-            var classes = db.UploadedAssignments as IQueryable<UploadedAssignment>;
+            var classes = db.UploadedAssignments.Where(ua => ua.AssignmentId == assignmentId) as IQueryable<UploadedAssignment>;
             return JsonConvert.SerializeObject(classes, _serializerSettings);
         }
 

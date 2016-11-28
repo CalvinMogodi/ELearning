@@ -17,6 +17,48 @@
             return defered.promise;
         }
 
+        var getAssignmentsBySubjectId = function (subjectId) {
+
+            var defered = $q.defer();
+            var getAssignmentsBySubjectIdComplete = function (response) {
+                defered.resolve(JSON.parse(response.data));
+            }
+
+            $http.get(apiUrl + 'Assignment/GetAssignmentsBySubjectId?subjectId=' + subjectId).then(getAssignmentsBySubjectIdComplete, function (err, status) {
+                defered.reject(err);
+            });
+
+            return defered.promise;
+        } 
+
+        var getUploadedAssignmentsByAssignmentId = function (assignmentId) {
+
+            var defered = $q.defer();
+            var getUploadedAssignmentsByAssignmentIdComplete = function (response) {
+                defered.resolve(JSON.parse(response.data));
+            }
+
+            $http.get(apiUrl + 'UploadedAssignment/GetUploadedAssignmentsByAssignmentId?assignmentId=' + assignmentId).then(getUploadedAssignmentsByAssignmentIdComplete, function (err, status) {
+                defered.reject(err);
+            });
+
+            return defered.promise;
+        }
+
+        var uploadAssignment = function (Assignment) {
+
+            var defered = $q.defer();
+            var uploadAssignmentComplete = function (response) {
+                defered.resolve(response.data);
+            }
+            Assignment.subject = undefined;
+            $http.post(apiUrl + 'UploadedAssignment/Create', Assignment).then(uploadAssignmentComplete, function (err, status) {
+                defered.reject(err);
+            });
+
+            return defered.promise;
+        }
+
         var editAssignment = function (Assignment) {
 
             var defered = $q.defer();
@@ -66,6 +108,9 @@
             editAssignment: editAssignment,
             createAssignment: createAssignment,
             deleteAssignment: deleteAssignment,
+            getAssignmentsBySubjectId: getAssignmentsBySubjectId,
+            uploadAssignment: uploadAssignment,
+            getUploadedAssignmentsByAssignmentId: getUploadedAssignmentsByAssignmentId,
         }
     }
 

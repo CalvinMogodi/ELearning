@@ -9,6 +9,12 @@ namespace Elearning.WebAPI.Models
     [Table("Assignment")]
     public partial class Assignment
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Assignment()
+        {
+            UploadedAssignments = new HashSet<UploadedAssignment>();
+        }
+
         public int Id { get; set; }
 
         [Required]
@@ -31,5 +37,8 @@ namespace Elearning.WebAPI.Models
         public virtual Subject Subject { get; set; }
 
         public virtual User User { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UploadedAssignment> UploadedAssignments { get; set; }
     }
 }

@@ -11,14 +11,14 @@ namespace Elearning.WebAPI.Models
     {
         public int Id { get; set; }
 
-        public int SubjectId { get; set; }
+        public int AssignmentId { get; set; }
 
         public int StudentId { get; set; }
 
         [Required]
         public string File { get; set; }
 
-        public virtual Subject Subject { get; set; }
+        public virtual Assignment Assignment { get; set; }
 
         public virtual User User { get; set; }
     }

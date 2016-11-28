@@ -50,6 +50,11 @@ namespace Elearning.WebAPI
                 .Property(e => e.File)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Assignment>()
+                .HasMany(e => e.UploadedAssignments)
+                .WithRequired(e => e.Assignment)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Class>()
                 .Property(e => e.Title)
                 .IsUnicode(false);
@@ -98,6 +103,10 @@ namespace Elearning.WebAPI
 
             modelBuilder.Entity<Message>()
                 .Property(e => e.Status)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Message>()
+                .Property(e => e.File)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Quiz>()
@@ -171,11 +180,6 @@ namespace Elearning.WebAPI
 
             modelBuilder.Entity<Subject>()
                 .HasMany(e => e.StudentSubjects)
-                .WithRequired(e => e.Subject)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Subject>()
-                .HasMany(e => e.UploadedAssignments)
                 .WithRequired(e => e.Subject)
                 .WillCascadeOnDelete(false);
 

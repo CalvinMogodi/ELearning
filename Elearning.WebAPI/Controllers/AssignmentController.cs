@@ -31,6 +31,14 @@ namespace Elearning.WebAPI.Controllers
             return JsonConvert.SerializeObject(assignments, _serializerSettings);
         }
 
+        // GET: 
+        [HttpGet]
+        public string GetAssignmentsBySubjectId(int subjectId)
+        {
+            var assignments = db.Assignments.Where(a => a.SubjectId == subjectId) as IQueryable<Assignment>;
+            return JsonConvert.SerializeObject(assignments, _serializerSettings);
+        }
+
         // GET: /Details/
         [HttpPut]
         public bool Edit(Assignment assignment)

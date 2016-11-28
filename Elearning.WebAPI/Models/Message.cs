@@ -32,6 +32,10 @@ namespace Elearning.WebAPI.Models
         [StringLength(50)]
         public string Status { get; set; }
 
+        public DateTime CreatedDate { get; set; }
+
+        public string File { get; set; }
+
         public virtual User User { get; set; }
 
         public virtual User User1 { get; set; }
