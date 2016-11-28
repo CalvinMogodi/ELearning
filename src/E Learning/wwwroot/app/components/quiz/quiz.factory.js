@@ -16,6 +16,47 @@
             return defered.promise;
         }
 
+        var getQuizQuestionsByQuizId = function (quizId) {
+
+            var defered = $q.defer();
+            var getQuizQuestionsByQuizIdComplete = function (response) {
+                defered.resolve(JSON.parse(response.data));
+            }
+
+            $http.get(apiUrl + 'QuizQuestion/GetQuizQuestionsByQuizId?quizId=' + quizId).then(getQuizQuestionsByQuizIdComplete, function (err, status) {
+                defered.reject(err);
+            });
+
+            return defered.promise;
+        }
+
+        var getQuizesBySubjectId = function (subjectId) {
+
+            var defered = $q.defer();
+            var getQuizesBySubjectIdComplete = function (response) {
+                defered.resolve(JSON.parse(response.data));
+            }
+
+            $http.get(apiUrl + 'Quiz/GetQuizesBySubjectId?subjectId=' + subjectId).then(getQuizesBySubjectIdComplete, function (err, status) {
+                defered.reject(err);
+            });
+
+            return defered.promise;
+        }
+        var getQuizAnswersByQuizId = function (quizId) {
+
+            var defered = $q.defer();
+            var getQuizAnswersByQuizId = function (response) {
+                defered.resolve(JSON.parse(response.data));
+            }
+
+            $http.get(apiUrl + 'QuizAnswer/GetQuizAnswersByQuizId?quizId=' + quizId).then(getQuizAnswersByQuizId, function (err, status) {
+                defered.reject(err);
+            });
+
+            return defered.promise;
+        }
+
         var editQuiz = function (Quiz) {
 
             var defered = $q.defer();
@@ -46,6 +87,36 @@
             return defered.promise;
         }
 
+        var createQuizQuestion = function (quizQuestion) {
+
+            var defered = $q.defer();
+            var createQuizQuestionComplete = function (response) {
+                defered.resolve(response.data);
+            }
+
+            quizQuestion.quiz = undefined;
+            $http.post(apiUrl + 'QuizQuestion/Create', quizQuestion).then(createQuizQuestionComplete, function (err, status) {
+                defered.reject(err);
+            });
+
+            return defered.promise;
+        }
+
+        var createQuizAnswer = function (quizAnswer) {
+
+            var defered = $q.defer();
+            var createQuizAnswerComplete = function (response) {
+                defered.resolve(response.data);
+            }
+
+            quizAnswer.quiz = undefined;
+            $http.post(apiUrl + 'QuizAnswer/Create', quizAnswer).then(createQuizAnswerComplete, function (err, status) {
+                defered.reject(err);
+            });
+
+            return defered.promise;
+        }
+
         var deleteQuiz = function (QuizId) {
 
             var defered = $q.defer();
@@ -65,6 +136,11 @@
             editQuiz: editQuiz,
             createQuiz: createQuiz,
             deleteQuiz: deleteQuiz,
+            getQuizQuestionsByQuizId: getQuizQuestionsByQuizId,
+            createQuizQuestion: createQuizQuestion,
+            createQuizAnswer: createQuizAnswer,
+            getQuizAnswersByQuizId: getQuizAnswersByQuizId,
+            getQuizesBySubjectId: getQuizesBySubjectId,
         }
     }
 

@@ -23,11 +23,11 @@ namespace Elearning.WebAPI.Controllers
 
         // GET: 
         [HttpGet]
-        public string GetQuizAnsweres()
+        public string GetQuizAnswersByQuizId(int quizId)
         {
 
-            var classes = db.QuizAnswers as IQueryable<QuizAnswer>;
-            return JsonConvert.SerializeObject(classes, _serializerSettings);
+            var quizAnswers = db.QuizAnswers.Where(qa => qa.QuizId == quizId) as IQueryable<QuizAnswer>;
+            return JsonConvert.SerializeObject(quizAnswers, _serializerSettings);
         }
 
         // GET: /Create

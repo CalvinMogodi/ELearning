@@ -15,6 +15,20 @@
             });
 
             return defered.promise;
+        } 
+
+        var getAnnoucementsBySubjectId = function (subjectId) {
+
+            var defered = $q.defer();
+            var getAnnoucementsBySubjectIdComplete = function (response) {
+                defered.resolve(JSON.parse(response.data));
+            }
+
+            $http.get(apiUrl + 'Annoucement/GetAnnoucementsBySubjectId?subjectId=' + subjectId).then(getAnnoucementsBySubjectIdComplete, function (err, status) {
+                defered.reject(err);
+            });
+
+            return defered.promise;
         }
 
         var editAnnoucement = function (annoucement) {
@@ -66,6 +80,7 @@
             editAnnoucement: editAnnoucement,
             createAnnoucement: createAnnoucement,
             deleteAnnoucement: deleteAnnoucement,
+            getAnnoucementsBySubjectId: getAnnoucementsBySubjectId,
         }
     }
 

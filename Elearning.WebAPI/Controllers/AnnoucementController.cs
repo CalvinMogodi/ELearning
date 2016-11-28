@@ -31,6 +31,14 @@ namespace Elearning.WebAPI.Controllers
             return JsonConvert.SerializeObject(annoucements, _serializerSettings);
         }
 
+        // GET: 
+        [HttpGet]
+        public string GetAnnoucementsBySubjectId(int subjectId)
+        {
+            var annoucements = db.Annoucements.Where(a => a.SubjectId == subjectId) as IQueryable<Annoucement>;
+            return JsonConvert.SerializeObject(annoucements, _serializerSettings);
+        }
+
         // GET: /Details/
         [HttpPut]
         public bool Edit(Annoucement annoucement)
