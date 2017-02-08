@@ -13,7 +13,7 @@
         }
         else {
             vm.userAuthenticated = false;
-            $location.path('/login');
+            $location.path('/home');
         }
 
         $scope.navigateTo = function (url) {

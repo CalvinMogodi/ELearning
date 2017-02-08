@@ -10,7 +10,7 @@
 
     <div layout="row" ng-class="{'layout-fill' : currentUrl === '/login'}" class="layout-fill" style="height:100%">
 
-        <md-sidenav md-is-locked-open="$mdMedia('gt-md')" md-component-id="left" class="md-whiteframe-z2 md-sidenav-left gt-md-closed md-locked-open" ng-hide="currentUrl === '/login'">
+        <md-sidenav md-is-locked-open="$mdMedia('gt-md')" md-component-id="left" class="md-whiteframe-z2 md-sidenav-left gt-md-closed md-locked-open" ng-hide="currentUrl === '/login' || currentUrl === '/home' || currentUrl === '/service' || currentUrl === '/aboutUs' || currentUrl === '/portfolio'|| currentUrl === '/contactUs'">
             <div flex layout="column" layout-fill>
                 <img src="assets/img/login_background.png" style="height: 180px;"/>
 
@@ -178,3 +178,8 @@
 <script src="app/common/alert/alertdialog.service.js"></script>
 <script src="app/common/helper/helper.js"></script>
 
+<script src="app/components/services/services.controller.js"></script>
+<script src="app/components/portfolio/portfolio.controller.js"></script>
+<script src="app/components/home/home.controller.js"></script>
+<script src="app/components/contactUs/contactUs.controller.js"></script>
+<script src="app/components/aboutUs/aboutUs.controller.js"></script>

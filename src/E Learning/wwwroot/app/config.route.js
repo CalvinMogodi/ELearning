@@ -170,6 +170,26 @@
         controller: 'ViewAssignmentResultController',
         templateUrl: viewBase + '/assignment/viewAssignmentResult/viewAssignmentResult.html',
         controllerAs: 'vm'
+    }).when('/home', {
+        controller: 'homeController',
+        templateUrl: viewBase + '/home/home.html',
+        controllerAs: 'vm'
+    }).when('/services', {
+        controller: 'servicesController',
+        templateUrl: viewBase + '/services/services.html',
+        controllerAs: 'vm'
+    }).when('/aboutUs', {
+        controller: 'aboutUsController',
+        templateUrl: viewBase + '/aboutUs/aboutUs.html',
+        controllerAs: 'vm'
+    }).when('/portfolio', {
+        controller: 'portfolioController',
+        templateUrl: viewBase + '/portfolio/portfolio.html',
+        controllerAs: 'vm'
+    }).when('/contactUs', {
+        controller: 'contactUsController',
+        templateUrl: viewBase + '/contactUs/contactUs.html',
+        controllerAs: 'vm'
     }).otherwise({ redirectTo: '/' });
     }
 
