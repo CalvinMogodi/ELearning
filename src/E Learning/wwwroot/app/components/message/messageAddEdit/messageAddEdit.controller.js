@@ -1,12 +1,11 @@
 ﻿(function () {
     'use strict';
 
-    function MessageAddEditController($location, $firebaseArray, HelperService, alertDialogService, modal, $filter, firebaseUrl, $sessionStorage) {
+    function MessageAddEditController($location, HelperService, MessageFactory, $sessionStorage, UserFactory) {
         /* jshint validthis:true */
         var vm = this;
         vm.isReadOnly = false;
         vm.isFromInbox = false;
-        var ref = new Firebase(firebaseUrl);
         vm.showDownload = false;
         vm.tabs = [
             { id: 1, heading: 'Inbox', active: false, url: 'message' },
@@ -17,8 +16,10 @@
 
         init();
         function init() {
-            vm.users = $firebaseArray(ref.child('User'));
             vm.message = HelperService.getAssignedRecord();
+
+            UserFactory.getUsers().then(function (results) {
+                vm.users = results;
             if (vm.message) {
                 vm.isReadOnly = true;
                 vm.isFromInbox = true;
@@ -31,6 +32,7 @@
             else {
                 vm.tabs.push({ id: 3, heading: 'Send New Message', active: true, url: '/messageAddEdit' });
             }
+            });
         }
 
         vm.getUsersByType = function (userType) {
@@ -47,43 +49,32 @@
             vm.formSubmitted = true;
 
             if (vm.messageForm.$valid) {
-
-                var addRef = new Firebase(firebaseUrl + "/Message");
-                var messages = $firebaseArray(addRef);
-                message.date = $filter('date')(new Date(), 'yyyy-MM-dd');
+                message.senderId = $sessionStorage.userId;
+                message.userId = message.user.id;
+                message.status = 'new';
 
                 var f = document.getElementById('file').files[0];
                 if (f != undefined) {
-                    var newRecord = {
-                        sendTo: message.sendTo,
-                        userId: message.user.$id,
-                        subject: message.subject,
-                        message: message.message,
-                        senderId: $sessionStorage.userId,
-                        createdDate: message.date,
-                        status: 'new',
-                    };
+                   
                     var r = new FileReader();
                     r.onloadend = function (e) {
                         var data = e.target.result;
-                        newRecord.file = data;
-                        messages.$add(newRecord);
-                        $location.path('/message');
-
+                        message.file = data;
+                       
+                        MessageFactory.createMessage(message).then(function (result) {
+                            if (result) {
+                                $location.path('/message');
+                            }
+                        });
                     }
                     r.readAsDataURL(f);
                 } else {
-                    var newRecord = {
-                        sendTo: message.sendTo,
-                        userId: message.user.$id,
-                        subject: message.subject,
-                        message: message.message,
-                        senderId: $sessionStorage.userId,
-                        createdDate: message.date,
-                        status: 'new',
-                    };
-                    messages.$add(newRecord);
-                    $location.path('/message');
+
+                    MessageFactory.createMessage(message).then(function (result) {
+                        if (result) {
+                            $location.path('/message');
+                        }
+                    });
                 }
                 
             }
@@ -115,5 +106,5 @@
     }
 
     angular.module('EL').controller('MessageAddEditController', MessageAddEditController);
-    MessageAddEditController.$inject = ['$location', '$firebaseArray', 'HelperService', 'alertDialogService', 'modal', '$filter', 'firebaseUrl', '$sessionStorage'];
+    MessageAddEditController.$inject = ['$location', 'HelperService', 'MessageFactory', '$sessionStorage', 'UserFactory'];
 })();

@@ -39,6 +39,15 @@
                             <div ng-messages="vm.userForm.studentNumber.$error" ng-if="vm.userForm.studentNumber.$dirty || vm.formSubmitted">
                                 <div ng-message="required">The field above is required</div>
                             </div>
+                        </md-input-container> 
+                        <md-input-container class="md-block" ng-if="vm.user.userType == 'student'">
+                            <label>Select Course</label>
+                            <md-select ng-model="vm.user.course" required name="course">
+                                <md-option ng-value="course" ng-repeat="course in vm.courses">{{course.title}}</md-option>
+                            </md-select>
+                            <div ng-messages="vm.userForm.course.$error" ng-if="vm.assignmentForm.course.$dirty || vm.formSubmitted">
+                                <div ng-message="required">Please select course</div>
+                            </div>
                         </md-input-container>
                         <md-input-container class="md-block">
                             <label>username</label>

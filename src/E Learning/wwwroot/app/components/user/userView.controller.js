@@ -1,12 +1,11 @@
 ﻿(function () {
     'use strict';
 
-    function UserController($location, $firebaseArray, HelperService, alertDialogService, modal, firebaseUrl, UserFactory) {
+    function UserController($location, HelperService, alertDialogService, modal, UserFactory) {
         /* jshint validthis:true */
         var vm = this;
         vm.heading = 'user';
         vm.icon = "add_box";
-        var ref = new Firebase(firebaseUrl);
         vm.pagenation = {
             limit: 5,
             page: 1,
@@ -15,12 +14,6 @@
         init();
 
         function init() {
-            //load users with
-            //vm.users = $firebaseArray(ref.child('User'));
-            //vm.users.$loaded(function (data) {
-            //    vm.masterUsers = angular.copy(vm.users);
-            //});
-
             UserFactory.getUsers().then(function (data) {
                 vm.users = data;
                 vm.masterUsers = angular.copy(vm.users);
@@ -35,12 +28,17 @@
             HelperService.assignCurrentRecord(user);
             $location.path('/userAddEdit');
         }
-        vm.deleteUser = function (user) {
+        vm.deleteUser = function (user, index) {
             alertDialogService.setHeaderAndMessage('Delete', 'Are you sure you want to delete this user?');
             var templateUrl = '/app/common/alert/alertDialog.template.html';
             modal.show(templateUrl, 'alertDialogController').then(function (result) {
                 if (result) {
-                    vm.users.$remove(user);
+                    UserFactory.deleteUser(user.id).then(function (results) {
+                        if (results) {
+                            vm.users.splice(index, 1);
+                        }
+                    });
+                    
                 }
             });
         }
@@ -63,5 +61,5 @@
     }
 
     angular.module('EL').controller('UserController', UserController);
-    UserController.$inject = ['$location', '$firebaseArray', 'HelperService', 'alertDialogService', 'modal', 'firebaseUrl', 'UserFactory'];
+    UserController.$inject = ['$location', 'HelperService', 'alertDialogService', 'modal', 'UserFactory'];
 })();

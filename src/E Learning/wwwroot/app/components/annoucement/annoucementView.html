@@ -12,7 +12,7 @@
                 <thead md-order="query.order" md-trigger="onOrderChange" class="color-blue color-medium-grey">
                     <tr>
                         <th name="Title"></th>
-                        <th name="Class"></th>
+                        <th name="Subject"></th>
                         <th name="Date"></th>
                         <th name="Description"></th>
                         <th></th>
@@ -21,14 +21,14 @@
                 <tbody>
                     <tr ng-repeat="annoucement in vm.annoucements" class="hover">
                         <td>{{annoucement.title}}</td>
-                        <td>{{annoucement.class.title}}</td>
+                        <td>{{annoucement.subject.title}}</td>
                         <td>{{annoucement.date}}</td>
                         <td>{{annoucement.description}}</td>
                         <td>
                             <md-button class="md-icon-button" ng-click="vm.editAnnoucement(annoucement)">
                                 <md-icon md-font-icon="material-icons" class="md-font material-icons">edit</md-icon>
                             </md-button>
-                            <md-button class="md-icon-button" ng-click="vm.deleteAnnoucement(annoucement)">
+                            <md-button class="md-icon-button" ng-click="vm.deleteAnnoucement(annoucement, $index)">
                                 <md-icon md-font-icon="material-icons" class="md-font material-icons">delete</md-icon>
                             </md-button>
                         </td>

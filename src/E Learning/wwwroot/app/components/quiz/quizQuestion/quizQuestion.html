@@ -28,7 +28,7 @@
                         <div flex>
                             <md-input-container class="md-block">
                                 <label>Select Question Type</label>
-                                <md-select ng-model="vm.question.questionType" required name="questionType">
+                                <md-select ng-model="vm.question.type" required name="questionType">
                                     <md-option value="YesNo">Yes/No</md-option>
                                     <md-option value="openEnded">Open Ended</md-option>
                                 </md-select>
@@ -43,14 +43,14 @@
                                     <div ng-message="required">The field above is required</div>
                                 </div>
                             </md-input-container>
-                           <div flex layout="row" layout-align="space-between center" class="inline-switch" ng-if="vm.question.questionType == 'YesNo'">
+                           <div flex layout="row" layout-align="space-between center" class="inline-switch" ng-if="vm.question.type == 'YesNo'">
                                <label>Answer</label>
                                <md-switch class="md-primary" aria-label="" ng-model="vm.question.answer">
                                    <label ng-if="vm.question.answer">Yes</label>
                                    <label ng-if="!vm.question.answer">No</label>
                                </md-switch>
                             </div>
-                            <md-input-container class="md-block" ng-if="vm.question.questionType == 'openEnded'">
+                            <md-input-container class="md-block" ng-if="vm.question.type == 'openEnded'">
                                 <label>Answer</label>
                                 <input ng-model="vm.question.answer" required name="answer" type="text" />
                                 <div ng-messages="vm.questionForm.answer.$error" ng-if="vm.questionForm.answer.$dirty || vm.formSubmitted">

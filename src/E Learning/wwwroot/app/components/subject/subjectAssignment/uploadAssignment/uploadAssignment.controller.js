@@ -1,12 +1,11 @@
 ﻿(function () {
     'use strict';
 
-    function UploadAssignmentController($location, firebaseUrl, $sessionStorage, HelperService, $firebaseArray) {
+    function UploadAssignmentController($location, $sessionStorage, HelperService, AssignmentFactory) {
         /* jshint validthis:true */
         var vm = this;
         vm.heading = 'Upload Assignment';
         vm.icon = "add_box";
-        var ref = new Firebase(firebaseUrl);
         init();
 
         function init() {
@@ -20,16 +19,14 @@
                 var r = new FileReader();
                 r.onloadend = function (e) {
                     var data = e.target.result;
-                    var assignmentRef = new Firebase(firebaseUrl + "/UploadedAssignment");
-                    var assignments = $firebaseArray(assignmentRef);
-
                     var newRecord = {
-                        subjectId: vm.assignment.$id,
+                        assignmentId: vm.assignment.id,
                         studentId: $sessionStorage.userId,
                         file: data,
                     };
-                    assignments.$add(newRecord);
-                    $location.path('/subject');
+                    AssignmentFactory.uploadAssignment(newRecord).then(function (result) {                    
+                        $location.path('/subject');
+                    });
                 }
                 r.readAsDataURL(f);
             } else {
@@ -44,5 +41,5 @@
     }
 
     angular.module('EL').controller('UploadAssignmentController', UploadAssignmentController);
-    UploadAssignmentController.$inject = ['$location', 'firebaseUrl', '$sessionStorage', 'HelperService', '$firebaseArray'];
+    UploadAssignmentController.$inject = ['$location', '$sessionStorage', 'HelperService', 'AssignmentFactory'];
 })();

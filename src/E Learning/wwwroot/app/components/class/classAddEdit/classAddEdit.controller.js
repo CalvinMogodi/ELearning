@@ -1,10 +1,9 @@
 ﻿(function () {
     'use strict';
 
-    function ClassAddEditController($location, firebaseUrl, HelperService, $firebaseArray, $filter, $firebaseObject) {
+    function ClassAddEditController($location, HelperService, ClassFactory) {
         /* jshint validthis:true */
         var vm = this;       
-        var ref = new Firebase(firebaseUrl + "/Class");
         vm.isEdit = false;
 
         init();
@@ -23,16 +22,11 @@
             vm.formSubmitted = true;
 
             if (vm.classForm.$valid) {
-                var classes = $firebaseArray(ref);
-
-                var today = $filter('date')(new Date(), 'yyyy-MM-dd');
-                var newRecord = {
-                    title: classOjb.title,
-                    description: classOjb.description,
-                    createdDate: today.toString(),
-                };
-                classes.$add(newRecord);
-                $location.path('/class');
+                ClassFactory.createClass(classOjb).then(function (result) {
+                    if (result) {
+                        $location.path('/class');
+                    }
+                });
             }
         }
 
@@ -40,16 +34,11 @@
             vm.formSubmitted = true;
 
             if (vm.classForm.$valid) {
-                var editRef = new Firebase(firebaseUrl + "/Class/" + classOjb.$id);
-                var oldClass = $firebaseObject(editRef);
-
-                oldClass.$id = classOjb.$id;
-                oldClass.description = classOjb.description;
-                oldClass.title = classOjb.title;
-                oldClass.createdDate = classOjb.createdDate;
-
-                oldClass.$save();
-                $location.path('/class');
+                ClassFactory.editClass(classOjb).then(function (result) {
+                    if (result) {
+                        $location.path('/class');
+                    }
+                });
             }
         }
 
@@ -59,5 +48,5 @@
     }
 
     angular.module('EL').controller('ClassAddEditController', ClassAddEditController);
-    ClassAddEditController.$inject = ['$location', 'firebaseUrl', 'HelperService', '$firebaseArray', '$filter', '$firebaseObject'];
+    ClassAddEditController.$inject = ['$location', 'HelperService', 'ClassFactory'];
 })();

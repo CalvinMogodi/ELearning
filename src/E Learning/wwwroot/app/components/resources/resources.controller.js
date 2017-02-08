@@ -1,12 +1,11 @@
 ﻿(function () {
     'use strict';
 
-    function ResourcesController($location, $firebaseArray, HelperService, alertDialogService, modal, firebaseUrl) {
+    function ResourcesController($location, HelperService, alertDialogService, modal, ResourceFactory) {
         /* jshint validthis:true */
         var vm = this;
         vm.heading = 'Resource';
         vm.icon = "add_box";
-        var ref = new Firebase(firebaseUrl);
         vm.pagenation = {
             limit: 5,
             page: 1,
@@ -15,8 +14,9 @@
         init();
 
         function init() {
-            vm.resources = $firebaseArray(ref.child('Resource'));
-
+            ResourceFactory.getResources().then(function (results) {
+                vm.resources = results;
+            });
         }
 
         vm.newResource = function () {
@@ -40,17 +40,21 @@
             xhr.send();
         }
 
-        vm.deleteResource = function (resource) {
+        vm.deleteResource = function (resource, index) {
             alertDialogService.setHeaderAndMessage('Delete', 'Are you sure you want to delete this resource?');
             var templateUrl = '/app/common/alert/alertDialog.template.html';
             modal.show(templateUrl, 'alertDialogController').then(function (result) {
                 if (result) {
-                    vm.resources.$remove(resource);
+                    ResourceFactory.deleteResource(resource.id).then(function (results) {
+                        if (results) {
+                            vm.resources.splice(index, 1);
+                        }
+                    });
                 }
             });
         }
     }
 
     angular.module('EL').controller('ResourcesController', ResourcesController);
-    ResourcesController.$inject = ['$location', '$firebaseArray', 'HelperService', 'alertDialogService', 'modal', 'firebaseUrl'];
+    ResourcesController.$inject = ['$location', 'HelperService', 'alertDialogService', 'modal', 'ResourceFactory'];
 })();

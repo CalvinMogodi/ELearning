@@ -1,22 +1,23 @@
 ﻿(function () {
     'use strict';
 
-    function UserAddEditController($location, firebaseUrl, HelperService, $firebaseArray,  $firebaseObject) {
+    function UserAddEditController($location, HelperService, UserFactory,CourseFactory) {
         /* jshint validthis:true */
         var vm = this;
-        var ref = new Firebase(firebaseUrl);
         vm.isEdit = false;
 
         init();
         function init() {
-            vm.user = HelperService.getAssignedRecord();
-            vm.heading = 'Add New User';
-            if (vm.user) {
-                vm.isEdit = true;
-                vm.heading = 'Update User';
-                vm.user.confirmPassword = vm.user.password;
-            }
-
+            CourseFactory.getCourses().then(function (data) {
+                vm.user = HelperService.getAssignedRecord();
+                vm.heading = 'Add New User';
+                if (vm.user) {
+                    vm.isEdit = true;
+                    vm.heading = 'Update User';
+                    vm.user.confirmPassword = vm.user.password;
+                }            
+                vm.courses = data;
+            });
         }
 
         vm.create = function (user) {
@@ -24,22 +25,24 @@
             vm.formSubmitted = true;
 
             if (vm.userForm.$valid) {
-
-                var addRef = new Firebase(firebaseUrl + "/User");
-                var users = $firebaseArray(addRef);
-
                 var newRecord = {
-                    firstname: user.firstname,
-                    surname: user.surname,
-                    userType: user.userType,
-                    username: user.username,
-                    password: user.password,
+                    Firstname: user.firstname,
+                    Surname: user.surname,
+                    UserType: user.userType,
+                    Username: user.username,
+                    Password: user.password,
+                    Id: 0,
                 };
-                if (newRecord.userType == 'student') {
-                    newRecord.studentNumber = user.studentNumber;
+                if (newRecord.UserType == 'student') {
+                    newRecord.StudentNumber = user.studentNumber;
+                    newRecord.CourseId = user.course.id;
                 }
-                users.$add(newRecord);
-                $location.path('/user');
+                UserFactory.createUser(newRecord).then(function (result) {
+                    if (result) {
+                        $location.path('/user');
+                    }                   
+                });
+                
             }
         }
 
@@ -48,25 +51,17 @@
 
             if (vm.userForm.$valid) {
 
-                var editRef = new Firebase(firebaseUrl + "/User/" + user.$id);
-                var oldUser = $firebaseObject(editRef);
-
-                oldUser.$id = user.$id;
-                oldUser.firstname = user.firstname;
-                oldUser.surname = user.surname;
-                oldUser.userType = user.userType;
-                oldUser.username = user.username;
-                oldUser.password = user.password;
-                if (user.courseId != undefined) {
-                    oldUser.courseId = user.courseId;
+                if (user.userType == 'student') {
+                    user.CourseId = user.course.id;
                 }
+                UserFactory.editUser(user).then(function (result) {
+                    if (result) {
+                        $location.path('/user');
+                    } else {
+                        vm.message = 'Password is not changed, Please try again!!';
+                    }
 
-                if (oldUser.userType == 'student') {
-                    oldUser.studentNumber = user.studentNumber;
-                }
-
-                oldUser.$save();
-                $location.path('/user');
+                });
             }
         }
 
@@ -76,5 +71,5 @@
     }
 
     angular.module('EL').controller('UserAddEditController', UserAddEditController);
-    UserAddEditController.$inject = ['$location', 'firebaseUrl', 'HelperService', '$firebaseArray','$firebaseObject'];
+    UserAddEditController.$inject = ['$location', 'HelperService', 'UserFactory', 'CourseFactory'];
 })();

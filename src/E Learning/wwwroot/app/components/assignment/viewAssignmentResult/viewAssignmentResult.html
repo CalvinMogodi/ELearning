@@ -26,4 +26,11 @@
             <md-data-table-pagination class="margin-bottom-16" md-limit="vm.pagenation.limit" md-page="vm.pagenation.page" md-total="{{vm.results.length}}"></md-data-table-pagination>
         </md-data-table-container>
     </md-content>
+    <md-content class="md-padding">
+        <div layout="row">
+            <div flex="50" layout="column" layout-align="start start">
+                <md-button class="md-primary md-primary-custom" ng-click="vm.back()">Back</md-button>
+            </div>            
+        </div>
+    </md-content>
 </md-content>

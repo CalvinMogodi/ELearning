@@ -1,14 +1,13 @@
 ﻿(function () {
     'use strict';
 
-    function CourseController($location, $firebaseArray, HelperService, alertDialogService, modal, firebaseUrl) {
+    function CourseController($location, HelperService, alertDialogService, modal, CourseFactory) {
         /* jshint validthis:true */
         var vm = this;
         vm.heading = 'Course';
         vm.icon = "add_box";
         vm.isStudent = false;
         vm.showAddButton = true;
-        var ref = new Firebase(firebaseUrl);
         vm.pagenation = {
             limit: 5,
             page: 1,
@@ -17,8 +16,10 @@
         init();
 
         function init() {
-            //load annoucements with class that is linked to
-            vm.courses = $firebaseArray(ref.child('Course'));
+            //load courses
+            CourseFactory.getCourses().then(function (data) {
+                vm.courses = data;
+            });
         }
 
         vm.newCourse = function () {
@@ -29,12 +30,16 @@
             HelperService.assignCurrentRecord(course);
             $location.path('/courseAddEdit');
         }
-        vm.deleteCourse = function (course) {
+        vm.deleteCourse = function (course, index) {
             alertDialogService.setHeaderAndMessage('Delete', 'Are you sure you want to delete this course?');
             var templateUrl = '/app/common/alert/alertDialog.template.html';
             modal.show(templateUrl, 'alertDialogController').then(function (result) {
                 if (result) {
-                    vm.courses.$remove(course);
+                    CourseFactory.deleteCourse(course.id).then(function (results) {
+                        if (results) {
+                            vm.courses.splice(index, 1);
+                        }
+                    });
                 }
             });
         }
@@ -46,5 +51,5 @@
     }
 
     angular.module('EL').controller('CourseController', CourseController);
-    CourseController.$inject = ['$location', '$firebaseArray', 'HelperService', 'alertDialogService', 'modal', 'firebaseUrl'];
+    CourseController.$inject = ['$location', 'HelperService', 'alertDialogService', 'modal', 'CourseFactory'];
 })();

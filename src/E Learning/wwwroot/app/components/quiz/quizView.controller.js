@@ -1,14 +1,13 @@
 ﻿(function () {
     'use strict';
 
-    function QuizController($location, $firebaseArray, HelperService, alertDialogService, modal, firebaseUrl, $sessionStorage) {
+    function QuizController($location, HelperService, alertDialogService, modal, QuizFactory, $sessionStorage) {
         /* jshint validthis:true */
         var vm = this;
         vm.heading = 'Quiz';
         vm.icon = "add_box";
         vm.isStudent = false;
         vm.showAddButton = true;
-        var ref = new Firebase(firebaseUrl);
         vm.pagenation = {
             limit: 5,
             page: 1,
@@ -21,22 +20,10 @@
                 vm.showAddButton = false;
                 vm.isStudent = true;
             }
-            //load quiz with class that is linked to
-            vm.quizzes = $firebaseArray(ref.child('Quiz'));
-            vm.quizzes.$loaded(function (data) {
-                vm.subjects = $firebaseArray(ref.child('Subject'));
-                vm.subjects.$loaded(function (data) {
-                    for (var i = 0; i < vm.quizzes.length; i++) {
-                        for (var j = 0; j < vm.subjects.length; j++) {
-                            if (vm.quizzes[i].subjectId == vm.subjects[j].$id) {
-                                vm.quizzes[i].subject = vm.subjects[j];
-                                break;
-                            }
-                        }
-                    }
-                });
+            //load quiz
+            QuizFactory.getQuizs().then(function (data) {
+                vm.quizzes = data;
             });
-
         }
 
         vm.newQuiz = function () {
@@ -56,17 +43,21 @@
             HelperService.assignCurrentRecord(quiz);
             $location.path('/quizQuestion');
         }
-        vm.deleteQuiz = function (quiz) {
-            alertDialogService.setHeaderAndMessage('Delete', 'Are you sure you want to delete this class?');
+        vm.deleteQuiz = function (quiz, index) {
+            alertDialogService.setHeaderAndMessage('Delete', 'Are you sure you want to delete this quiz?');
             var templateUrl = '/app/common/alert/alertDialog.template.html';
             modal.show(templateUrl, 'alertDialogController').then(function (result) {
                 if (result) {
-                    vm.quizzes.$remove(quiz);
+                    QuizFactory.deleteQuiz(quiz.id).then(function (results) {
+                        if (results) {
+                            vm.quizzes.splice(index, 1);
+                        }
+                    });
                 }
             });
         }
     }
 
     angular.module('EL').controller('QuizController', QuizController);
-    QuizController.$inject = ['$location', '$firebaseArray', 'HelperService', 'alertDialogService', 'modal', 'firebaseUrl', '$sessionStorage'];
+    QuizController.$inject = ['$location', 'HelperService', 'alertDialogService', 'modal', 'QuizFactory', '$sessionStorage'];
 })();

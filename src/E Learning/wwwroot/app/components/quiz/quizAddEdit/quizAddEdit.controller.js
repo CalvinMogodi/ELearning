@@ -1,22 +1,23 @@
 ﻿(function () {
     'use strict';
 
-    function QuizAddEditController($location, firebaseUrl, HelperService, $firebaseArray, $filter, $firebaseObject) {
+    function QuizAddEditController($location, HelperService, QuizFactory, SubjectFactory) {
         /* jshint validthis:true */
         var vm = this;
-        var ref = new Firebase(firebaseUrl);
         vm.isEdit = false;
 
         init();
         function init() {
             vm.quiz = HelperService.getAssignedRecord();
-            vm.subjects = $firebaseArray(ref.child('Subject'));
-            vm.heading = 'Add New Quiz';
-            if (vm.quiz) {
-                vm.isEdit = true;
-                vm.heading = 'Update Quiz';
-                vm.quiz.class = vm.quiz.class;
-            }
+             SubjectFactory.getSubjects().then(function (results) {
+                 vm.subjects = results;
+                vm.heading = 'Add New Quiz';
+                if (vm.quiz) {
+                    vm.isEdit = true;
+                    vm.heading = 'Update Quiz';
+                    vm.quiz.class = vm.quiz.class;
+                }
+            });
 
         }
 
@@ -25,15 +26,14 @@
             vm.formSubmitted = true;
 
             if (vm.quizForm.$valid) {
-                var quizRef = new Firebase(firebaseUrl + "/Quiz");
-                var quizzes = $firebaseArray(quizRef);
-                var newRecord = {
-                    title: quiz.title,
-                    description: quiz.description,
-                    subjectId: quiz.subject.$id,
-                };
-                quizzes.$add(newRecord);
-                $location.path('/quiz');
+
+                quiz.subjectId = quiz.subject.id;
+
+                QuizFactory.createQuiz(quiz).then(function (result) {
+                    if (result) {
+                        $location.path('/quiz');
+                    }
+                });
             }
         }
 
@@ -41,16 +41,13 @@
             vm.formSubmitted = true;
 
             if (vm.quizForm.$valid) {
-                var editRef = new Firebase(firebaseUrl + "/Quiz/" + quiz.$id);
-                var oldQuiz = $firebaseObject(editRef);
+                quiz.subjectId = quiz.subject.id;
 
-                oldQuiz.$id = quiz.$id;
-                oldQuiz.description = quiz.description;
-                oldQuiz.title = quiz.title;
-                oldQuiz.subjectId = quiz.subject.$id;
-
-                oldQuiz.$save();
-                $location.path('/quiz');
+                QuizFactory.editQuiz(quiz).then(function (result) {
+                    if (result) {
+                        $location.path('/quiz');
+                    }
+                });
             }
         }
 
@@ -60,5 +57,5 @@
     }
 
     angular.module('EL').controller('QuizAddEditController', QuizAddEditController);
-    QuizAddEditController.$inject = ['$location', 'firebaseUrl', 'HelperService', '$firebaseArray', '$filter', '$firebaseObject'];
+    QuizAddEditController.$inject = ['$location', 'HelperService', 'QuizFactory', 'SubjectFactory'];
 })();

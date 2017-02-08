@@ -1,35 +1,26 @@
 ﻿(function () {
     'use strict';
 
-    function ViewAssignmentResultController($location, firebaseUrl, HelperService, $firebaseArray, $filter, $firebaseObject, $sessionStorage) {
+    function ViewAssignmentResultController($location, HelperService, AssignmentFactory, $sessionStorage) {
         var vm = this;
-        var ref = new Firebase(firebaseUrl);
         vm.results = [];
         vm.heading = 'Assignment Results';
+        vm.pagenation = {
+            limit: 5,
+            page: 1,
+        };
 
         init();
         function init() {
             vm.assignment = HelperService.getAssignedRecord();
-            vm.uploadedAssignments = $firebaseArray(ref.child('UploadedAssignment'));
-            vm.uploadedAssignments.$loaded(function (data) {
-                vm.users = $firebaseArray(ref.child('User'));
-                vm.users.$loaded(function (data) {
-                for (var i = 0; i < vm.uploadedAssignments.length; i++) {
-                    if (vm.uploadedAssignments[i].subjectId == vm.assignment.$id) {
-                       
-                            for (var u = 0; u < vm.users.length; u++) {
-                                if (vm.uploadedAssignments[i].studentId == vm.users[u].$id) {
-                                    vm.uploadedAssignments[i].user = vm.users[u];
-                                    vm.results.push(vm.uploadedAssignments[i]);
-                                    break;
-                                }                               
-                            }
-                            
-                       
-                    }
-                }
-                });
+            
+            AssignmentFactory.getUploadedAssignmentsByAssignmentId(vm.assignment.id).then(function (result) {
+                vm.results = result;
             });
+        }
+
+        vm.back = function () {
+            $location.path('/assignment');
         }
 
         vm.downloadAssignment = function (assignment) {
@@ -49,5 +40,5 @@
     }
 
     angular.module('EL').controller('ViewAssignmentResultController', ViewAssignmentResultController);
-    ViewAssignmentResultController.$inject = ['$location', 'firebaseUrl', 'HelperService', '$firebaseArray', '$filter', '$firebaseObject', '$sessionStorage'];
+    ViewAssignmentResultController.$inject = ['$location', 'HelperService', 'AssignmentFactory', '$sessionStorage'];
 })();
