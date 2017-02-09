@@ -1,10 +1,72 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+﻿
+    <md-toolbar class="md-toolbar-custom-header">
 
-</body>
-</html>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button hide-menu-close" aria-label="Menu Toggle" ng-click="menu()">
+                <md-icon md-font-icon="material-icons">menu</md-icon>
+            </md-button>
+
+            <span flex></span>
+            <md-menu-sidenav>
+                <md-menu-sidenav-item>
+                    <a style="padding: 0px 12px 0px 13px" href="#/home"><h2 class="md-body-2" flex>Home</h2></a>
+                </md-menu-sidenav-item>
+            </md-menu-sidenav>
+            <md-menu-sidenav>
+                <md-menu-sidenav-item>
+                    <a style="padding: 0px 12px 0px 13px" href="#/aboutUs"><h2 class="md-body-2" flex>About Us</h2></a>
+                </md-menu-sidenav-item>
+            </md-menu-sidenav>
+            <md-menu-sidenav>
+                <md-menu-sidenav-item>
+                    <a style="padding: 0px 12px 0px 13px" href="#/services"><h2 class="md-body-2" flex>Services</h2></a>
+                </md-menu-sidenav-item>
+            </md-menu-sidenav>
+            <md-menu-sidenav>
+                <md-menu-sidenav-item>
+                    <a style="padding: 0px 12px 0px 13px" href="#/portfolio"><h2 class="md-body-2" flex>Portfolio</h2></a>
+                </md-menu-sidenav-item>
+            </md-menu-sidenav>
+            <md-menu-sidenav>
+                <md-menu-sidenav-item>
+                    <a style="padding: 0px 12px 0px 13px" href="#/contactUs"><h2 class="md-body-2" flex>Contact Us</h2></a>
+                </md-menu-sidenav-item>
+            </md-menu-sidenav>
+            <md-menu-sidenav>
+                <md-menu-sidenav-item>
+                    <a style="padding: 0px 12px 0px 13px" href="#/login"><h2 class="md-body-2" flex>Sign In</h2></a>
+                </md-menu-sidenav-item>
+            </md-menu-sidenav>
+        </div>
+    </md-toolbar>
+<md-content class="main-content md-fade-in md-padding page-content transparent">
+    <md-content class="box-shadow">
+        <md-content class="md-padding">
+            <div class="section-title wow fadeInDown">
+                <h2><strong>Contact</strong> us</h2>
+                <hr>
+                <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>-->
+                <p>Please feel free to leave us a message, and we will get one of our consultant get back to your as soon as possible.</p>
+            </div>
+            <div class="col-md-8 col-md-offset-2 wow fadeInUp" data-wow-delay="200ms">
+                <div class="col-md-4">
+                    <i class="fa fa-map-marker fa-2x"></i>
+                    <p>
+                        41 Parklands Avenue<br>
+                        Alberton, JHB, 1449
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fa fa-envelope-o fa-2x"></i>
+                    <p>info@sbit.co.za</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fa fa-phone fa-2x"></i>
+                    <p> +27 79 124 0425</p>
+                    <p> +27 76 255 1150</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </md-content>
+    </md-content>
+</md-content>

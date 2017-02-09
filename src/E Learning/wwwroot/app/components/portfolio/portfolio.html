@@ -1,10 +1,53 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+﻿
+    <md-toolbar class="md-toolbar-custom-header">
 
-</body>
-</html>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button hide-menu-close" aria-label="Menu Toggle" ng-click="menu()">
+                <md-icon md-font-icon="material-icons">menu</md-icon>
+            </md-button>
+
+            <span flex></span>
+            <md-menu-sidenav>
+                <md-menu-sidenav-item>
+                    <a style="padding: 0px 12px 0px 13px" href="#/home"><h2 class="md-body-2" flex>Home</h2></a>
+                </md-menu-sidenav-item>
+            </md-menu-sidenav>
+            <md-menu-sidenav>
+                <md-menu-sidenav-item>
+                    <a style="padding: 0px 12px 0px 13px" href="#/aboutUs"><h2 class="md-body-2" flex>About Us</h2></a>
+                </md-menu-sidenav-item>
+            </md-menu-sidenav>
+            <md-menu-sidenav>
+                <md-menu-sidenav-item>
+                    <a style="padding: 0px 12px 0px 13px" href="#/services"><h2 class="md-body-2" flex>Services</h2></a>
+                </md-menu-sidenav-item>
+            </md-menu-sidenav>
+            <md-menu-sidenav>
+                <md-menu-sidenav-item>
+                    <a style="padding: 0px 12px 0px 13px" href="#/portfolio"><h2 class="md-body-2" flex>Portfolio</h2></a>
+                </md-menu-sidenav-item>
+            </md-menu-sidenav>
+            <md-menu-sidenav>
+                <md-menu-sidenav-item>
+                    <a style="padding: 0px 12px 0px 13px" href="#/contactUs"><h2 class="md-body-2" flex>Contact Us</h2></a>
+                </md-menu-sidenav-item>
+            </md-menu-sidenav>
+            <md-menu-sidenav>
+                <md-menu-sidenav-item>
+                    <a style="padding: 0px 12px 0px 13px" href="#/login"><h2 class="md-body-2" flex>Sign In</h2></a>
+                </md-menu-sidenav-item>
+            </md-menu-sidenav>
+        </div>
+    </md-toolbar>
+    <md-content class="main-content md-fade-in md-padding page-content transparent">
+        <md-content class="box-shadow">
+            <md-content class="md-padding">
+                <div class="section-title wow fadeInDown">
+                    <h2>Our <strong>Portfolio</strong></h2>
+                    <hr>
+                    <div class="clearfix"></div>
+                    <p>The ability to develop beautiful, responsive websites is one of our strongest assets. Whether it’s a Social Media platform, ecommerce, or an informative website, we provide our clients with support the entire journey, from design and UX to search engine optimisation – just take a look at some of our work!</p>
+                </div>
+            </md-content>
+        </md-content>
+    </md-content>

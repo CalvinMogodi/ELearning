@@ -1,10 +1,54 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+﻿
+    <md-toolbar class="md-toolbar-custom-header">
 
-</body>
-</html>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button hide-menu-close" aria-label="Menu Toggle" ng-click="menu()">
+                <md-icon md-font-icon="material-icons">menu</md-icon>
+            </md-button>
+
+            <span flex></span>
+            <md-menu-sidenav>
+                <md-menu-sidenav-item>
+                    <a style="padding: 0px 12px 0px 13px" href="#/home"><h2 class="md-body-2" flex>Home</h2></a>
+                </md-menu-sidenav-item>
+            </md-menu-sidenav>
+            <md-menu-sidenav>
+                <md-menu-sidenav-item>
+                    <a style="padding: 0px 12px 0px 13px" href="#/aboutUs"><h2 class="md-body-2" flex>About Us</h2></a>
+                </md-menu-sidenav-item>
+            </md-menu-sidenav>
+            <md-menu-sidenav>
+                <md-menu-sidenav-item>
+                    <a style="padding: 0px 12px 0px 13px" href="#/services"><h2 class="md-body-2" flex>Services</h2></a>
+                </md-menu-sidenav-item>
+            </md-menu-sidenav>
+            <md-menu-sidenav>
+                <md-menu-sidenav-item>
+                    <a style="padding: 0px 12px 0px 13px" href="#/portfolio"><h2 class="md-body-2" flex>Portfolio</h2></a>
+                </md-menu-sidenav-item>
+            </md-menu-sidenav>
+            <md-menu-sidenav>
+                <md-menu-sidenav-item>
+                    <a style="padding: 0px 12px 0px 13px" href="#/contactUs"><h2 class="md-body-2" flex>Contact Us</h2></a>
+                </md-menu-sidenav-item>
+            </md-menu-sidenav>
+            <md-menu-sidenav>
+                <md-menu-sidenav-item>
+                    <a style="padding: 0px 12px 0px 13px" href="#/login"><h2 class="md-body-2" flex>Sign In</h2></a>
+                </md-menu-sidenav-item>
+            </md-menu-sidenav>
+        </div>
+    </md-toolbar>
+    <md-content class="main-content md-fade-in md-padding page-content transparent">
+    <md-content class="box-shadow">
+        <md-content class="md-padding">
+            <div class="section-title text-center wow fadeInDown">
+                <h2><strong>About</strong> us</h2>
+                <hr>
+                <div class="clearfix"></div>
+                <p><strong>Sight Business Integration Technology </strong> is a leading, web and mobile applications development agency. We believe in providing forward thinking creative  solutions that yield exceptional results.</p>
+                <p> With a solid approach to planning, realistic implementation and value, we deliver customized, results-driven programs to achieve our clients’ specific marketing goals.</p>
+            </div>
+        </md-content>
+    </md-content>
+</md-content>
