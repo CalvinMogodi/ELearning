@@ -1,44 +1,60 @@
-﻿
-    <md-toolbar class="md-toolbar-custom-header">
+﻿<md-toolbar class="md-toolbar-custom-header">
 
-        <div class="md-toolbar-tools">
-            <md-button class="md-icon-button hide-menu-close" aria-label="Menu Toggle" ng-click="menu()">
-                <md-icon md-font-icon="material-icons">menu</md-icon>
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button hide-menu-close" aria-label="Menu Toggle" ng-click="menu()">
+            <md-icon md-font-icon="material-icons">menu</md-icon>
+        </md-button>
+
+
+        <span flex></span>
+        <md-menu md-position-mode="target-right target">
+            <md-button class="md-icon-button" aria-label="Options" ng-click="vm.openToolsMenu($mdOpenMenu, ev)">
+                <md-icon md-font-icon="material-icons">more_vert</md-icon>
             </md-button>
+            <md-menu-content width="3" class="md-functions-dropdown-sm">
+                <md-menu-item>
+                    <md-button class="md-primary">
+                        <md-icon md-font-icon="material-icons">reply</md-icon><a href="#/home">Sign In</a>
+                    </md-button>
+                </md-menu-item>
 
-            <span flex></span>
-            <md-menu-sidenav>
-                <md-menu-sidenav-item>
-                    <a style="padding: 0px 12px 0px 13px" href="#/home"><h2 class="md-body-2" flex>Home</h2></a>
-                </md-menu-sidenav-item>
-            </md-menu-sidenav>
-            <md-menu-sidenav>
-                <md-menu-sidenav-item>
-                    <a style="padding: 0px 12px 0px 13px" href="#/aboutUs"><h2 class="md-body-2" flex>About Us</h2></a>
-                </md-menu-sidenav-item>
-            </md-menu-sidenav>
-            <md-menu-sidenav>
-                <md-menu-sidenav-item>
-                    <a style="padding: 0px 12px 0px 13px" href="#/services"><h2 class="md-body-2" flex>Services</h2></a>
-                </md-menu-sidenav-item>
-            </md-menu-sidenav>
-            <md-menu-sidenav>
-                <md-menu-sidenav-item>
-                    <a style="padding: 0px 12px 0px 13px" href="#/portfolio"><h2 class="md-body-2" flex>Portfolio</h2></a>
-                </md-menu-sidenav-item>
-            </md-menu-sidenav>
-            <md-menu-sidenav>
-                <md-menu-sidenav-item>
-                    <a style="padding: 0px 12px 0px 13px" href="#/contactUs"><h2 class="md-body-2" flex>Contact Us</h2></a>
-                </md-menu-sidenav-item>
-            </md-menu-sidenav>
-            <md-menu-sidenav>
-                <md-menu-sidenav-item>
-                    <a style="padding: 0px 12px 0px 13px" href="#/login"><h2 class="md-body-2" flex>Sign In</h2></a>
-                </md-menu-sidenav-item>
-            </md-menu-sidenav>
+            </md-menu-content>
+        </md-menu>
+    </div>
+    <div class="md-toolbar-tools md-toolbar-custom-heading">
+        <div id="services-section" flex layout="row" layout-align="start start">
+            <img src="../../../assets/img/sight1.png" />
+
         </div>
-    </md-toolbar>
+        <div id="services-section" flex layout="row" layout-align="center">
+            <h1>Testing College</h1>
+        </div>
+    </div>
+    <div class="header-tabs md-toolbar-tools" hide show-gt-sm>
+        <div>
+            <md-button ng-class="{'md-active' : false}" class="" aria-label="Home"><a style="padding: 0px 12px 0px 13px" href="#/home">Home</a></md-button>
+        </div>
+        <div>
+            <md-button ng-class="{'md-active' : false}" class="" aria-label="Home"><a style="padding: 0px 12px 0px 13px" href="#/aboutUs">About Us</a></md-button>
+        </div>
+        <div>
+            <md-button ng-class="{'md-active' : false}" class="" aria-label="Home"><a style="padding: 0px 12px 0px 13px" href="#/services">Services</a></md-button>
+        </div>
+        <div>
+            <md-button ng-class="{'md-active' : true}" class="" aria-label="Home"><a style="padding: 0px 12px 0px 13px" href="#/portfolio">Portfolio</a></md-button>
+        </div>
+        <div>
+            <md-button ng-class="{'md-active' : false}" class="" aria-label="Home"><a style="padding: 0px 12px 0px 13px" href="#/contactUs">Contact Us</a></md-button>
+        </div>
+    </div>
+    <div class="header-tabs" hide show-sm>
+        <md-select ng-model="tabs" aria-label="mobileMenu">
+            <md-option value="Home" aria-label="Home">
+                <span aria-label="Home">Home</span>
+            </md-option>
+        </md-select>
+    </div>
+</md-toolbar>
     <md-content class="main-content md-fade-in md-padding page-content transparent">
         <md-content class="box-shadow">
             <md-content class="md-padding">

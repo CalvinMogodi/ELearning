@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function homeController($location) {
+    function homeController($location, $window) {
         /* jshint validthis:true */
         var vm = this;
 
@@ -9,8 +9,13 @@
             $location.path(url);
         }
 
+        vm.openToolsMenu = function ($mdOpenMenu, ev) {
+
+            $mdOpenMenu(ev);
+        };
+
     }
 
     angular.module('EL').controller('homeController', homeController);
-    homeController.$inject = ['$location'];
+    homeController.$inject = ['$location', '$window'];
 })();
